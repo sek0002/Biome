@@ -1,0 +1,18 @@
+{
+  "status": "review-only, not applied to game",
+  "sourceGeneratedImage": "/Users/sekkevin/.codex/generated_images/019ec07a-dbaf-7020-ac41-1f7802510fcc/ig_01565647f2494691016a2d6af363a48191b5a022ab8323bbfa.png",
+  "projectSource": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/coral-zone-world-layer-scratch-source.png",
+  "worldLayerPreview": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/coral-zone-world-layer-scratch-preview.png",
+  "worldLayerFrame": {
+    "x": 900,
+    "y": 266,
+    "width": 9820,
+    "height": 1946
+  },
+  "constraints": [
+    "fresh generation from scratch",
+    "uses coral biome world-layer frame",
+    "no bubbles",
+    "not applied to Phaser scene"
+  ]
+}

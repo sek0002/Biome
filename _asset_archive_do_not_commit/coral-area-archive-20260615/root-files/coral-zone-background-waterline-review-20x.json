@@ -1,0 +1,21 @@
+{
+  "status": "review-only; not applied to game because SHOW_CORAL_BACKGROUND_REVIEW_ASSET is false",
+  "cleanup": "extended water-column pixels to the top edge and removed the distinct white surface line",
+  "reviewBase": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/coral-zone-background-waterline-review-base.png",
+  "base": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/coral-zone-background-waterline-halfscale.png",
+  "highResolutionImage": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/coral-zone-background-waterline-review-20x.png",
+  "pixelCountMultiplier": 20,
+  "linearScale": 4.47213595499958,
+  "baseSize": {
+    "width": 9820,
+    "height": 1946,
+    "pixels": 19109720
+  },
+  "highResolutionSize": {
+    "width": 43916,
+    "height": 8703,
+    "pixels": 382200948
+  },
+  "resampling": "nearest-neighbor to preserve pixel art",
+  "tileManifest": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/waterline-hires-halfscale-tiles/manifest.json"
+}

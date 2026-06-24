@@ -1,0 +1,3049 @@
+{
+  "status": "applied layer tile manifest for water column, distant crag, and mid coral only",
+  "display": {
+    "x": 900,
+    "y": 266,
+    "width": 9820,
+    "height": 1946,
+    "scaleInGame": 1
+  },
+  "nativeResolutionScale": 2,
+  "tileDisplaySize": {
+    "width": 512,
+    "height": 486
+  },
+  "grid": {
+    "columns": 20,
+    "rows": 5,
+    "tilesPerLayer": 100
+  },
+  "layers": [
+    {
+      "id": "water",
+      "keyPrefix": "parallax-imagegen-water",
+      "depth": -5.72,
+      "alpha": 1.0,
+      "source": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/parallax-imagegen/layer-01-water-column-imagegen-2x.png",
+      "tiles": [
+        {
+          "key": "parallax-imagegen-water-000",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-000.png",
+          "x": 0,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-001",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-001.png",
+          "x": 512,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-002",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-002.png",
+          "x": 1024,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-003",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-003.png",
+          "x": 1536,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-004",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-004.png",
+          "x": 2048,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-005",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-005.png",
+          "x": 2560,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-006",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-006.png",
+          "x": 3072,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-007",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-007.png",
+          "x": 3584,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-008",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-008.png",
+          "x": 4096,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-009",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-009.png",
+          "x": 4608,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-010",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-010.png",
+          "x": 5120,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-011",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-011.png",
+          "x": 5632,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-012",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-012.png",
+          "x": 6144,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-013",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-013.png",
+          "x": 6656,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-014",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-014.png",
+          "x": 7168,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-015",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-015.png",
+          "x": 7680,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-016",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-016.png",
+          "x": 8192,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-017",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-017.png",
+          "x": 8704,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-018",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-018.png",
+          "x": 9216,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-019",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-019.png",
+          "x": 9728,
+          "y": 0,
+          "displayWidth": 92,
+          "displayHeight": 486,
+          "pixelWidth": 184,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-020",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-020.png",
+          "x": 0,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-021",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-021.png",
+          "x": 512,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-022",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-022.png",
+          "x": 1024,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-023",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-023.png",
+          "x": 1536,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-024",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-024.png",
+          "x": 2048,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-025",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-025.png",
+          "x": 2560,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-026",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-026.png",
+          "x": 3072,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-027",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-027.png",
+          "x": 3584,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-028",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-028.png",
+          "x": 4096,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-029",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-029.png",
+          "x": 4608,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-030",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-030.png",
+          "x": 5120,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-031",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-031.png",
+          "x": 5632,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-032",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-032.png",
+          "x": 6144,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-033",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-033.png",
+          "x": 6656,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-034",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-034.png",
+          "x": 7168,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-035",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-035.png",
+          "x": 7680,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-036",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-036.png",
+          "x": 8192,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-037",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-037.png",
+          "x": 8704,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-038",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-038.png",
+          "x": 9216,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-039",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-039.png",
+          "x": 9728,
+          "y": 486,
+          "displayWidth": 92,
+          "displayHeight": 486,
+          "pixelWidth": 184,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-040",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-040.png",
+          "x": 0,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-041",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-041.png",
+          "x": 512,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-042",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-042.png",
+          "x": 1024,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-043",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-043.png",
+          "x": 1536,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-044",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-044.png",
+          "x": 2048,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-045",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-045.png",
+          "x": 2560,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-046",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-046.png",
+          "x": 3072,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-047",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-047.png",
+          "x": 3584,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-048",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-048.png",
+          "x": 4096,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-049",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-049.png",
+          "x": 4608,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-050",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-050.png",
+          "x": 5120,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-051",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-051.png",
+          "x": 5632,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-052",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-052.png",
+          "x": 6144,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-053",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-053.png",
+          "x": 6656,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-054",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-054.png",
+          "x": 7168,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-055",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-055.png",
+          "x": 7680,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-056",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-056.png",
+          "x": 8192,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-057",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-057.png",
+          "x": 8704,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-058",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-058.png",
+          "x": 9216,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-059",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-059.png",
+          "x": 9728,
+          "y": 972,
+          "displayWidth": 92,
+          "displayHeight": 486,
+          "pixelWidth": 184,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-060",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-060.png",
+          "x": 0,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-061",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-061.png",
+          "x": 512,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-062",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-062.png",
+          "x": 1024,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-063",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-063.png",
+          "x": 1536,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-064",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-064.png",
+          "x": 2048,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-065",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-065.png",
+          "x": 2560,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-066",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-066.png",
+          "x": 3072,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-067",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-067.png",
+          "x": 3584,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-068",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-068.png",
+          "x": 4096,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-069",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-069.png",
+          "x": 4608,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-070",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-070.png",
+          "x": 5120,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-071",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-071.png",
+          "x": 5632,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-072",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-072.png",
+          "x": 6144,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-073",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-073.png",
+          "x": 6656,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-074",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-074.png",
+          "x": 7168,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-075",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-075.png",
+          "x": 7680,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-076",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-076.png",
+          "x": 8192,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-077",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-077.png",
+          "x": 8704,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-078",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-078.png",
+          "x": 9216,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-079",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-079.png",
+          "x": 9728,
+          "y": 1458,
+          "displayWidth": 92,
+          "displayHeight": 486,
+          "pixelWidth": 184,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-water-080",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-080.png",
+          "x": 0,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-water-081",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-081.png",
+          "x": 512,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-water-082",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-082.png",
+          "x": 1024,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-water-083",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-083.png",
+          "x": 1536,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-water-084",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-084.png",
+          "x": 2048,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-water-085",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-085.png",
+          "x": 2560,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-water-086",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-086.png",
+          "x": 3072,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-water-087",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-087.png",
+          "x": 3584,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-water-088",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-088.png",
+          "x": 4096,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-water-089",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-089.png",
+          "x": 4608,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-water-090",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-090.png",
+          "x": 5120,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-water-091",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-091.png",
+          "x": 5632,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-water-092",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-092.png",
+          "x": 6144,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-water-093",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-093.png",
+          "x": 6656,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-water-094",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-094.png",
+          "x": 7168,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-water-095",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-095.png",
+          "x": 7680,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-water-096",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-096.png",
+          "x": 8192,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-water-097",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-097.png",
+          "x": 8704,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-water-098",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-098.png",
+          "x": 9216,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-water-099",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/water/parallax-imagegen-water-099.png",
+          "x": 9728,
+          "y": 1944,
+          "displayWidth": 92,
+          "displayHeight": 2,
+          "pixelWidth": 184,
+          "pixelHeight": 4
+        }
+      ]
+    },
+    {
+      "id": "crag",
+      "keyPrefix": "parallax-imagegen-crag",
+      "depth": -5.62,
+      "alpha": 0.9,
+      "source": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/parallax-imagegen/layer-04-distant-crag-shadows-imagegen-75pct-2x.png",
+      "tiles": [
+        {
+          "key": "parallax-imagegen-crag-000",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-000.png",
+          "x": 0,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-001",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-001.png",
+          "x": 512,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-002",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-002.png",
+          "x": 1024,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-003",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-003.png",
+          "x": 1536,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-004",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-004.png",
+          "x": 2048,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-005",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-005.png",
+          "x": 2560,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-006",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-006.png",
+          "x": 3072,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-007",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-007.png",
+          "x": 3584,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-008",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-008.png",
+          "x": 4096,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-009",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-009.png",
+          "x": 4608,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-010",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-010.png",
+          "x": 5120,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-011",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-011.png",
+          "x": 5632,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-012",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-012.png",
+          "x": 6144,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-013",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-013.png",
+          "x": 6656,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-014",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-014.png",
+          "x": 7168,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-015",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-015.png",
+          "x": 7680,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-016",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-016.png",
+          "x": 8192,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-017",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-017.png",
+          "x": 8704,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-018",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-018.png",
+          "x": 9216,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-019",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-019.png",
+          "x": 9728,
+          "y": 0,
+          "displayWidth": 92,
+          "displayHeight": 486,
+          "pixelWidth": 184,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-020",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-020.png",
+          "x": 0,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-021",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-021.png",
+          "x": 512,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-022",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-022.png",
+          "x": 1024,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-023",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-023.png",
+          "x": 1536,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-024",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-024.png",
+          "x": 2048,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-025",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-025.png",
+          "x": 2560,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-026",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-026.png",
+          "x": 3072,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-027",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-027.png",
+          "x": 3584,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-028",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-028.png",
+          "x": 4096,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-029",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-029.png",
+          "x": 4608,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-030",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-030.png",
+          "x": 5120,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-031",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-031.png",
+          "x": 5632,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-032",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-032.png",
+          "x": 6144,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-033",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-033.png",
+          "x": 6656,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-034",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-034.png",
+          "x": 7168,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-035",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-035.png",
+          "x": 7680,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-036",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-036.png",
+          "x": 8192,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-037",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-037.png",
+          "x": 8704,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-038",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-038.png",
+          "x": 9216,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-039",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-039.png",
+          "x": 9728,
+          "y": 486,
+          "displayWidth": 92,
+          "displayHeight": 486,
+          "pixelWidth": 184,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-040",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-040.png",
+          "x": 0,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-041",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-041.png",
+          "x": 512,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-042",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-042.png",
+          "x": 1024,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-043",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-043.png",
+          "x": 1536,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-044",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-044.png",
+          "x": 2048,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-045",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-045.png",
+          "x": 2560,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-046",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-046.png",
+          "x": 3072,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-047",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-047.png",
+          "x": 3584,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-048",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-048.png",
+          "x": 4096,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-049",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-049.png",
+          "x": 4608,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-050",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-050.png",
+          "x": 5120,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-051",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-051.png",
+          "x": 5632,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-052",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-052.png",
+          "x": 6144,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-053",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-053.png",
+          "x": 6656,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-054",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-054.png",
+          "x": 7168,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-055",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-055.png",
+          "x": 7680,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-056",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-056.png",
+          "x": 8192,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-057",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-057.png",
+          "x": 8704,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-058",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-058.png",
+          "x": 9216,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-059",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-059.png",
+          "x": 9728,
+          "y": 972,
+          "displayWidth": 92,
+          "displayHeight": 486,
+          "pixelWidth": 184,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-060",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-060.png",
+          "x": 0,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-061",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-061.png",
+          "x": 512,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-062",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-062.png",
+          "x": 1024,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-063",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-063.png",
+          "x": 1536,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-064",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-064.png",
+          "x": 2048,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-065",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-065.png",
+          "x": 2560,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-066",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-066.png",
+          "x": 3072,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-067",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-067.png",
+          "x": 3584,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-068",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-068.png",
+          "x": 4096,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-069",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-069.png",
+          "x": 4608,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-070",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-070.png",
+          "x": 5120,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-071",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-071.png",
+          "x": 5632,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-072",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-072.png",
+          "x": 6144,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-073",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-073.png",
+          "x": 6656,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-074",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-074.png",
+          "x": 7168,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-075",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-075.png",
+          "x": 7680,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-076",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-076.png",
+          "x": 8192,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-077",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-077.png",
+          "x": 8704,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-078",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-078.png",
+          "x": 9216,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-079",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-079.png",
+          "x": 9728,
+          "y": 1458,
+          "displayWidth": 92,
+          "displayHeight": 486,
+          "pixelWidth": 184,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-crag-080",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-080.png",
+          "x": 0,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-crag-081",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-081.png",
+          "x": 512,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-crag-082",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-082.png",
+          "x": 1024,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-crag-083",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-083.png",
+          "x": 1536,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-crag-084",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-084.png",
+          "x": 2048,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-crag-085",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-085.png",
+          "x": 2560,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-crag-086",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-086.png",
+          "x": 3072,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-crag-087",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-087.png",
+          "x": 3584,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-crag-088",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-088.png",
+          "x": 4096,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-crag-089",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-089.png",
+          "x": 4608,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-crag-090",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-090.png",
+          "x": 5120,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-crag-091",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-091.png",
+          "x": 5632,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-crag-092",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-092.png",
+          "x": 6144,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-crag-093",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-093.png",
+          "x": 6656,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-crag-094",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-094.png",
+          "x": 7168,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-crag-095",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-095.png",
+          "x": 7680,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-crag-096",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-096.png",
+          "x": 8192,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-crag-097",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-097.png",
+          "x": 8704,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-crag-098",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-098.png",
+          "x": 9216,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-crag-099",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/crag/parallax-imagegen-crag-099.png",
+          "x": 9728,
+          "y": 1944,
+          "displayWidth": 92,
+          "displayHeight": 2,
+          "pixelWidth": 184,
+          "pixelHeight": 4
+        }
+      ]
+    },
+    {
+      "id": "mid",
+      "keyPrefix": "parallax-imagegen-mid",
+      "depth": -5.42,
+      "alpha": 1.0,
+      "source": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/parallax-imagegen/layer-03-mid-coral-kelp-imagegen-50pct-2x.png",
+      "tiles": [
+        {
+          "key": "parallax-imagegen-mid-000",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-000.png",
+          "x": 0,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-001",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-001.png",
+          "x": 512,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-002",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-002.png",
+          "x": 1024,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-003",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-003.png",
+          "x": 1536,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-004",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-004.png",
+          "x": 2048,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-005",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-005.png",
+          "x": 2560,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-006",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-006.png",
+          "x": 3072,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-007",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-007.png",
+          "x": 3584,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-008",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-008.png",
+          "x": 4096,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-009",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-009.png",
+          "x": 4608,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-010",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-010.png",
+          "x": 5120,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-011",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-011.png",
+          "x": 5632,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-012",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-012.png",
+          "x": 6144,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-013",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-013.png",
+          "x": 6656,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-014",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-014.png",
+          "x": 7168,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-015",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-015.png",
+          "x": 7680,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-016",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-016.png",
+          "x": 8192,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-017",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-017.png",
+          "x": 8704,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-018",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-018.png",
+          "x": 9216,
+          "y": 0,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-019",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-019.png",
+          "x": 9728,
+          "y": 0,
+          "displayWidth": 92,
+          "displayHeight": 486,
+          "pixelWidth": 184,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-020",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-020.png",
+          "x": 0,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-021",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-021.png",
+          "x": 512,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-022",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-022.png",
+          "x": 1024,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-023",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-023.png",
+          "x": 1536,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-024",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-024.png",
+          "x": 2048,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-025",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-025.png",
+          "x": 2560,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-026",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-026.png",
+          "x": 3072,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-027",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-027.png",
+          "x": 3584,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-028",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-028.png",
+          "x": 4096,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-029",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-029.png",
+          "x": 4608,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-030",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-030.png",
+          "x": 5120,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-031",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-031.png",
+          "x": 5632,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-032",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-032.png",
+          "x": 6144,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-033",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-033.png",
+          "x": 6656,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-034",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-034.png",
+          "x": 7168,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-035",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-035.png",
+          "x": 7680,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-036",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-036.png",
+          "x": 8192,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-037",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-037.png",
+          "x": 8704,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-038",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-038.png",
+          "x": 9216,
+          "y": 486,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-039",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-039.png",
+          "x": 9728,
+          "y": 486,
+          "displayWidth": 92,
+          "displayHeight": 486,
+          "pixelWidth": 184,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-040",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-040.png",
+          "x": 0,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-041",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-041.png",
+          "x": 512,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-042",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-042.png",
+          "x": 1024,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-043",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-043.png",
+          "x": 1536,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-044",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-044.png",
+          "x": 2048,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-045",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-045.png",
+          "x": 2560,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-046",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-046.png",
+          "x": 3072,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-047",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-047.png",
+          "x": 3584,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-048",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-048.png",
+          "x": 4096,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-049",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-049.png",
+          "x": 4608,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-050",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-050.png",
+          "x": 5120,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-051",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-051.png",
+          "x": 5632,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-052",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-052.png",
+          "x": 6144,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-053",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-053.png",
+          "x": 6656,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-054",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-054.png",
+          "x": 7168,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-055",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-055.png",
+          "x": 7680,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-056",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-056.png",
+          "x": 8192,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-057",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-057.png",
+          "x": 8704,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-058",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-058.png",
+          "x": 9216,
+          "y": 972,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-059",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-059.png",
+          "x": 9728,
+          "y": 972,
+          "displayWidth": 92,
+          "displayHeight": 486,
+          "pixelWidth": 184,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-060",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-060.png",
+          "x": 0,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-061",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-061.png",
+          "x": 512,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-062",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-062.png",
+          "x": 1024,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-063",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-063.png",
+          "x": 1536,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-064",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-064.png",
+          "x": 2048,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-065",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-065.png",
+          "x": 2560,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-066",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-066.png",
+          "x": 3072,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-067",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-067.png",
+          "x": 3584,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-068",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-068.png",
+          "x": 4096,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-069",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-069.png",
+          "x": 4608,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-070",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-070.png",
+          "x": 5120,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-071",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-071.png",
+          "x": 5632,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-072",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-072.png",
+          "x": 6144,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-073",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-073.png",
+          "x": 6656,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-074",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-074.png",
+          "x": 7168,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-075",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-075.png",
+          "x": 7680,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-076",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-076.png",
+          "x": 8192,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-077",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-077.png",
+          "x": 8704,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-078",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-078.png",
+          "x": 9216,
+          "y": 1458,
+          "displayWidth": 512,
+          "displayHeight": 486,
+          "pixelWidth": 1024,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-079",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-079.png",
+          "x": 9728,
+          "y": 1458,
+          "displayWidth": 92,
+          "displayHeight": 486,
+          "pixelWidth": 184,
+          "pixelHeight": 972
+        },
+        {
+          "key": "parallax-imagegen-mid-080",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-080.png",
+          "x": 0,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-mid-081",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-081.png",
+          "x": 512,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-mid-082",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-082.png",
+          "x": 1024,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-mid-083",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-083.png",
+          "x": 1536,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-mid-084",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-084.png",
+          "x": 2048,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-mid-085",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-085.png",
+          "x": 2560,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-mid-086",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-086.png",
+          "x": 3072,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-mid-087",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-087.png",
+          "x": 3584,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-mid-088",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-088.png",
+          "x": 4096,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-mid-089",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-089.png",
+          "x": 4608,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-mid-090",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-090.png",
+          "x": 5120,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-mid-091",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-091.png",
+          "x": 5632,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-mid-092",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-092.png",
+          "x": 6144,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-mid-093",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-093.png",
+          "x": 6656,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-mid-094",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-094.png",
+          "x": 7168,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-mid-095",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-095.png",
+          "x": 7680,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-mid-096",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-096.png",
+          "x": 8192,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-mid-097",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-097.png",
+          "x": 8704,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-mid-098",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-098.png",
+          "x": 9216,
+          "y": 1944,
+          "displayWidth": 512,
+          "displayHeight": 2,
+          "pixelWidth": 1024,
+          "pixelHeight": 4
+        },
+        {
+          "key": "parallax-imagegen-mid-099",
+          "url": "/assets/landscape/coral-area/parallax-imagegen/tiles/mid/parallax-imagegen-mid-099.png",
+          "x": 9728,
+          "y": 1944,
+          "displayWidth": 92,
+          "displayHeight": 2,
+          "pixelWidth": 184,
+          "pixelHeight": 4
+        }
+      ]
+    }
+  ]
+}

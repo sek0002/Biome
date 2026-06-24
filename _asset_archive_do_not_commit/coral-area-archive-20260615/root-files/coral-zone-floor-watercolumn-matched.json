@@ -1,0 +1,29 @@
+{
+  "waterlineY": 266,
+  "beachEndX": 900,
+  "coralStartX": 900,
+  "coralEndX": 10720,
+  "coralBiomeWidthPx": 9820,
+  "floorBoundaryMinY": 539.6319444444445,
+  "floorBoundaryMaxY": 1952,
+  "waterColumnMinPx": 274,
+  "waterColumnMaxPx": 1686,
+  "waterColumnAveragePx": 834.6528513238289,
+  "firstFloorY": 539.6319444444445,
+  "lastFloorY": 1306.7074652777778,
+  "targetImage": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/coral-zone-background-floor-watercolumn-matched.png",
+  "guideImage": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/coral-zone-floor-watercolumn-guide.png",
+  "sourceImage": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/coral-zone-background-waterline-contour-matched.png",
+  "targetTopYWorld": 186,
+  "targetBottomYWorld": 2212,
+  "targetWidthPx": 9820,
+  "targetHeightPx": 2026,
+  "targetWaterlineYPx": 80,
+  "placement": {
+    "x": 900,
+    "y": 186,
+    "scale": 1,
+    "floorBoundaryImageYFormula": "floorBoundaryWorldY - targetTopYWorld",
+    "waterColumnImagePxFormula": "floorBoundaryWorldY - waterlineY"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "status": "review-only; not applied to game",
+  "references": [
+    "coral bommie composition and table/brain corals",
+    "quiet blue beams and silhouettes",
+    "kelp/table coral spacing",
+    "deep reef frame and water texture"
+  ],
+  "displayFrame": {
+    "width": 9820,
+    "height": 1946,
+    "x": 900,
+    "y": 266,
+    "scaleInGame": 1
+  },
+  "nativeResolution": {
+    "width": 19640,
+    "height": 3892,
+    "resolutionScale": 2
+  },
+  "layers": [
+    {
+      "order": 1,
+      "name": "water column",
+      "coverage": "100%",
+      "path": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/parallax-redesign/layer-01-water-column-2x.png",
+      "type": "RGB",
+      "movement": "slowest"
+    },
+    {
+      "order": 2,
+      "name": "distant crag shadows",
+      "coverage": "lower 75%",
+      "path": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/parallax-redesign/layer-04-distant-crag-shadows-75pct-2x.png",
+      "type": "RGBA",
+      "movement": "slow"
+    },
+    {
+      "order": 3,
+      "name": "mid coral kelp forest",
+      "coverage": "lower 50%",
+      "path": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/parallax-redesign/layer-03-mid-coral-kelp-50pct-2x.png",
+      "type": "RGBA",
+      "movement": "medium"
+    },
+    {
+      "order": 4,
+      "name": "front coral garden",
+      "coverage": "lower 25%",
+      "path": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/parallax-redesign/layer-02-front-coral-garden-25pct-2x.png",
+      "type": "RGBA",
+      "movement": "world speed"
+    }
+  ],
+  "composite": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/parallax-redesign/parallax-redesign-composite-2x.png",
+  "preview": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/parallax-redesign/parallax-redesign-preview.png",
+  "layerSheet": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/parallax-redesign/parallax-redesign-layer-sheet.png",
+  "notes": [
+    "No bubbles generated.",
+    "All layer files share native dimensions.",
+    "Alpha rows in sheet are composited over the water column for review."
+  ]
+}

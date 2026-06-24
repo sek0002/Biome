@@ -1,0 +1,14 @@
+{
+  "name": "brown-seal-swim-down-search",
+  "source": "assets/brown-seal-pixel-sprite.png",
+  "sheet": "assets/sprites/seal/brown-seal-swim-down-search-sheet.png",
+  "preview": "assets/sprites/seal/brown-seal-swim-down-search-preview.gif",
+  "frameDirectory": "assets/sprites/seal/brown-seal-swim-down-search-frames",
+  "frameCount": 12,
+  "frameWidth": 384,
+  "frameHeight": 256,
+  "durationMs": 95,
+  "anchor": "center",
+  "background": "transparent",
+  "notes": "Generated locally from brown-seal-pixel-sprite.png. Seal dives downward with overlapped head-search and flipper flick frames."
+}

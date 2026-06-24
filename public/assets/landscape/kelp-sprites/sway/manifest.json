@@ -1,0 +1,177 @@
+{
+  "frameCount": 8,
+  "frameDurationMs": 180,
+  "motion": "gentle base-anchored horizontal sway, baked into transparent PNG frames",
+  "sprites": [
+    {
+      "source": "assets/kelp/kelp-random-01.png",
+      "sheet": "assets/kelp/sway/kelp-random-01-sway-sheet.png",
+      "publicSheet": "public/assets/landscape/kelp-sprites/sway/kelp-random-01-sway-sheet.png",
+      "frameWidth": 459,
+      "frameHeight": 858,
+      "frames": [
+        "assets/kelp/sway/kelp-random-01/kelp-random-01-sway-01.png",
+        "assets/kelp/sway/kelp-random-01/kelp-random-01-sway-02.png",
+        "assets/kelp/sway/kelp-random-01/kelp-random-01-sway-03.png",
+        "assets/kelp/sway/kelp-random-01/kelp-random-01-sway-04.png",
+        "assets/kelp/sway/kelp-random-01/kelp-random-01-sway-05.png",
+        "assets/kelp/sway/kelp-random-01/kelp-random-01-sway-06.png",
+        "assets/kelp/sway/kelp-random-01/kelp-random-01-sway-07.png",
+        "assets/kelp/sway/kelp-random-01/kelp-random-01-sway-08.png"
+      ]
+    },
+    {
+      "source": "assets/kelp/kelp-random-02.png",
+      "sheet": "assets/kelp/sway/kelp-random-02-sway-sheet.png",
+      "publicSheet": "public/assets/landscape/kelp-sprites/sway/kelp-random-02-sway-sheet.png",
+      "frameWidth": 512,
+      "frameHeight": 769,
+      "frames": [
+        "assets/kelp/sway/kelp-random-02/kelp-random-02-sway-01.png",
+        "assets/kelp/sway/kelp-random-02/kelp-random-02-sway-02.png",
+        "assets/kelp/sway/kelp-random-02/kelp-random-02-sway-03.png",
+        "assets/kelp/sway/kelp-random-02/kelp-random-02-sway-04.png",
+        "assets/kelp/sway/kelp-random-02/kelp-random-02-sway-05.png",
+        "assets/kelp/sway/kelp-random-02/kelp-random-02-sway-06.png",
+        "assets/kelp/sway/kelp-random-02/kelp-random-02-sway-07.png",
+        "assets/kelp/sway/kelp-random-02/kelp-random-02-sway-08.png"
+      ]
+    },
+    {
+      "source": "assets/kelp/kelp-random-03.png",
+      "sheet": "assets/kelp/sway/kelp-random-03-sway-sheet.png",
+      "publicSheet": "public/assets/landscape/kelp-sprites/sway/kelp-random-03-sway-sheet.png",
+      "frameWidth": 417,
+      "frameHeight": 943,
+      "frames": [
+        "assets/kelp/sway/kelp-random-03/kelp-random-03-sway-01.png",
+        "assets/kelp/sway/kelp-random-03/kelp-random-03-sway-02.png",
+        "assets/kelp/sway/kelp-random-03/kelp-random-03-sway-03.png",
+        "assets/kelp/sway/kelp-random-03/kelp-random-03-sway-04.png",
+        "assets/kelp/sway/kelp-random-03/kelp-random-03-sway-05.png",
+        "assets/kelp/sway/kelp-random-03/kelp-random-03-sway-06.png",
+        "assets/kelp/sway/kelp-random-03/kelp-random-03-sway-07.png",
+        "assets/kelp/sway/kelp-random-03/kelp-random-03-sway-08.png"
+      ]
+    },
+    {
+      "source": "assets/kelp/kelp-random-04.png",
+      "sheet": "assets/kelp/sway/kelp-random-04-sway-sheet.png",
+      "publicSheet": "public/assets/landscape/kelp-sprites/sway/kelp-random-04-sway-sheet.png",
+      "frameWidth": 484,
+      "frameHeight": 814,
+      "frames": [
+        "assets/kelp/sway/kelp-random-04/kelp-random-04-sway-01.png",
+        "assets/kelp/sway/kelp-random-04/kelp-random-04-sway-02.png",
+        "assets/kelp/sway/kelp-random-04/kelp-random-04-sway-03.png",
+        "assets/kelp/sway/kelp-random-04/kelp-random-04-sway-04.png",
+        "assets/kelp/sway/kelp-random-04/kelp-random-04-sway-05.png",
+        "assets/kelp/sway/kelp-random-04/kelp-random-04-sway-06.png",
+        "assets/kelp/sway/kelp-random-04/kelp-random-04-sway-07.png",
+        "assets/kelp/sway/kelp-random-04/kelp-random-04-sway-08.png"
+      ]
+    },
+    {
+      "source": "assets/kelp/kelp-random-05.png",
+      "sheet": "assets/kelp/sway/kelp-random-05-sway-sheet.png",
+      "publicSheet": "public/assets/landscape/kelp-sprites/sway/kelp-random-05-sway-sheet.png",
+      "frameWidth": 453,
+      "frameHeight": 868,
+      "frames": [
+        "assets/kelp/sway/kelp-random-05/kelp-random-05-sway-01.png",
+        "assets/kelp/sway/kelp-random-05/kelp-random-05-sway-02.png",
+        "assets/kelp/sway/kelp-random-05/kelp-random-05-sway-03.png",
+        "assets/kelp/sway/kelp-random-05/kelp-random-05-sway-04.png",
+        "assets/kelp/sway/kelp-random-05/kelp-random-05-sway-05.png",
+        "assets/kelp/sway/kelp-random-05/kelp-random-05-sway-06.png",
+        "assets/kelp/sway/kelp-random-05/kelp-random-05-sway-07.png",
+        "assets/kelp/sway/kelp-random-05/kelp-random-05-sway-08.png"
+      ]
+    },
+    {
+      "source": "assets/kelp/kelp-random-06.png",
+      "sheet": "assets/kelp/sway/kelp-random-06-sway-sheet.png",
+      "publicSheet": "public/assets/landscape/kelp-sprites/sway/kelp-random-06-sway-sheet.png",
+      "frameWidth": 519,
+      "frameHeight": 758,
+      "frames": [
+        "assets/kelp/sway/kelp-random-06/kelp-random-06-sway-01.png",
+        "assets/kelp/sway/kelp-random-06/kelp-random-06-sway-02.png",
+        "assets/kelp/sway/kelp-random-06/kelp-random-06-sway-03.png",
+        "assets/kelp/sway/kelp-random-06/kelp-random-06-sway-04.png",
+        "assets/kelp/sway/kelp-random-06/kelp-random-06-sway-05.png",
+        "assets/kelp/sway/kelp-random-06/kelp-random-06-sway-06.png",
+        "assets/kelp/sway/kelp-random-06/kelp-random-06-sway-07.png",
+        "assets/kelp/sway/kelp-random-06/kelp-random-06-sway-08.png"
+      ]
+    },
+    {
+      "source": "assets/kelp/kelp-random-07.png",
+      "sheet": "assets/kelp/sway/kelp-random-07-sway-sheet.png",
+      "publicSheet": "public/assets/landscape/kelp-sprites/sway/kelp-random-07-sway-sheet.png",
+      "frameWidth": 426,
+      "frameHeight": 924,
+      "frames": [
+        "assets/kelp/sway/kelp-random-07/kelp-random-07-sway-01.png",
+        "assets/kelp/sway/kelp-random-07/kelp-random-07-sway-02.png",
+        "assets/kelp/sway/kelp-random-07/kelp-random-07-sway-03.png",
+        "assets/kelp/sway/kelp-random-07/kelp-random-07-sway-04.png",
+        "assets/kelp/sway/kelp-random-07/kelp-random-07-sway-05.png",
+        "assets/kelp/sway/kelp-random-07/kelp-random-07-sway-06.png",
+        "assets/kelp/sway/kelp-random-07/kelp-random-07-sway-07.png",
+        "assets/kelp/sway/kelp-random-07/kelp-random-07-sway-08.png"
+      ]
+    },
+    {
+      "source": "assets/kelp/kelp-random-08.png",
+      "sheet": "assets/kelp/sway/kelp-random-08-sway-sheet.png",
+      "publicSheet": "public/assets/landscape/kelp-sprites/sway/kelp-random-08-sway-sheet.png",
+      "frameWidth": 482,
+      "frameHeight": 816,
+      "frames": [
+        "assets/kelp/sway/kelp-random-08/kelp-random-08-sway-01.png",
+        "assets/kelp/sway/kelp-random-08/kelp-random-08-sway-02.png",
+        "assets/kelp/sway/kelp-random-08/kelp-random-08-sway-03.png",
+        "assets/kelp/sway/kelp-random-08/kelp-random-08-sway-04.png",
+        "assets/kelp/sway/kelp-random-08/kelp-random-08-sway-05.png",
+        "assets/kelp/sway/kelp-random-08/kelp-random-08-sway-06.png",
+        "assets/kelp/sway/kelp-random-08/kelp-random-08-sway-07.png",
+        "assets/kelp/sway/kelp-random-08/kelp-random-08-sway-08.png"
+      ]
+    },
+    {
+      "source": "assets/kelp/kelp-random-09.png",
+      "sheet": "assets/kelp/sway/kelp-random-09-sway-sheet.png",
+      "publicSheet": "public/assets/landscape/kelp-sprites/sway/kelp-random-09-sway-sheet.png",
+      "frameWidth": 452,
+      "frameHeight": 870,
+      "frames": [
+        "assets/kelp/sway/kelp-random-09/kelp-random-09-sway-01.png",
+        "assets/kelp/sway/kelp-random-09/kelp-random-09-sway-02.png",
+        "assets/kelp/sway/kelp-random-09/kelp-random-09-sway-03.png",
+        "assets/kelp/sway/kelp-random-09/kelp-random-09-sway-04.png",
+        "assets/kelp/sway/kelp-random-09/kelp-random-09-sway-05.png",
+        "assets/kelp/sway/kelp-random-09/kelp-random-09-sway-06.png",
+        "assets/kelp/sway/kelp-random-09/kelp-random-09-sway-07.png",
+        "assets/kelp/sway/kelp-random-09/kelp-random-09-sway-08.png"
+      ]
+    },
+    {
+      "source": "assets/kelp/kelp-random-10.png",
+      "sheet": "assets/kelp/sway/kelp-random-10-sway-sheet.png",
+      "publicSheet": "public/assets/landscape/kelp-sprites/sway/kelp-random-10-sway-sheet.png",
+      "frameWidth": 547,
+      "frameHeight": 720,
+      "frames": [
+        "assets/kelp/sway/kelp-random-10/kelp-random-10-sway-01.png",
+        "assets/kelp/sway/kelp-random-10/kelp-random-10-sway-02.png",
+        "assets/kelp/sway/kelp-random-10/kelp-random-10-sway-03.png",
+        "assets/kelp/sway/kelp-random-10/kelp-random-10-sway-04.png",
+        "assets/kelp/sway/kelp-random-10/kelp-random-10-sway-05.png",
+        "assets/kelp/sway/kelp-random-10/kelp-random-10-sway-06.png",
+        "assets/kelp/sway/kelp-random-10/kelp-random-10-sway-07.png",
+        "assets/kelp/sway/kelp-random-10/kelp-random-10-sway-08.png"
+      ]
+    }
+  ]
+}

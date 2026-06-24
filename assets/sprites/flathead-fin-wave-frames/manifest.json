@@ -1,0 +1,22 @@
+{
+  "source": "/Users/sekkevin/LocalR/game/assets/sprites/flathead-pixel-sprite-alpha.png",
+  "frame_count": 8,
+  "frame_width": 1704,
+  "frame_height": 431,
+  "frame_duration_ms": 90,
+  "animation": "flathead lower pectoral fin reverted to subtle wave while held open, with tiny moving-edge stray pixels removed",
+  "frames": [
+    "/Users/sekkevin/LocalR/game/assets/sprites/flathead-fin-wave-frames/flathead-fin-wave-01.png",
+    "/Users/sekkevin/LocalR/game/assets/sprites/flathead-fin-wave-frames/flathead-fin-wave-02.png",
+    "/Users/sekkevin/LocalR/game/assets/sprites/flathead-fin-wave-frames/flathead-fin-wave-03.png",
+    "/Users/sekkevin/LocalR/game/assets/sprites/flathead-fin-wave-frames/flathead-fin-wave-04.png",
+    "/Users/sekkevin/LocalR/game/assets/sprites/flathead-fin-wave-frames/flathead-fin-wave-05.png",
+    "/Users/sekkevin/LocalR/game/assets/sprites/flathead-fin-wave-frames/flathead-fin-wave-06.png",
+    "/Users/sekkevin/LocalR/game/assets/sprites/flathead-fin-wave-frames/flathead-fin-wave-07.png",
+    "/Users/sekkevin/LocalR/game/assets/sprites/flathead-fin-wave-frames/flathead-fin-wave-08.png"
+  ],
+  "sheet": "/Users/sekkevin/LocalR/game/assets/sprites/flathead-fin-wave-sheet.png",
+  "preview_gif": "/Users/sekkevin/LocalR/game/assets/sprites/flathead-fin-wave-preview.gif",
+  "preview_checker_gif": "/Users/sekkevin/LocalR/game/assets/sprites/flathead-fin-wave-preview-checker.gif",
+  "preview_zoom_gif": "/Users/sekkevin/LocalR/game/assets/sprites/flathead-fin-wave-preview-zoom.gif"
+}

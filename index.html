@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Joey the Port Jackson Shark</title>
+  </head>
+  <body>
+    <div id="app" class="splash-mode">
+      <div id="game-root"></div>
+      <div id="splash" aria-hidden="true">
+        <div id="loading-panel">
+          <img src="%BASE_URL%assets/creatures/muuc.svg" alt="" />
+          <div id="loading-title">Joey the Port Jackson Shark</div>
+          <div id="loading-track" aria-hidden="true">
+            <div id="loading-fill"></div>
+          </div>
+          <div id="loading-status">Loading assets</div>
+          <div id="loading-percent">0%</div>
+          <button id="start-button" type="button">Start diving</button>
+        </div>
+      </div>
+      <div id="hud">
+        <img id="hud-logo" src="%BASE_URL%assets/creatures/muuc.svg" alt="" />
+        <div class="hud-panel">
+          <strong id="zone-label">Water Surface</strong>
+        </div>
+        <div id="depth-gauge" aria-label="Depth gauge">
+          <div id="depth-gauge-track">
+            <div id="depth-gauge-fill"></div>
+            <div class="depth-gauge-tick top"></div>
+            <div class="depth-gauge-tick mid"></div>
+            <div class="depth-gauge-tick bottom"></div>
+            <div id="depth-marker">
+              <span id="depth-label">0m</span>
+            </div>
+          </div>
+          <span id="depth-gauge-max">500m</span>
+        </div>
+      </div>
+      <div id="touch-controls" aria-label="Touch joystick">
+        <div id="touch-joystick" aria-hidden="true">
+          <div id="touch-joystick-ring"></div>
+          <div id="touch-joystick-knob"></div>
+        </div>
+      </div>
+      <button id="fullscreen-toggle" type="button" aria-pressed="false" aria-label="Enter fullscreen" title="Fullscreen">
+        <span class="fullscreen-icon" aria-hidden="true"></span>
+      </button>
+      <div id="dev-tools" aria-label="Developer world navigation">
+        <button id="dev-toggle" type="button" aria-pressed="false" title="Developer camera">DEV</button>
+        <div class="dev-extra">
+          <button id="dev-zoom-out" type="button" title="Zoom out">-</button>
+          <button id="dev-zoom-in" type="button" title="Zoom in">+</button>
+          <button id="dev-fit" type="button" title="Fit world">[]</button>
+          <button id="dev-player" type="button" title="Follow player">@</button>
+          <button id="dev-teleport" type="button" title="Teleport player to dev view center">TP</button>
+          <label class="dev-select" title="Performance profile">
+            <span>Profile</span>
+            <select id="dev-profile">
+              <option value="desktop">Desktop</option>
+              <option value="mobile">Mobile</option>
+            </select>
+          </label>
+          <label class="dev-seed dev-resolution" title="Render height">
+            <span>Res</span>
+            <input id="dev-render-height" type="number" min="360" max="1080" step="60" value="720" />
+          </label>
+          <button id="dev-render-apply" type="button" title="Apply render height">Set</button>
+          <label class="dev-slider" title="World X">
+            <span>X</span>
+            <input id="dev-x-range" type="range" min="0" max="50000" value="0" />
+          </label>
+          <label class="dev-slider" title="World Y">
+            <span>Y</span>
+            <input id="dev-y-range" type="range" min="0" max="17024" value="0" />
+          </label>
+          <label class="dev-seed" title="Cave seed">
+            <span>Seed</span>
+            <input id="cave-seed-input" type="number" min="0" step="1" value="130626" />
+          </label>
+          <button id="cave-seed-apply" type="button" title="Apply cave seed">Apply</button>
+          <button id="cave-seed-random" type="button" title="New cave seed">New</button>
+          <output id="dev-camera-readout">x 0 y 0 z 1.00</output>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

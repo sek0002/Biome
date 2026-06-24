@@ -1,0 +1,1017 @@
+{
+  "status": "review-only; not applied to game because SHOW_CORAL_BACKGROUND_REVIEW_ASSET is false",
+  "source": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/coral-zone-background-waterline-review-base.png",
+  "base": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/coral-zone-background-waterline-halfscale.png",
+  "cleanup": "extended water-column pixels to the top edge and removed the distinct white surface line",
+  "display": {
+    "x": 900,
+    "y": 266,
+    "width": 9820,
+    "height": 1946,
+    "scaleInGame": 1
+  },
+  "resolutionScale": 4.47213595499958,
+  "pixelCountMultiplier": 20,
+  "tiles": [
+    {
+      "key": "coral-waterline-halfscale-hires-000",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-000.png",
+      "x": 0,
+      "y": 0,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-001",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-001.png",
+      "x": 512,
+      "y": 0,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-002",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-002.png",
+      "x": 1024,
+      "y": 0,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-003",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-003.png",
+      "x": 1536,
+      "y": 0,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-004",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-004.png",
+      "x": 2048,
+      "y": 0,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-005",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-005.png",
+      "x": 2560,
+      "y": 0,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-006",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-006.png",
+      "x": 3072,
+      "y": 0,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-007",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-007.png",
+      "x": 3584,
+      "y": 0,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-008",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-008.png",
+      "x": 4096,
+      "y": 0,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-009",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-009.png",
+      "x": 4608,
+      "y": 0,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-010",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-010.png",
+      "x": 5120,
+      "y": 0,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-011",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-011.png",
+      "x": 5632,
+      "y": 0,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-012",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-012.png",
+      "x": 6144,
+      "y": 0,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-013",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-013.png",
+      "x": 6656,
+      "y": 0,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-014",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-014.png",
+      "x": 7168,
+      "y": 0,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-015",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-015.png",
+      "x": 7680,
+      "y": 0,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-016",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-016.png",
+      "x": 8192,
+      "y": 0,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-017",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-017.png",
+      "x": 8704,
+      "y": 0,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-018",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-018.png",
+      "x": 9216,
+      "y": 0,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-019",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-019.png",
+      "x": 9728,
+      "y": 0,
+      "displayWidth": 92,
+      "displayHeight": 486,
+      "pixelWidth": 411,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-020",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-020.png",
+      "x": 0,
+      "y": 486,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-021",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-021.png",
+      "x": 512,
+      "y": 486,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-022",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-022.png",
+      "x": 1024,
+      "y": 486,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-023",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-023.png",
+      "x": 1536,
+      "y": 486,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-024",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-024.png",
+      "x": 2048,
+      "y": 486,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-025",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-025.png",
+      "x": 2560,
+      "y": 486,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-026",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-026.png",
+      "x": 3072,
+      "y": 486,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-027",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-027.png",
+      "x": 3584,
+      "y": 486,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-028",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-028.png",
+      "x": 4096,
+      "y": 486,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-029",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-029.png",
+      "x": 4608,
+      "y": 486,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-030",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-030.png",
+      "x": 5120,
+      "y": 486,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-031",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-031.png",
+      "x": 5632,
+      "y": 486,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-032",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-032.png",
+      "x": 6144,
+      "y": 486,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-033",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-033.png",
+      "x": 6656,
+      "y": 486,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-034",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-034.png",
+      "x": 7168,
+      "y": 486,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-035",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-035.png",
+      "x": 7680,
+      "y": 486,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-036",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-036.png",
+      "x": 8192,
+      "y": 486,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-037",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-037.png",
+      "x": 8704,
+      "y": 486,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-038",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-038.png",
+      "x": 9216,
+      "y": 486,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-039",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-039.png",
+      "x": 9728,
+      "y": 486,
+      "displayWidth": 92,
+      "displayHeight": 486,
+      "pixelWidth": 411,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-040",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-040.png",
+      "x": 0,
+      "y": 972,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-041",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-041.png",
+      "x": 512,
+      "y": 972,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-042",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-042.png",
+      "x": 1024,
+      "y": 972,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-043",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-043.png",
+      "x": 1536,
+      "y": 972,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-044",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-044.png",
+      "x": 2048,
+      "y": 972,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-045",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-045.png",
+      "x": 2560,
+      "y": 972,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-046",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-046.png",
+      "x": 3072,
+      "y": 972,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-047",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-047.png",
+      "x": 3584,
+      "y": 972,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-048",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-048.png",
+      "x": 4096,
+      "y": 972,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-049",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-049.png",
+      "x": 4608,
+      "y": 972,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-050",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-050.png",
+      "x": 5120,
+      "y": 972,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-051",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-051.png",
+      "x": 5632,
+      "y": 972,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-052",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-052.png",
+      "x": 6144,
+      "y": 972,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-053",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-053.png",
+      "x": 6656,
+      "y": 972,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-054",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-054.png",
+      "x": 7168,
+      "y": 972,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-055",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-055.png",
+      "x": 7680,
+      "y": 972,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-056",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-056.png",
+      "x": 8192,
+      "y": 972,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-057",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-057.png",
+      "x": 8704,
+      "y": 972,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-058",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-058.png",
+      "x": 9216,
+      "y": 972,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-059",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-059.png",
+      "x": 9728,
+      "y": 972,
+      "displayWidth": 92,
+      "displayHeight": 486,
+      "pixelWidth": 411,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-060",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-060.png",
+      "x": 0,
+      "y": 1458,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-061",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-061.png",
+      "x": 512,
+      "y": 1458,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-062",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-062.png",
+      "x": 1024,
+      "y": 1458,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-063",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-063.png",
+      "x": 1536,
+      "y": 1458,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-064",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-064.png",
+      "x": 2048,
+      "y": 1458,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-065",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-065.png",
+      "x": 2560,
+      "y": 1458,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-066",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-066.png",
+      "x": 3072,
+      "y": 1458,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-067",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-067.png",
+      "x": 3584,
+      "y": 1458,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-068",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-068.png",
+      "x": 4096,
+      "y": 1458,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-069",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-069.png",
+      "x": 4608,
+      "y": 1458,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-070",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-070.png",
+      "x": 5120,
+      "y": 1458,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-071",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-071.png",
+      "x": 5632,
+      "y": 1458,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-072",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-072.png",
+      "x": 6144,
+      "y": 1458,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-073",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-073.png",
+      "x": 6656,
+      "y": 1458,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-074",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-074.png",
+      "x": 7168,
+      "y": 1458,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-075",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-075.png",
+      "x": 7680,
+      "y": 1458,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-076",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-076.png",
+      "x": 8192,
+      "y": 1458,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-077",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-077.png",
+      "x": 8704,
+      "y": 1458,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-078",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-078.png",
+      "x": 9216,
+      "y": 1458,
+      "displayWidth": 512,
+      "displayHeight": 486,
+      "pixelWidth": 2290,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-079",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-079.png",
+      "x": 9728,
+      "y": 1458,
+      "displayWidth": 92,
+      "displayHeight": 486,
+      "pixelWidth": 411,
+      "pixelHeight": 2173
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-080",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-080.png",
+      "x": 0,
+      "y": 1944,
+      "displayWidth": 512,
+      "displayHeight": 2,
+      "pixelWidth": 2290,
+      "pixelHeight": 9
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-081",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-081.png",
+      "x": 512,
+      "y": 1944,
+      "displayWidth": 512,
+      "displayHeight": 2,
+      "pixelWidth": 2290,
+      "pixelHeight": 9
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-082",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-082.png",
+      "x": 1024,
+      "y": 1944,
+      "displayWidth": 512,
+      "displayHeight": 2,
+      "pixelWidth": 2290,
+      "pixelHeight": 9
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-083",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-083.png",
+      "x": 1536,
+      "y": 1944,
+      "displayWidth": 512,
+      "displayHeight": 2,
+      "pixelWidth": 2290,
+      "pixelHeight": 9
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-084",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-084.png",
+      "x": 2048,
+      "y": 1944,
+      "displayWidth": 512,
+      "displayHeight": 2,
+      "pixelWidth": 2290,
+      "pixelHeight": 9
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-085",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-085.png",
+      "x": 2560,
+      "y": 1944,
+      "displayWidth": 512,
+      "displayHeight": 2,
+      "pixelWidth": 2290,
+      "pixelHeight": 9
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-086",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-086.png",
+      "x": 3072,
+      "y": 1944,
+      "displayWidth": 512,
+      "displayHeight": 2,
+      "pixelWidth": 2290,
+      "pixelHeight": 9
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-087",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-087.png",
+      "x": 3584,
+      "y": 1944,
+      "displayWidth": 512,
+      "displayHeight": 2,
+      "pixelWidth": 2290,
+      "pixelHeight": 9
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-088",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-088.png",
+      "x": 4096,
+      "y": 1944,
+      "displayWidth": 512,
+      "displayHeight": 2,
+      "pixelWidth": 2290,
+      "pixelHeight": 9
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-089",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-089.png",
+      "x": 4608,
+      "y": 1944,
+      "displayWidth": 512,
+      "displayHeight": 2,
+      "pixelWidth": 2290,
+      "pixelHeight": 9
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-090",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-090.png",
+      "x": 5120,
+      "y": 1944,
+      "displayWidth": 512,
+      "displayHeight": 2,
+      "pixelWidth": 2290,
+      "pixelHeight": 9
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-091",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-091.png",
+      "x": 5632,
+      "y": 1944,
+      "displayWidth": 512,
+      "displayHeight": 2,
+      "pixelWidth": 2290,
+      "pixelHeight": 9
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-092",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-092.png",
+      "x": 6144,
+      "y": 1944,
+      "displayWidth": 512,
+      "displayHeight": 2,
+      "pixelWidth": 2290,
+      "pixelHeight": 9
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-093",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-093.png",
+      "x": 6656,
+      "y": 1944,
+      "displayWidth": 512,
+      "displayHeight": 2,
+      "pixelWidth": 2290,
+      "pixelHeight": 9
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-094",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-094.png",
+      "x": 7168,
+      "y": 1944,
+      "displayWidth": 512,
+      "displayHeight": 2,
+      "pixelWidth": 2290,
+      "pixelHeight": 9
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-095",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-095.png",
+      "x": 7680,
+      "y": 1944,
+      "displayWidth": 512,
+      "displayHeight": 2,
+      "pixelWidth": 2290,
+      "pixelHeight": 9
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-096",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-096.png",
+      "x": 8192,
+      "y": 1944,
+      "displayWidth": 512,
+      "displayHeight": 2,
+      "pixelWidth": 2290,
+      "pixelHeight": 9
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-097",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-097.png",
+      "x": 8704,
+      "y": 1944,
+      "displayWidth": 512,
+      "displayHeight": 2,
+      "pixelWidth": 2290,
+      "pixelHeight": 9
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-098",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-098.png",
+      "x": 9216,
+      "y": 1944,
+      "displayWidth": 512,
+      "displayHeight": 2,
+      "pixelWidth": 2290,
+      "pixelHeight": 9
+    },
+    {
+      "key": "coral-waterline-halfscale-hires-099",
+      "url": "/assets/landscape/coral-area/waterline-hires-halfscale-tiles/coral-waterline-halfscale-hires-099.png",
+      "x": 9728,
+      "y": 1944,
+      "displayWidth": 92,
+      "displayHeight": 2,
+      "pixelWidth": 411,
+      "pixelHeight": 9
+    }
+  ]
+}

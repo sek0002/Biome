@@ -1,0 +1,29 @@
+{
+  "asset": "great_white_shark",
+  "frameSize": {
+    "width": 512,
+    "height": 320
+  },
+  "animations": {
+    "swim": {
+      "fps": 8,
+      "loop": true,
+      "frames": [
+        "great_white_shark_swim_01.png",
+        "great_white_shark_swim_02.png",
+        "great_white_shark_swim_03.png",
+        "great_white_shark_swim_04.png"
+      ]
+    },
+    "surface": {
+      "fps": 7,
+      "loop": false,
+      "frames": [
+        "great_white_shark_surface_01.png",
+        "great_white_shark_surface_02.png",
+        "great_white_shark_surface_03.png",
+        "great_white_shark_surface_04.png"
+      ]
+    }
+  }
+}

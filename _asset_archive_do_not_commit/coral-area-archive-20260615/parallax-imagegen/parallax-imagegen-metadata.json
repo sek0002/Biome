@@ -1,0 +1,63 @@
+{
+  "status": "review-only; imagegen-generated raster overlays; not applied to game",
+  "displayFrame": {
+    "width": 9820,
+    "height": 1946,
+    "x": 900,
+    "y": 266,
+    "scaleInGame": 1
+  },
+  "nativeResolution": {
+    "width": 19640,
+    "height": 3892,
+    "resolutionScale": 2
+  },
+  "sources": [
+    "/Users/sekkevin/.codex/generated_images/019ec07a-dbaf-7020-ac41-1f7802510fcc/ig_01565647f2494691016a2e3de7ecec81919cae77aed6a015e1.png",
+    "/Users/sekkevin/.codex/generated_images/019ec07a-dbaf-7020-ac41-1f7802510fcc/ig_01565647f2494691016a2e3e5fe7a881919db9c7ddb17e56e1.png",
+    "/Users/sekkevin/.codex/generated_images/019ec07a-dbaf-7020-ac41-1f7802510fcc/ig_01565647f2494691016a2e3ef7a70481918bf1fdb80044f035.png",
+    "/Users/sekkevin/.codex/generated_images/019ec07a-dbaf-7020-ac41-1f7802510fcc/ig_01565647f2494691016a2e3f69d25c8191a4d03bd2620827a1.png"
+  ],
+  "layers": [
+    {
+      "order": 1,
+      "name": "water column",
+      "coverage": "100%",
+      "path": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/parallax-imagegen/layer-01-water-column-imagegen-2x.png",
+      "type": "RGB",
+      "generation": "imagegen"
+    },
+    {
+      "order": 2,
+      "name": "distant crag shadows",
+      "coverage": "lower 75%",
+      "path": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/parallax-imagegen/layer-04-distant-crag-shadows-imagegen-75pct-2x.png",
+      "type": "RGBA extracted from imagegen layer",
+      "generation": "imagegen"
+    },
+    {
+      "order": 3,
+      "name": "mid coral and kelp",
+      "coverage": "lower 50%",
+      "path": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/parallax-imagegen/layer-03-mid-coral-kelp-imagegen-50pct-2x.png",
+      "type": "RGBA extracted from imagegen layer",
+      "generation": "imagegen"
+    },
+    {
+      "order": 4,
+      "name": "front coral garden",
+      "coverage": "lower 25%",
+      "path": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/parallax-imagegen/layer-02-front-coral-garden-imagegen-25pct-2x.png",
+      "type": "RGBA extracted from imagegen layer",
+      "generation": "imagegen"
+    }
+  ],
+  "composite": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/parallax-imagegen/parallax-imagegen-composite-2x.png",
+  "preview": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/parallax-imagegen/parallax-imagegen-preview.png",
+  "layerSheet": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/parallax-imagegen/parallax-imagegen-layer-sheet.png",
+  "notes": [
+    "No procedural coral/rock shapes were drawn for this pass; layer imagery comes from imagegen outputs.",
+    "Alpha extraction was used only to turn generated full-frame overlay concepts into compositable PNG overlays.",
+    "No bubbles requested."
+  ]
+}

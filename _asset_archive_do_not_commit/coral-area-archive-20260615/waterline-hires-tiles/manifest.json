@@ -1,0 +1,195 @@
+{
+  "source": "/Users/sekkevin/LocalR/game/public/assets/landscape/coral-area/coral-zone-background-floor-watercolumn-matched.png",
+  "removedAboveWaterlinePx": 80,
+  "display": {
+    "x": 900,
+    "y": 266,
+    "width": 9820,
+    "height": 1946,
+    "scaleInGame": 1
+  },
+  "resolutionScale": 3.1622776601683795,
+  "pixelCountMultiplier": 10.000000000000002,
+  "tiles": [
+    {
+      "key": "coral-waterline-hires-00",
+      "url": "/assets/landscape/coral-area/waterline-hires-tiles/coral-waterline-hires-00.png",
+      "x": 0,
+      "displayWidth": 512,
+      "displayHeight": 1946,
+      "pixelWidth": 1619,
+      "pixelHeight": 6154
+    },
+    {
+      "key": "coral-waterline-hires-01",
+      "url": "/assets/landscape/coral-area/waterline-hires-tiles/coral-waterline-hires-01.png",
+      "x": 512,
+      "displayWidth": 512,
+      "displayHeight": 1946,
+      "pixelWidth": 1619,
+      "pixelHeight": 6154
+    },
+    {
+      "key": "coral-waterline-hires-02",
+      "url": "/assets/landscape/coral-area/waterline-hires-tiles/coral-waterline-hires-02.png",
+      "x": 1024,
+      "displayWidth": 512,
+      "displayHeight": 1946,
+      "pixelWidth": 1619,
+      "pixelHeight": 6154
+    },
+    {
+      "key": "coral-waterline-hires-03",
+      "url": "/assets/landscape/coral-area/waterline-hires-tiles/coral-waterline-hires-03.png",
+      "x": 1536,
+      "displayWidth": 512,
+      "displayHeight": 1946,
+      "pixelWidth": 1619,
+      "pixelHeight": 6154
+    },
+    {
+      "key": "coral-waterline-hires-04",
+      "url": "/assets/landscape/coral-area/waterline-hires-tiles/coral-waterline-hires-04.png",
+      "x": 2048,
+      "displayWidth": 512,
+      "displayHeight": 1946,
+      "pixelWidth": 1619,
+      "pixelHeight": 6154
+    },
+    {
+      "key": "coral-waterline-hires-05",
+      "url": "/assets/landscape/coral-area/waterline-hires-tiles/coral-waterline-hires-05.png",
+      "x": 2560,
+      "displayWidth": 512,
+      "displayHeight": 1946,
+      "pixelWidth": 1619,
+      "pixelHeight": 6154
+    },
+    {
+      "key": "coral-waterline-hires-06",
+      "url": "/assets/landscape/coral-area/waterline-hires-tiles/coral-waterline-hires-06.png",
+      "x": 3072,
+      "displayWidth": 512,
+      "displayHeight": 1946,
+      "pixelWidth": 1619,
+      "pixelHeight": 6154
+    },
+    {
+      "key": "coral-waterline-hires-07",
+      "url": "/assets/landscape/coral-area/waterline-hires-tiles/coral-waterline-hires-07.png",
+      "x": 3584,
+      "displayWidth": 512,
+      "displayHeight": 1946,
+      "pixelWidth": 1619,
+      "pixelHeight": 6154
+    },
+    {
+      "key": "coral-waterline-hires-08",
+      "url": "/assets/landscape/coral-area/waterline-hires-tiles/coral-waterline-hires-08.png",
+      "x": 4096,
+      "displayWidth": 512,
+      "displayHeight": 1946,
+      "pixelWidth": 1619,
+      "pixelHeight": 6154
+    },
+    {
+      "key": "coral-waterline-hires-09",
+      "url": "/assets/landscape/coral-area/waterline-hires-tiles/coral-waterline-hires-09.png",
+      "x": 4608,
+      "displayWidth": 512,
+      "displayHeight": 1946,
+      "pixelWidth": 1619,
+      "pixelHeight": 6154
+    },
+    {
+      "key": "coral-waterline-hires-10",
+      "url": "/assets/landscape/coral-area/waterline-hires-tiles/coral-waterline-hires-10.png",
+      "x": 5120,
+      "displayWidth": 512,
+      "displayHeight": 1946,
+      "pixelWidth": 1619,
+      "pixelHeight": 6154
+    },
+    {
+      "key": "coral-waterline-hires-11",
+      "url": "/assets/landscape/coral-area/waterline-hires-tiles/coral-waterline-hires-11.png",
+      "x": 5632,
+      "displayWidth": 512,
+      "displayHeight": 1946,
+      "pixelWidth": 1619,
+      "pixelHeight": 6154
+    },
+    {
+      "key": "coral-waterline-hires-12",
+      "url": "/assets/landscape/coral-area/waterline-hires-tiles/coral-waterline-hires-12.png",
+      "x": 6144,
+      "displayWidth": 512,
+      "displayHeight": 1946,
+      "pixelWidth": 1619,
+      "pixelHeight": 6154
+    },
+    {
+      "key": "coral-waterline-hires-13",
+      "url": "/assets/landscape/coral-area/waterline-hires-tiles/coral-waterline-hires-13.png",
+      "x": 6656,
+      "displayWidth": 512,
+      "displayHeight": 1946,
+      "pixelWidth": 1619,
+      "pixelHeight": 6154
+    },
+    {
+      "key": "coral-waterline-hires-14",
+      "url": "/assets/landscape/coral-area/waterline-hires-tiles/coral-waterline-hires-14.png",
+      "x": 7168,
+      "displayWidth": 512,
+      "displayHeight": 1946,
+      "pixelWidth": 1619,
+      "pixelHeight": 6154
+    },
+    {
+      "key": "coral-waterline-hires-15",
+      "url": "/assets/landscape/coral-area/waterline-hires-tiles/coral-waterline-hires-15.png",
+      "x": 7680,
+      "displayWidth": 512,
+      "displayHeight": 1946,
+      "pixelWidth": 1619,
+      "pixelHeight": 6154
+    },
+    {
+      "key": "coral-waterline-hires-16",
+      "url": "/assets/landscape/coral-area/waterline-hires-tiles/coral-waterline-hires-16.png",
+      "x": 8192,
+      "displayWidth": 512,
+      "displayHeight": 1946,
+      "pixelWidth": 1619,
+      "pixelHeight": 6154
+    },
+    {
+      "key": "coral-waterline-hires-17",
+      "url": "/assets/landscape/coral-area/waterline-hires-tiles/coral-waterline-hires-17.png",
+      "x": 8704,
+      "displayWidth": 512,
+      "displayHeight": 1946,
+      "pixelWidth": 1619,
+      "pixelHeight": 6154
+    },
+    {
+      "key": "coral-waterline-hires-18",
+      "url": "/assets/landscape/coral-area/waterline-hires-tiles/coral-waterline-hires-18.png",
+      "x": 9216,
+      "displayWidth": 512,
+      "displayHeight": 1946,
+      "pixelWidth": 1619,
+      "pixelHeight": 6154
+    },
+    {
+      "key": "coral-waterline-hires-19",
+      "url": "/assets/landscape/coral-area/waterline-hires-tiles/coral-waterline-hires-19.png",
+      "x": 9728,
+      "displayWidth": 92,
+      "displayHeight": 1946,
+      "pixelWidth": 291,
+      "pixelHeight": 6154
+    }
+  ]
+}

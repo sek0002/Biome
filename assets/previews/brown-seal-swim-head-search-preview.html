@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Brown Seal Swim Head Search Preview</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        background: #061722;
+        color: #d8fff6;
+      }
+
+      body {
+        display: grid;
+        min-height: 100vh;
+        margin: 0;
+        place-items: center;
+      }
+
+      main {
+        display: grid;
+        gap: 14px;
+        width: min(760px, calc(100vw - 28px));
+      }
+
+      canvas {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border: 1px solid rgba(155, 228, 219, 0.42);
+        background:
+          linear-gradient(#0a3550, #061b33),
+          #061722;
+        image-rendering: pixelated;
+      }
+
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+      }
+
+      button,
+      select,
+      input {
+        border: 1px solid rgba(155, 228, 219, 0.45);
+        background: rgba(4, 20, 28, 0.86);
+        color: #d8fff6;
+        font: inherit;
+      }
+
+      button,
+      select {
+        min-height: 34px;
+        padding: 6px 9px;
+      }
+
+      label {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <canvas id="preview" width="960" height="540" aria-label="Animated brown seal sprite preview"></canvas>
+      <div class="controls">
+        <button id="toggle" type="button">Pause</button>
+        <label>
+          Cycle
+          <select id="cycle">
+            <option value="0">Top row</option>
+            <option value="1">Bottom row</option>
+            <option value="both">Both rows</option>
+          </select>
+        </label>
+        <label>
+          FPS
+          <input id="fps" type="range" min="4" max="16" value="9" />
+          <output id="fpsValue">9</output>
+        </label>
+      </div>
+    </main>
+
+    <script>
+      const image = new Image();
+      image.src = "../brown-seal-swim-head-search-no-bubbles-sprite-sheet.png";
+
+      const canvas = document.getElementById("preview");
+      const ctx = canvas.getContext("2d");
+      const toggle = document.getElementById("toggle");
+      const cycle = document.getElementById("cycle");
+      const fps = document.getElementById("fps");
+      const fpsValue = document.getElementById("fpsValue");
+
+      const columns = 6;
+      const rows = 2;
+      let frame = 0;
+      let lastFrameAt = 0;
+      let playing = true;
+
+      ctx.imageSmoothingEnabled = false;
+
+      const drawWater = () => {
+        const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+        gradient.addColorStop(0, "#0a4365");
+        gradient.addColorStop(0.52, "#08283a");
+        gradient.addColorStop(1, "#061727");
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = "rgba(140, 232, 255, 0.16)";
+        for (let y = 52; y < canvas.height; y += 42) {
+          for (let x = (y % 84) - 24; x < canvas.width; x += 96) {
+            ctx.fillRect(x, y, 22, 3);
+          }
+        }
+      };
+
+      const drawFrame = () => {
+        drawWater();
+        const cellWidth = Math.floor(image.width / columns);
+        const cellHeight = Math.floor(image.height / rows);
+        const mode = cycle.value;
+        const row = mode === "both" ? Math.floor(frame / columns) % rows : Number(mode);
+        const col = frame % columns;
+        const sx = col * cellWidth;
+        const sy = row * cellHeight;
+        const sw = col === columns - 1 ? image.width - sx : cellWidth;
+        const sh = row === rows - 1 ? image.height - sy : cellHeight;
+        const scale = Math.min(2.9, (canvas.width * 0.76) / sw, (canvas.height * 0.58) / sh);
+        const dw = Math.round(sw * scale);
+        const dh = Math.round(sh * scale);
+        ctx.drawImage(image, sx, sy, sw, sh, (canvas.width - dw) / 2, (canvas.height - dh) / 2, dw, dh);
+      };
+
+      const tick = (time) => {
+        if (playing && time - lastFrameAt >= 1000 / Number(fps.value)) {
+          frame = (frame + 1) % (cycle.value === "both" ? columns * rows : columns);
+          lastFrameAt = time;
+        }
+        drawFrame();
+        requestAnimationFrame(tick);
+      };
+
+      toggle.addEventListener("click", () => {
+        playing = !playing;
+        toggle.textContent = playing ? "Pause" : "Play";
+      });
+
+      fps.addEventListener("input", () => {
+        fpsValue.textContent = fps.value;
+      });
+
+      cycle.addEventListener("change", () => {
+        frame = 0;
+      });
+
+      image.addEventListener("load", () => requestAnimationFrame(tick));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "brown-seal-tail-flipper-swim",
+  "source": "assets/brown-seal-pixel-sprite.png",
+  "sheet": "assets/sprites/seal/brown-seal-tail-flipper-swim-sheet.png",
+  "preview": "assets/sprites/seal/brown-seal-tail-flipper-swim-preview.gif",
+  "contactSheet": "assets/sprites/seal/brown-seal-tail-flipper-swim-contact-sheet.png",
+  "frameDirectory": "assets/sprites/seal/brown-seal-tail-flipper-swim-frames",
+  "frameCount": 16,
+  "frameWidth": 384,
+  "frameHeight": 256,
+  "durationMs": 80,
+  "anchor": "center",
+  "background": "transparent",
+  "notes": "Seal swim cycle generated from the brown seal sprite. Tail uses a seamless column bend; side flippers paddle with alternating overlaid strokes."
+}

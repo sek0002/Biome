@@ -1,0 +1,254 @@
+{
+  "source": "latest regenerated seagrass sheets with programmatic directional bend for clear sway",
+  "frame_order": [
+    "neutral",
+    "sway-left",
+    "center",
+    "sway-right"
+  ],
+  "variants": [
+    {
+      "variant": 1,
+      "sheet": "grass-current-variant-01-sheet.png",
+      "source": "/Users/sekkevin/.codex/generated_images/019ec636-f160-7663-b988-1b64a6473c24/ig_0d1ee49a68a21d99016a2eab1aaec0819181b3acb68dac1991.png",
+      "frames": [
+        {
+          "frame": 1,
+          "pose": "neutral",
+          "file": "grass-current-variant-01-frame-01-neutral.png",
+          "alphaFile": "grass-current-variant-01-frame-01-neutral-alpha.png",
+          "size": [
+            543,
+            526
+          ]
+        },
+        {
+          "frame": 2,
+          "pose": "sway-left",
+          "file": "grass-current-variant-01-frame-02-sway-left.png",
+          "alphaFile": "grass-current-variant-01-frame-02-sway-left-alpha.png",
+          "size": [
+            543,
+            526
+          ]
+        },
+        {
+          "frame": 3,
+          "pose": "center",
+          "file": "grass-current-variant-01-frame-03-center.png",
+          "alphaFile": "grass-current-variant-01-frame-03-center-alpha.png",
+          "size": [
+            543,
+            526
+          ]
+        },
+        {
+          "frame": 4,
+          "pose": "sway-right",
+          "file": "grass-current-variant-01-frame-04-sway-right.png",
+          "alphaFile": "grass-current-variant-01-frame-04-sway-right-alpha.png",
+          "size": [
+            543,
+            526
+          ]
+        }
+      ]
+    },
+    {
+      "variant": 2,
+      "sheet": "grass-current-variant-02-sheet.png",
+      "source": "/Users/sekkevin/.codex/generated_images/019ec636-f160-7663-b988-1b64a6473c24/ig_0d1ee49a68a21d99016a2eab4c9b3c81919cb950a15b2855d7.png",
+      "frames": [
+        {
+          "frame": 1,
+          "pose": "neutral",
+          "file": "grass-current-variant-02-frame-01-neutral.png",
+          "alphaFile": "grass-current-variant-02-frame-01-neutral-alpha.png",
+          "size": [
+            543,
+            366
+          ]
+        },
+        {
+          "frame": 2,
+          "pose": "sway-left",
+          "file": "grass-current-variant-02-frame-02-sway-left.png",
+          "alphaFile": "grass-current-variant-02-frame-02-sway-left-alpha.png",
+          "size": [
+            543,
+            366
+          ]
+        },
+        {
+          "frame": 3,
+          "pose": "center",
+          "file": "grass-current-variant-02-frame-03-center.png",
+          "alphaFile": "grass-current-variant-02-frame-03-center-alpha.png",
+          "size": [
+            543,
+            366
+          ]
+        },
+        {
+          "frame": 4,
+          "pose": "sway-right",
+          "file": "grass-current-variant-02-frame-04-sway-right.png",
+          "alphaFile": "grass-current-variant-02-frame-04-sway-right-alpha.png",
+          "size": [
+            543,
+            366
+          ]
+        }
+      ]
+    },
+    {
+      "variant": 3,
+      "sheet": "grass-current-variant-03-sheet.png",
+      "source": "/Users/sekkevin/.codex/generated_images/019ec636-f160-7663-b988-1b64a6473c24/ig_0d1ee49a68a21d99016a2eab817e44819194eba57094cdc516.png",
+      "frames": [
+        {
+          "frame": 1,
+          "pose": "neutral",
+          "file": "grass-current-variant-03-frame-01-neutral.png",
+          "alphaFile": "grass-current-variant-03-frame-01-neutral-alpha.png",
+          "size": [
+            527,
+            630
+          ]
+        },
+        {
+          "frame": 2,
+          "pose": "sway-left",
+          "file": "grass-current-variant-03-frame-02-sway-left.png",
+          "alphaFile": "grass-current-variant-03-frame-02-sway-left-alpha.png",
+          "size": [
+            527,
+            630
+          ]
+        },
+        {
+          "frame": 3,
+          "pose": "center",
+          "file": "grass-current-variant-03-frame-03-center.png",
+          "alphaFile": "grass-current-variant-03-frame-03-center-alpha.png",
+          "size": [
+            527,
+            630
+          ]
+        },
+        {
+          "frame": 4,
+          "pose": "sway-right",
+          "file": "grass-current-variant-03-frame-04-sway-right.png",
+          "alphaFile": "grass-current-variant-03-frame-04-sway-right-alpha.png",
+          "size": [
+            527,
+            630
+          ]
+        }
+      ]
+    },
+    {
+      "variant": 4,
+      "sheet": "grass-current-variant-04-sheet.png",
+      "source": "/Users/sekkevin/.codex/generated_images/019ec636-f160-7663-b988-1b64a6473c24/ig_0d1ee49a68a21d99016a2eabb30de48191834e9f896b6f6e0c.png",
+      "frames": [
+        {
+          "frame": 1,
+          "pose": "neutral",
+          "file": "grass-current-variant-04-frame-01-neutral.png",
+          "alphaFile": "grass-current-variant-04-frame-01-neutral-alpha.png",
+          "size": [
+            529,
+            429
+          ]
+        },
+        {
+          "frame": 2,
+          "pose": "sway-left",
+          "file": "grass-current-variant-04-frame-02-sway-left.png",
+          "alphaFile": "grass-current-variant-04-frame-02-sway-left-alpha.png",
+          "size": [
+            529,
+            429
+          ]
+        },
+        {
+          "frame": 3,
+          "pose": "center",
+          "file": "grass-current-variant-04-frame-03-center.png",
+          "alphaFile": "grass-current-variant-04-frame-03-center-alpha.png",
+          "size": [
+            529,
+            429
+          ]
+        },
+        {
+          "frame": 4,
+          "pose": "sway-right",
+          "file": "grass-current-variant-04-frame-04-sway-right.png",
+          "alphaFile": "grass-current-variant-04-frame-04-sway-right-alpha.png",
+          "size": [
+            529,
+            429
+          ]
+        }
+      ]
+    },
+    {
+      "variant": 5,
+      "sheet": "grass-current-variant-05-sheet.png",
+      "source": "/Users/sekkevin/.codex/generated_images/019ec636-f160-7663-b988-1b64a6473c24/ig_0d1ee49a68a21d99016a2eabe0a7548191a35ebfbaa6ef012a.png",
+      "frames": [
+        {
+          "frame": 1,
+          "pose": "neutral",
+          "file": "grass-current-variant-05-frame-01-neutral.png",
+          "alphaFile": "grass-current-variant-05-frame-01-neutral-alpha.png",
+          "size": [
+            533,
+            524
+          ]
+        },
+        {
+          "frame": 2,
+          "pose": "sway-left",
+          "file": "grass-current-variant-05-frame-02-sway-left.png",
+          "alphaFile": "grass-current-variant-05-frame-02-sway-left-alpha.png",
+          "size": [
+            533,
+            524
+          ]
+        },
+        {
+          "frame": 3,
+          "pose": "center",
+          "file": "grass-current-variant-05-frame-03-center.png",
+          "alphaFile": "grass-current-variant-05-frame-03-center-alpha.png",
+          "size": [
+            533,
+            524
+          ]
+        },
+        {
+          "frame": 4,
+          "pose": "sway-right",
+          "file": "grass-current-variant-05-frame-04-sway-right.png",
+          "alphaFile": "grass-current-variant-05-frame-04-sway-right-alpha.png",
+          "size": [
+            533,
+            524
+          ]
+        }
+      ]
+    }
+  ],
+  "directionalSwaySource": "image-generated models with direction-normalized left/right frames; frame 02 all strands left, frame 04 all strands right",
+  "directionalSwaySheets": [
+    "/Users/sekkevin/.codex/generated_images/019ec636-f160-7663-b988-1b64a6473c24/ig_0d1ee49a68a21d99016a2eb60a3cc0819190b635bf12001b06.png",
+    "/Users/sekkevin/.codex/generated_images/019ec636-f160-7663-b988-1b64a6473c24/ig_0d1ee49a68a21d99016a2eb6481228819184f76a534dd159c7.png",
+    "/Users/sekkevin/.codex/generated_images/019ec636-f160-7663-b988-1b64a6473c24/ig_0d1ee49a68a21d99016a2eb6857f3c8191be3bd10ac681b2ef.png",
+    "/Users/sekkevin/.codex/generated_images/019ec636-f160-7663-b988-1b64a6473c24/ig_0d1ee49a68a21d99016a2eb6c5656c8191abc88aa7248c6cf9.png",
+    "/Users/sekkevin/.codex/generated_images/019ec636-f160-7663-b988-1b64a6473c24/ig_0d1ee49a68a21d99016a2eb7040c0c819191329e7293069aea.png"
+  ]
+}

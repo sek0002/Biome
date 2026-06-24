@@ -1,0 +1,6 @@
+{
+  "frameWidth": 512,
+  "frameHeight": 256,
+  "frameCount": 8,
+  "horizontalMargin": "repacked with extra right-side tail clearance"
+}

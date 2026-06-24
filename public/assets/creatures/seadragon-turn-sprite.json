@@ -1,0 +1,21 @@
+{
+  "image": "seadragon-turn-sprite.png",
+  "frameWidth": 724,
+  "frameHeight": 724,
+  "frames": [
+    {
+      "index": 0,
+      "pose": "body and tail rotated away from viewer"
+    },
+    {
+      "index": 1,
+      "pose": "neutral side profile"
+    },
+    {
+      "index": 2,
+      "pose": "body and tail rotated toward viewer"
+    }
+  ],
+  "loop": [0, 1, 2, 1],
+  "frameDurationMs": 140
+}

@@ -1,0 +1,303 @@
+{
+  "source": "/Users/sekkevin/.codex/generated_images/019ed97f-8242-7531-bb8d-f3b9218c9291/ig_0c57b01a1cc0e842016a33957ce9908197ac9e3a7ebbf7e90a.png",
+  "frameWidth": 512,
+  "frameHeight": 256,
+  "frameCount": 8,
+  "animations": {
+    "finSine": {
+      "sheet": "reef-triggerfish-fin-sine-sheet.png",
+      "framesDir": "fin-sine-frames",
+      "frameRate": 9,
+      "description": "Dorsal and anal fins undulate on opposite sine phases."
+    },
+    "spikeRetract": {
+      "sheet": "reef-triggerfish-spike-retract-sheet.png",
+      "framesDir": "spike-retract-frames",
+      "frameRate": 9,
+      "description": "Head spike retracts over the first frames while fin sine motion continues."
+    },
+    "finPerspectiveSpikeFlat": {
+      "sheet": "reef-triggerfish-fin-perspective-spike-flat-sheet.png",
+      "framesDir": "fin-perspective-spike-flat-frames",
+      "frameRate": 8,
+      "frameWidth": 512,
+      "frameHeight": 256,
+      "frameCount": 8,
+      "description": "Body-locked side profile; ventral and anal fins rotate away, neutral, then toward the viewer with foreshortening; head spike flattened against the head without body warping."
+    },
+    "spikeOnly": {
+      "sheet": "reef-triggerfish-spike-only-sheet.png",
+      "framesDir": "spike-only-frames",
+      "frameRate": 8,
+      "frameWidth": 512,
+      "frameHeight": 256,
+      "frameCount": 8,
+      "description": "Head spike folds flat against the head and returns; body, tail, dorsal, ventral, pectoral, and anal fins remain locked."
+    },
+    "spikeOnlyHorizontalFold": {
+      "sheet": "reef-triggerfish-spike-only-horizontal-fold-sheet.png",
+      "framesDir": "spike-only-horizontal-fold-frames",
+      "frameRate": 8,
+      "frameWidth": 512,
+      "frameHeight": 256,
+      "frameCount": 8,
+      "description": "Connected pixel mask for the user-circled trigger spine only; all other fish pixels are restored from source."
+    },
+    "spikePivot": {
+      "sheet": "reef-triggerfish-spike-pivot-sheet.png",
+      "framesDir": "spike-only-pivot-frames",
+      "frameRate": 8,
+      "frameWidth": 512,
+      "frameHeight": 256,
+      "frameCount": 8,
+      "pivot": [
+        168,
+        82
+      ],
+      "angles": [
+        0,
+        -16,
+        -36,
+        -58,
+        -78,
+        -58,
+        -36,
+        -16
+      ],
+      "description": "Connected mask for the user-circled trigger spine rotates around the base pivot; all other fish pixels are restored from source.",
+      "cleanup": {
+        "removedTinyDisconnectedComponentsUnderPixels": 18,
+        "note": "Removed isolated rotation debris from pivot frames; main fish and selected spike components preserved."
+      }
+    },
+    "finFlagWave": {
+      "sheet": "reef-triggerfish-fin-flag-wave-sheet.png",
+      "framesDir": "fin-flag-wave-frames",
+      "frameRate": 8,
+      "frameWidth": 512,
+      "frameHeight": 256,
+      "frameCount": 8,
+      "description": "Dorsal and anal fins use a 2D in-plane flag-wave field; static fin silhouettes behind moving fins are cleared except for a narrow source attachment band."
+    },
+    "finFlagWaveTailPerspective": {
+      "sheet": "reef-triggerfish-fin-flag-wave-tail-perspective-sheet.png",
+      "framesDir": "fin-flag-wave-tail-perspective-frames",
+      "frameRate": 8,
+      "frameWidth": 512,
+      "frameHeight": 256,
+      "frameCount": 8,
+      "tailStates": [
+        0,
+        -0.3,
+        -0.6,
+        -0.3,
+        0,
+        0.3,
+        0.6,
+        0.3
+      ],
+      "description": "Dorsal/anal fin 2D flag wave plus full-height tail perspective transform preserving bottom lobe."
+    },
+    "finTailSpikeCombined": {
+      "sheet": "reef-triggerfish-fin-tail-spike-combined-sheet.png",
+      "framesDir": "fin-tail-spike-combined-frames",
+      "frameRate": 8,
+      "frameWidth": 512,
+      "frameHeight": 256,
+      "frameCount": 8,
+      "spikePivot": [
+        168,
+        82
+      ],
+      "spikeAngles": [
+        0,
+        -16,
+        -36,
+        -58,
+        -78,
+        -58,
+        -36,
+        -16
+      ],
+      "description": "Combined fin/tail animation with spike pivot composited behind the fish; original upright spike cleared from foreground and stray pixels removed."
+    },
+    "spikeDown": {
+      "sheet": "reef-triggerfish-spike-down-sheet.png",
+      "framesDir": "spike-down-frames",
+      "frameRate": 8,
+      "frameWidth": 512,
+      "frameHeight": 256,
+      "frameCount": 5,
+      "spikePivot": [
+        168,
+        82
+      ],
+      "spikeAngles": [
+        0,
+        -16,
+        -36,
+        -58,
+        -78
+      ],
+      "description": "Standalone spike-down animation. Spike pivots behind the fish; foreground body/head remain clean."
+    },
+    "spikeUp": {
+      "sheet": "reef-triggerfish-spike-up-sheet.png",
+      "framesDir": "spike-up-frames",
+      "frameRate": 8,
+      "frameWidth": 512,
+      "frameHeight": 256,
+      "frameCount": 5,
+      "spikePivot": [
+        168,
+        82
+      ],
+      "spikeAngles": [
+        -78,
+        -58,
+        -36,
+        -16,
+        0
+      ],
+      "description": "Standalone spike-up animation. Reverse of spike-down; spike pivots from tucked to upright behind the fish."
+    },
+    "swimSpikeDown": {
+      "sheet": "reef-triggerfish-swim-spike-down-sheet.png",
+      "framesDir": "swim-spike-down-frames",
+      "frameRate": 8,
+      "frameWidth": 512,
+      "frameHeight": 256,
+      "frameCount": 8,
+      "spikePivot": [
+        168,
+        82
+      ],
+      "spikeAngles": [
+        0,
+        -16,
+        -36,
+        -58,
+        -78,
+        -78,
+        -78,
+        -78
+      ],
+      "description": "Full swimming animation with spike pivoting down over the first frames, then held down."
+    },
+    "swimSpikeUp": {
+      "sheet": "reef-triggerfish-swim-spike-up-sheet.png",
+      "framesDir": "swim-spike-up-frames",
+      "frameRate": 8,
+      "frameWidth": 512,
+      "frameHeight": 256,
+      "frameCount": 8,
+      "spikePivot": [
+        168,
+        82
+      ],
+      "spikeAngles": [
+        -78,
+        -58,
+        -36,
+        -16,
+        0,
+        0,
+        0,
+        0
+      ],
+      "description": "Full swimming animation with spike starting down and pivoting up, then held upright."
+    },
+    "swimSpikeUpLoop": {
+      "sheet": "reef-triggerfish-swim-spike-up-loop-sheet.png",
+      "framesDir": "swim-spike-up-loop-frames",
+      "frameRate": 8,
+      "frameWidth": 512,
+      "frameHeight": 256,
+      "frameCount": 8,
+      "spikePivot": [
+        168,
+        82
+      ],
+      "spikeAngles": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "description": "Full swimming animation state/transition for trigger spine."
+    },
+    "swimSpikeDownLoop": {
+      "sheet": "reef-triggerfish-swim-spike-down-loop-sheet.png",
+      "framesDir": "swim-spike-down-loop-frames",
+      "frameRate": 8,
+      "frameWidth": 512,
+      "frameHeight": 256,
+      "frameCount": 8,
+      "spikePivot": [
+        168,
+        82
+      ],
+      "spikeAngles": [
+        -78,
+        -78,
+        -78,
+        -78,
+        -78,
+        -78,
+        -78,
+        -78
+      ],
+      "description": "Full swimming animation state/transition for trigger spine."
+    },
+    "swimSpikeUpToDownTransition": {
+      "sheet": "reef-triggerfish-swim-spike-up-to-down-transition-sheet.png",
+      "framesDir": "swim-spike-up-to-down-transition-frames",
+      "frameRate": 8,
+      "frameWidth": 512,
+      "frameHeight": 256,
+      "frameCount": 8,
+      "spikePivot": [
+        168,
+        82
+      ],
+      "spikeAngles": [
+        0,
+        -12,
+        -24,
+        -38,
+        -52,
+        -64,
+        -72,
+        -78
+      ],
+      "description": "Full swimming animation state/transition for trigger spine."
+    },
+    "swimSpikeDownToUpTransition": {
+      "sheet": "reef-triggerfish-swim-spike-down-to-up-transition-sheet.png",
+      "framesDir": "swim-spike-down-to-up-transition-frames",
+      "frameRate": 8,
+      "frameWidth": 512,
+      "frameHeight": 256,
+      "frameCount": 8,
+      "spikePivot": [
+        168,
+        82
+      ],
+      "spikeAngles": [
+        -78,
+        -72,
+        -64,
+        -52,
+        -38,
+        -24,
+        -12,
+        0
+      ],
+      "description": "Full swimming animation state/transition for trigger spine."
+    }
+  }
+}

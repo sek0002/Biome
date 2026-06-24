@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "godot-procedural-generation": {
+      "source": "thedivergentai/gd-agentic-skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot-procedural-generation/SKILL.md",
+      "computedHash": "0dae80fd32758095d774369ad2f99b0831dcc838893e5b7b580bd7754dd484fd"
+    }
+  }
+}

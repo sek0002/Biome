@@ -1,0 +1,15 @@
+{
+  "source": "rainbow-reef-fish-pixel-sprite.png",
+  "frameWidth": 512,
+  "frameHeight": 256,
+  "frameCount": 8,
+  "animations": {
+    "tailPerspective": {
+      "sheet": "rainbow-reef-fish-tail-perspective-sheet.png",
+      "framesDir": "rainbow-reef-fish-tail-perspective-frames",
+      "preview": "rainbow-reef-fish-tail-perspective-preview.gif",
+      "frameRate": 11,
+      "description": "Side profile body remains locked while the tail fin rotates away, through neutral, toward the viewer, then loops back with perspective foreshortening."
+    }
+  }
+}

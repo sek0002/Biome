@@ -1,0 +1,52 @@
+{
+  "status": "review-only; not applied to game",
+  "source": "public/assets/landscape/coral-area/coral-zone-background-waterline-review-base.png",
+  "backgroundLayer": "public/assets/landscape/coral-area/coral-zone-parallax-background-water.png",
+  "worldCoralLayer": "public/assets/landscape/coral-area/coral-zone-world-layer-coral-alpha.png",
+  "worldLayerCheckerPreview": "public/assets/landscape/coral-area/coral-zone-world-layer-coral-alpha-checker-preview.png",
+  "splitPreview": "public/assets/landscape/coral-area/coral-zone-split-layers-preview.png",
+  "size": {
+    "width": 9820,
+    "height": 1946
+  },
+  "placementForLater": {
+    "x": 900,
+    "y": 266,
+    "scale": 1
+  },
+  "intendedUse": "Draw background layer behind the world at a slower parallax rate, then draw the alpha coral/world layer at world speed on top.",
+  "notes": [
+    "No Phaser overlay change was made.",
+    "Foreground alpha was extracted from the existing review image using the reef crest and color/brightness mask."
+  ],
+  "backgroundCleanup": "Parallax background rebuilt as a complete full-frame water column with no terrain-shaped foreground contour.",
+  "baseBackgroundLayer": "public/assets/landscape/coral-area/coral-zone-parallax-background-water.png",
+  "distantRockyOutcropsLayer": "public/assets/landscape/coral-area/coral-zone-distant-rocky-outcrops-alpha.png",
+  "backgroundWithRockyOutcrops": "public/assets/landscape/coral-area/coral-zone-parallax-background-water-rocky-outcrops.png",
+  "completeCompositeWithRockyOutcrops": "public/assets/landscape/coral-area/coral-zone-complete-with-distant-rocky-outcrops.png",
+  "rockyOutcropsPreview": "public/assets/landscape/coral-area/coral-zone-rocky-outcrops-layer-preview.png",
+  "parallaxPlan": [
+    {
+      "layer": "coral-zone-parallax-background-complete-water.png",
+      "movement": "slowest"
+    },
+    {
+      "layer": "coral-zone-distant-rocky-outcrops-alpha.png",
+      "movement": "slow, slightly faster than water"
+    },
+    {
+      "layer": "coral-zone-world-layer-coral-alpha.png",
+      "movement": "world speed"
+    }
+  ],
+  "completeParallaxBackgroundLayer": "public/assets/landscape/coral-area/coral-zone-parallax-background-complete-water.png",
+  "completeParallaxBackgroundWithRockyOutcrops": "public/assets/landscape/coral-area/coral-zone-parallax-background-complete-rocky-outcrops.png",
+  "completeStackPreviewWithWorldLayer": "public/assets/landscape/coral-area/coral-zone-complete-parallax-rocks-world-preview-full.png",
+  "completeParallaxPreview": "public/assets/landscape/coral-area/coral-zone-complete-parallax-rocks-preview.png",
+  "rockyOutcropStyle": "moved much higher, heavily defocused, low-alpha amorphous far crag shadow band independent from terrain contour",
+  "focusedWorldCoralLayer": "public/assets/landscape/coral-area/coral-zone-world-layer-coral-alpha-focused.png",
+  "terrainLayerLink": "removed for the distant crag layer; it is generated from its own far-landscape curve, not the foreground terrain/world contour",
+  "frontCoralFocus": "front coral/world alpha layer sharpened into coral-zone-world-layer-coral-alpha-focused.png for preview stacking",
+  "cleanParallaxBackgroundPreview": "public/assets/landscape/coral-area/coral-zone-parallax-background-clean-preview.png",
+  "previewMode": "complete parallax background only; no terrain/world layer overlay and no checker/grey area"
+}

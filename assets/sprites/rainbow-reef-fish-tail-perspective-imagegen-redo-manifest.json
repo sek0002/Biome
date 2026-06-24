@@ -1,0 +1,17 @@
+{
+  "source": "rainbow-reef-fish-pixel-sprite.png",
+  "imagegenRaw": "rainbow-reef-fish-tail-perspective-imagegen-redo-raw.png",
+  "frameWidth": 512,
+  "frameHeight": 256,
+  "frameCount": 8,
+  "animations": {
+    "tailPerspectiveImagegenRedo": {
+      "sheet": "rainbow-reef-fish-tail-perspective-imagegen-redo-sheet.png",
+      "framesDir": "rainbow-reef-fish-tail-perspective-imagegen-redo-frames",
+      "preview": "rainbow-reef-fish-tail-perspective-imagegen-redo-preview.gif",
+      "frameRate": 11,
+      "description": "Imagegen-redone strip with body composited from one neutral frame for an exact body lock; only the imagegen tail region changes away, through neutral, and toward the viewer with perspective foreshortening.",
+      "tailHingeX": 418
+    }
+  }
+}
