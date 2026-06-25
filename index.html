@@ -23,11 +23,21 @@
         <a id="hud-logo-link" href="https://muuc.org.au" target="_blank" rel="noopener noreferrer" aria-label="Visit MUUC website">
           <img id="hud-logo" src="%BASE_URL%assets/creatures/muuc.svg" alt="" />
         </a>
-        <div class="hud-panel">
-          <select id="zone-label" aria-label="Biome">
-            <option value="coral">Seagrass Meadow</option>
-            <option value="kelp">Kelp Forest</option>
-          </select>
+        <div class="hud-right">
+          <div class="hud-panel">
+            <select id="zone-label" aria-label="Biome">
+              <option value="coral">Seagrass Meadow</option>
+              <option value="kelp">Kelp Forest</option>
+            </select>
+          </div>
+          <div id="music-controls" class="music-controls" aria-label="Background music">
+            <button id="music-mute" type="button" aria-pressed="true" aria-label="Unmute music" title="Unmute music">
+              <span class="speaker-icon" aria-hidden="true"></span>
+            </button>
+            <div class="music-volume-popover">
+              <input id="music-volume" type="range" min="0" max="1" step="0.01" value="0" aria-label="Music volume" />
+            </div>
+          </div>
         </div>
         <div id="depth-gauge" aria-label="Depth gauge">
           <div id="depth-gauge-track">

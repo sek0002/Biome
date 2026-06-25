@@ -94,6 +94,14 @@ type DevCameraTools = {
   biomeReload: HTMLButtonElement;
   readout: HTMLOutputElement;
 };
+type MusicControls = {
+  root: HTMLElement;
+  muteButton: HTMLButtonElement;
+  volumeInput: HTMLInputElement;
+};
+type VolumeAdjustableSound = Phaser.Sound.BaseSound & {
+  setVolume?: (value: number) => Phaser.Sound.BaseSound;
+};
 type CreatureTrackPoint = {
   x: number;
   y: number;
@@ -402,6 +410,9 @@ const CORAL_GARDEN_BACKDROP_ALPHA = 0.46;
 const CORAL_GARDEN_BACKDROP_ZONE_FADE_DISTANCE = 900;
 const WATER_OVERLAY_DEPTH = -4.9;
 const WATER_DETAIL_DEPTH = -4.85;
+const BACKGROUND_MUSIC_KEY = "kelp-sweeping-background";
+const BACKGROUND_MUSIC_URL = "/assets/audio/kelp-sweeping-background.wav";
+const BACKGROUND_MUSIC_DEFAULT_VOLUME = 0.45;
 const ZODIAC_BOAT_KEY = "zodiac-rib-tr251-black-scratch-registered";
 const ZODIAC_BOAT_STATIC_KEY = "zodiac-rib-stationary-no-waves-registered";
 const ZODIAC_BOAT_ANIMATION_KEY = "zodiac-rib-surface-zoom";
@@ -538,6 +549,38 @@ const SAND_PALETTE_DARK = 0x3a2316;
 const TERRAIN_GRADIENT_TEXTURE_KEY = "terrain-sand-gradient-scale";
 const TERRAIN_GRADIENT_TEXTURE_WIDTH = 1200;
 const TERRAIN_GRADIENT_TEXTURE_HEIGHT = 720;
+const SEABED_ELEMENT_DEPTH = -5.46;
+const SEABED_ELEMENT_COUNT = 52;
+const SEABED_ELEMENT_SCATTER_START_X = BEACH_SHELF_END_X + 320;
+const SEABED_ELEMENT_CLUSTER_SPACING_X = 520;
+const SEABED_ELEMENT_CLUSTER_SPACING_Y = 150;
+const SEABED_ELEMENT_SCATTER_BAND_TOP = 14;
+const SEABED_ELEMENT_SCATTER_BAND_DEPTH = 320;
+const SEABED_ELEMENT_CLUSTER_DENSITY = 0.16;
+const SEABED_ELEMENT_CLUSTER_MIN_SIZE = 4;
+const SEABED_ELEMENT_CLUSTER_MAX_SIZE = 10;
+const SEABED_ELEMENT_CLUSTER_RADIUS_X = 42;
+const SEABED_ELEMENT_CLUSTER_RADIUS_Y = 34;
+const SEABED_ELEMENTS = Array.from({ length: SEABED_ELEMENT_COUNT }, (_, index) => {
+  const id = (index + 1).toString().padStart(2, "0");
+
+  return {
+    key: `underground-element-${id}`,
+    url: `/assets/landscape/underground-elements/elements-half/underground-element-${id}.png`,
+  };
+});
+const SEABED_ELEMENT_CATEGORY_POOLS = [
+  { weight: 10, indices: [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51] },
+  { weight: 5, indices: [30, 31, 32, 33, 34, 35, 36, 37, 38, 39] },
+  { weight: 1, indices: [22, 23, 24, 25, 26, 27, 28, 29] },
+  { weight: 1, indices: [16, 17, 18, 19, 20, 21] },
+  { weight: 3, indices: [1, 5, 8, 9, 10, 11, 12, 13, 14, 15] },
+  { weight: 0.5, indices: [0, 2, 3, 4, 6, 7] },
+];
+const SEABED_ELEMENT_CATEGORY_WEIGHT_TOTAL = SEABED_ELEMENT_CATEGORY_POOLS.reduce(
+  (total, pool) => total + pool.weight,
+  0,
+);
 const CAMERA_TELEPORT_SYNC_THRESHOLD = 220;
 const flythroughBiomeFromZone = (id: FlythroughBiomeId, inset = 80): FlythroughBiome => {
   const zone = ZONES.find((candidate) => candidate.id === id) ?? ZONES[0];
@@ -686,6 +729,12 @@ export class OceanScene extends Phaser.Scene {
     centerX: number;
   };
   private devCameraTools?: DevCameraTools;
+  private musicControls?: MusicControls;
+  private closeMusicControlsOnPointerDown?: (event: PointerEvent) => void;
+  private musicControlsFadeTimer?: number;
+  private backgroundMusic?: VolumeAdjustableSound;
+  private musicMuted = true;
+  private musicVolume = 0;
   private devCameraEnabled = false;
   private devCameraDragging = false;
   private backgroundImageVisibility = 1;
@@ -759,6 +808,17 @@ export class OceanScene extends Phaser.Scene {
     this.flythroughManualDragging = false;
     this.flythroughManualDragStart = undefined;
     this.devCameraTools = undefined;
+    this.musicControls = undefined;
+    this.clearMusicControlsFadeTimer();
+    if (this.closeMusicControlsOnPointerDown) {
+      document.removeEventListener("pointerdown", this.closeMusicControlsOnPointerDown);
+      this.closeMusicControlsOnPointerDown = undefined;
+    }
+    this.backgroundMusic?.stop();
+    this.backgroundMusic?.destroy();
+    this.backgroundMusic = undefined;
+    this.musicMuted = true;
+    this.musicVolume = 0;
     this.devCameraEnabled = false;
     this.devCameraDragging = false;
     this.devCameraDragStart = undefined;
@@ -875,6 +935,10 @@ export class OceanScene extends Phaser.Scene {
       frameHeight: ZODIAC_BOAT_FRAME_HEIGHT,
     });
     this.load.image(ZODIAC_BOAT_STATIC_KEY, assetUrl(ZODIAC_BOAT_STATIC_URL));
+    this.load.audio(BACKGROUND_MUSIC_KEY, assetUrl(BACKGROUND_MUSIC_URL));
+    for (const element of SEABED_ELEMENTS) {
+      this.load.image(element.key, assetUrl(element.url));
+    }
     for (const variant of SEAGRASS_MEADOW_VARIANTS) {
       for (const frame of variant.frames) {
         this.load.image(frame.key, frame.url);
@@ -1051,6 +1115,8 @@ export class OceanScene extends Phaser.Scene {
           this.createHero();
           this.createControls();
           this.createDeveloperTools();
+          this.createMusicControls();
+          this.setupBackgroundMusic();
           this.createLightingOverlay();
 
           this.heroTerrainCollider = this.physics.add.collider(this.hero, this.rocks);
@@ -1282,6 +1348,113 @@ export class OceanScene extends Phaser.Scene {
         this.restartWithFlythroughBiome(selected);
       }
     };
+  }
+
+  private createMusicControls() {
+    const root = document.getElementById("music-controls");
+    const muteButton = document.getElementById("music-mute");
+    const volumeInput = document.getElementById("music-volume");
+
+    if (
+      !(root instanceof HTMLElement) ||
+      !(muteButton instanceof HTMLButtonElement) ||
+      !(volumeInput instanceof HTMLInputElement)
+    ) {
+      return;
+    }
+
+    this.musicMuted = true;
+    this.musicVolume = 0;
+    this.musicControls = { root, muteButton, volumeInput };
+
+    muteButton.onclick = (event) => {
+      event.stopPropagation();
+      this.openMusicControls();
+      this.musicMuted = !this.musicMuted;
+      if (!this.musicMuted && this.musicVolume <= 0) {
+        this.musicVolume = BACKGROUND_MUSIC_DEFAULT_VOLUME;
+      }
+      this.applyMusicState();
+    };
+    root.onpointerenter = () => {
+      this.openMusicControls();
+    };
+    root.onpointerleave = () => {
+      this.scheduleMusicControlsFade();
+    };
+    root.onpointerup = () => {
+      if (root.matches(":hover")) {
+        this.scheduleMusicControlsFade();
+      }
+    };
+    volumeInput.oninput = () => {
+      this.scheduleMusicControlsFade();
+      this.musicVolume = Phaser.Math.Clamp(Number.parseFloat(volumeInput.value) || 0, 0, 1);
+      this.musicMuted = this.musicVolume <= 0;
+      this.applyMusicState();
+    };
+    volumeInput.onpointerdown = (event) => {
+      event.stopPropagation();
+      this.clearMusicControlsFadeTimer();
+    };
+    volumeInput.onpointerup = () => this.scheduleMusicControlsFade();
+    this.closeMusicControlsOnPointerDown = (event) => {
+      if (event.target instanceof Node && root.contains(event.target)) return;
+      this.closeMusicControls();
+    };
+    document.addEventListener("pointerdown", this.closeMusicControlsOnPointerDown);
+
+    this.applyMusicState();
+  }
+
+  private openMusicControls() {
+    this.musicControls?.root.classList.add("is-open");
+    this.scheduleMusicControlsFade();
+  }
+
+  private closeMusicControls() {
+    this.clearMusicControlsFadeTimer();
+    this.musicControls?.root.classList.remove("is-open");
+  }
+
+  private scheduleMusicControlsFade() {
+    this.clearMusicControlsFadeTimer();
+    this.musicControlsFadeTimer = window.setTimeout(() => this.closeMusicControls(), 2600);
+  }
+
+  private clearMusicControlsFadeTimer() {
+    if (this.musicControlsFadeTimer === undefined) return;
+    window.clearTimeout(this.musicControlsFadeTimer);
+    this.musicControlsFadeTimer = undefined;
+  }
+
+  private setupBackgroundMusic() {
+    if (this.backgroundMusic) return;
+    this.backgroundMusic = this.sound.add(BACKGROUND_MUSIC_KEY, {
+      loop: true,
+      volume: 0,
+    }) as VolumeAdjustableSound;
+    this.applyMusicState();
+  }
+
+  private applyMusicState() {
+    const volume = Phaser.Math.Clamp(this.musicVolume, 0, 1);
+    const effectiveVolume = this.musicMuted ? 0 : volume;
+    const controls = this.musicControls;
+
+    if (controls) {
+      controls.root.toggleAttribute("data-muted", this.musicMuted);
+      controls.muteButton.setAttribute("aria-pressed", String(this.musicMuted));
+      controls.muteButton.setAttribute("aria-label", this.musicMuted ? "Unmute music" : "Mute music");
+      controls.muteButton.title = this.musicMuted ? "Unmute music" : "Mute music";
+      controls.volumeInput.value = String(volume);
+    }
+
+    if (!this.backgroundMusic) return;
+    this.backgroundMusic.setVolume?.(effectiveVolume);
+    if (effectiveVolume > 0 && !this.backgroundMusic.isPlaying) {
+      this.backgroundMusic.play({ loop: true, volume: effectiveVolume });
+    }
   }
 
   private compactBiomeName(biome: FlythroughBiome) {
@@ -3138,6 +3311,7 @@ export class OceanScene extends Phaser.Scene {
       .setDepth(graphics.depth)
       .setMask(terrainMask);
 
+    this.createSeabedElementScatter(terrainMask, terrainTopByColumn);
     graphics.setMask(terrainMask);
 
     for (let y = WATERLINE_Y + 320; y < WORLD_HEIGHT; y += 720) {
@@ -3148,6 +3322,116 @@ export class OceanScene extends Phaser.Scene {
     }
 
     this.drawTerrainSandTexture(graphics, terrainTopByColumn);
+  }
+
+  private createSeabedElementScatter(
+    mask: Phaser.Display.Masks.GeometryMask,
+    terrainTopByColumn: Map<number, number>,
+  ) {
+    if (terrainTopByColumn.size === 0) return;
+
+    for (const element of SEABED_ELEMENTS) {
+      this.textures.get(element.key).setFilter(Phaser.Textures.FilterMode.NEAREST);
+    }
+
+    const bounds = this.activeBiomeBounds(ACTIVE_BIOME_TERRAIN_MARGIN);
+    const startX = Math.max(bounds.startX, SEABED_ELEMENT_SCATTER_START_X);
+    const endX = Math.min(bounds.endX, WORLD_WIDTH);
+    if (endX <= startX) return;
+
+    const columns = Math.ceil((endX - startX) / SEABED_ELEMENT_CLUSTER_SPACING_X);
+    const rows = Math.ceil(SEABED_ELEMENT_SCATTER_BAND_DEPTH / SEABED_ELEMENT_CLUSTER_SPACING_Y);
+
+    for (let column = 0; column <= columns; column += 1) {
+      for (let row = 0; row <= rows; row += 1) {
+        const occupancy = this.deterministicUnit(column * 41 + row * 17, this.caveSeed + 3019, 0x5ea);
+        if (occupancy > SEABED_ELEMENT_CLUSTER_DENSITY) continue;
+
+        const baseX = startX + column * SEABED_ELEMENT_CLUSTER_SPACING_X;
+        const anchorX = Phaser.Math.Clamp(
+          baseX + Phaser.Math.Linear(
+            -SEABED_ELEMENT_CLUSTER_SPACING_X * 0.34,
+            SEABED_ELEMENT_CLUSTER_SPACING_X * 0.34,
+            this.deterministicUnit(column * 61, row * 23, this.caveSeed + 3037),
+          ),
+          startX,
+          endX,
+        );
+        const floorY = this.smoothedTerrainGuideYAt(anchorX, terrainTopByColumn);
+        const anchorY = floorY + SEABED_ELEMENT_SCATTER_BAND_TOP + row * SEABED_ELEMENT_CLUSTER_SPACING_Y + Phaser.Math.Linear(
+          -SEABED_ELEMENT_CLUSTER_SPACING_Y * 0.2,
+          SEABED_ELEMENT_CLUSTER_SPACING_Y * 0.2,
+          this.deterministicUnit(column * 29, row * 53, this.caveSeed + 3061),
+        );
+        const clusterSize = Phaser.Math.Linear(
+          SEABED_ELEMENT_CLUSTER_MIN_SIZE,
+          SEABED_ELEMENT_CLUSTER_MAX_SIZE + 0.999,
+          this.deterministicUnit(column * 83, row * 31, this.caveSeed + 3089),
+        );
+
+        for (let member = 0; member < Math.floor(clusterSize); member += 1) {
+          this.createSeabedElementSprite(mask, anchorX, anchorY, column, row, member);
+        }
+      }
+    }
+  }
+
+  private createSeabedElementSprite(
+    mask: Phaser.Display.Masks.GeometryMask,
+    anchorX: number,
+    anchorY: number,
+    column: number,
+    row: number,
+    member: number,
+  ) {
+    const spread = member === 0 ? 0 : 1;
+    const x = anchorX + Phaser.Math.Linear(
+      -SEABED_ELEMENT_CLUSTER_RADIUS_X,
+      SEABED_ELEMENT_CLUSTER_RADIUS_X,
+      this.deterministicUnit(column * 101 + member * 13, row * 47, this.caveSeed + 3109),
+    ) * spread;
+    const y = anchorY + Phaser.Math.Linear(
+      -SEABED_ELEMENT_CLUSTER_RADIUS_Y,
+      SEABED_ELEMENT_CLUSTER_RADIUS_Y,
+      this.deterministicUnit(column * 43, row * 107 + member * 17, this.caveSeed + 3121),
+    ) * spread;
+    if (y >= WORLD_HEIGHT - 16) return;
+
+    const elementIndex = this.weightedSeabedElementIndex(
+      this.deterministicUnit(column * 73 + member * 29, row * 89, this.caveSeed + 3137),
+      this.deterministicUnit(column * 97 + member * 53, row * 79, this.caveSeed + 3149),
+    );
+    const scale = Phaser.Math.Linear(
+      member === 0 ? 0.24 : 0.16,
+      member === 0 ? 0.42 : 0.3,
+      this.deterministicUnit(column * 37, row * 67 + member * 41, this.caveSeed + 3163),
+    );
+    const orientation = Math.floor(this.deterministicUnit(column * 113, row * 71 + member * 23, this.caveSeed + 3181) * 8);
+    const element = SEABED_ELEMENTS[elementIndex];
+
+    this.add
+      .image(x, y, element.key)
+      .setDepth(SEABED_ELEMENT_DEPTH + member * 0.0001)
+      .setScale(scale)
+      .setFlipX((orientation & 1) === 1)
+      .setFlipY((orientation & 2) === 2)
+      .setRotation((Math.floor(orientation / 2) % 4) * Phaser.Math.DegToRad(90))
+      .setAlpha(Phaser.Math.Linear(0.72, 0.98, 1 - this.smooth01((y - anchorY) / Math.max(1, SEABED_ELEMENT_SCATTER_BAND_DEPTH))))
+      .setMask(mask);
+  }
+
+  private weightedSeabedElementIndex(categoryRoll: number, elementRoll: number) {
+    let remaining = categoryRoll * SEABED_ELEMENT_CATEGORY_WEIGHT_TOTAL;
+
+    for (const pool of SEABED_ELEMENT_CATEGORY_POOLS) {
+      remaining -= pool.weight;
+      if (remaining <= 0) {
+        return pool.indices[Math.floor(elementRoll * pool.indices.length) % pool.indices.length];
+      }
+    }
+
+    const fallbackPool = SEABED_ELEMENT_CATEGORY_POOLS[0];
+    return fallbackPool.indices[Math.floor(elementRoll * fallbackPool.indices.length) % fallbackPool.indices.length];
   }
 
   private drawTerrainSandTexture(
