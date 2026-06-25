@@ -1,0 +1,316 @@
+{
+  "elements": [
+    {
+      "key": "underground-element-01",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-01.png",
+      "width": 89,
+      "height": 80
+    },
+    {
+      "key": "underground-element-02",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-02.png",
+      "width": 94,
+      "height": 92
+    },
+    {
+      "key": "underground-element-03",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-03.png",
+      "width": 72,
+      "height": 83
+    },
+    {
+      "key": "underground-element-04",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-04.png",
+      "width": 80,
+      "height": 85
+    },
+    {
+      "key": "underground-element-05",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-05.png",
+      "width": 80,
+      "height": 90
+    },
+    {
+      "key": "underground-element-06",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-06.png",
+      "width": 60,
+      "height": 75
+    },
+    {
+      "key": "underground-element-07",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-07.png",
+      "width": 76,
+      "height": 68
+    },
+    {
+      "key": "underground-element-08",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-08.png",
+      "width": 82,
+      "height": 76
+    },
+    {
+      "key": "underground-element-09",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-09.png",
+      "width": 89,
+      "height": 58
+    },
+    {
+      "key": "underground-element-10",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-10.png",
+      "width": 64,
+      "height": 69
+    },
+    {
+      "key": "underground-element-11",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-11.png",
+      "width": 40,
+      "height": 44
+    },
+    {
+      "key": "underground-element-12",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-12.png",
+      "width": 47,
+      "height": 47
+    },
+    {
+      "key": "underground-element-13",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-13.png",
+      "width": 44,
+      "height": 47
+    },
+    {
+      "key": "underground-element-14",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-14.png",
+      "width": 33,
+      "height": 34
+    },
+    {
+      "key": "underground-element-15",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-15.png",
+      "width": 30,
+      "height": 40
+    },
+    {
+      "key": "underground-element-16",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-16.png",
+      "width": 26,
+      "height": 24
+    },
+    {
+      "key": "underground-element-17",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-17.png",
+      "width": 84,
+      "height": 75
+    },
+    {
+      "key": "underground-element-18",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-18.png",
+      "width": 87,
+      "height": 84
+    },
+    {
+      "key": "underground-element-19",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-19.png",
+      "width": 71,
+      "height": 77
+    },
+    {
+      "key": "underground-element-20",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-20.png",
+      "width": 68,
+      "height": 82
+    },
+    {
+      "key": "underground-element-21",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-21.png",
+      "width": 63,
+      "height": 60
+    },
+    {
+      "key": "underground-element-22",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-22.png",
+      "width": 76,
+      "height": 72
+    },
+    {
+      "key": "underground-element-23",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-23.png",
+      "width": 47,
+      "height": 50
+    },
+    {
+      "key": "underground-element-24",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-24.png",
+      "width": 79,
+      "height": 66
+    },
+    {
+      "key": "underground-element-25",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-25.png",
+      "width": 86,
+      "height": 66
+    },
+    {
+      "key": "underground-element-26",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-26.png",
+      "width": 78,
+      "height": 75
+    },
+    {
+      "key": "underground-element-27",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-27.png",
+      "width": 76,
+      "height": 74
+    },
+    {
+      "key": "underground-element-28",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-28.png",
+      "width": 123,
+      "height": 88
+    },
+    {
+      "key": "underground-element-29",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-29.png",
+      "width": 69,
+      "height": 65
+    },
+    {
+      "key": "underground-element-30",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-30.png",
+      "width": 46,
+      "height": 43
+    },
+    {
+      "key": "underground-element-31",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-31.png",
+      "width": 40,
+      "height": 37
+    },
+    {
+      "key": "underground-element-32",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-32.png",
+      "width": 38,
+      "height": 37
+    },
+    {
+      "key": "underground-element-33",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-33.png",
+      "width": 36,
+      "height": 31
+    },
+    {
+      "key": "underground-element-34",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-34.png",
+      "width": 32,
+      "height": 31
+    },
+    {
+      "key": "underground-element-35",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-35.png",
+      "width": 28,
+      "height": 28
+    },
+    {
+      "key": "underground-element-36",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-36.png",
+      "width": 24,
+      "height": 21
+    },
+    {
+      "key": "underground-element-37",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-37.png",
+      "width": 23,
+      "height": 20
+    },
+    {
+      "key": "underground-element-38",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-38.png",
+      "width": 18,
+      "height": 17
+    },
+    {
+      "key": "underground-element-39",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-39.png",
+      "width": 18,
+      "height": 17
+    },
+    {
+      "key": "underground-element-40",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-40.png",
+      "width": 19,
+      "height": 18
+    },
+    {
+      "key": "underground-element-41",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-41.png",
+      "width": 30,
+      "height": 30
+    },
+    {
+      "key": "underground-element-42",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-42.png",
+      "width": 29,
+      "height": 27
+    },
+    {
+      "key": "underground-element-43",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-43.png",
+      "width": 22,
+      "height": 23
+    },
+    {
+      "key": "underground-element-44",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-44.png",
+      "width": 22,
+      "height": 21
+    },
+    {
+      "key": "underground-element-45",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-45.png",
+      "width": 19,
+      "height": 20
+    },
+    {
+      "key": "underground-element-46",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-46.png",
+      "width": 23,
+      "height": 21
+    },
+    {
+      "key": "underground-element-47",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-47.png",
+      "width": 19,
+      "height": 20
+    },
+    {
+      "key": "underground-element-48",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-48.png",
+      "width": 19,
+      "height": 18
+    },
+    {
+      "key": "underground-element-49",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-49.png",
+      "width": 19,
+      "height": 20
+    },
+    {
+      "key": "underground-element-50",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-50.png",
+      "width": 19,
+      "height": 16
+    },
+    {
+      "key": "underground-element-51",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-51.png",
+      "width": 15,
+      "height": 15
+    },
+    {
+      "key": "underground-element-52",
+      "url": "/assets/landscape/underground-elements/elements-half/underground-element-52.png",
+      "width": 16,
+      "height": 16
+    }
+  ]
+}

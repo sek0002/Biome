@@ -1,0 +1,13 @@
+{
+  "image": "sea-sweep-locked-v2-sheet.png",
+  "frameWidth": 480,
+  "frameHeight": 304,
+  "frames": 6,
+  "direction": "left",
+  "animation": {
+    "name": "swim",
+    "fps": 9,
+    "loop": true
+  },
+  "notes": "Body/head region is locked across all frames; only tail pixels after x=300 vary."
+}

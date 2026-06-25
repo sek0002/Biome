@@ -1,0 +1,15 @@
+file 'comp_01.png'
+duration 1
+file 'comp_02.png'
+duration 1
+file 'comp_03.png'
+duration 0.333333
+file 'comp_04.png'
+duration 0.333333
+file 'comp_05.png'
+duration 0.333333
+file 'comp_06.png'
+duration 1
+file 'comp_07.png'
+duration 1
+file 'comp_07.png'

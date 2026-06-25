@@ -1,0 +1,115 @@
+{
+  "generatedFrom": "built-in image_gen",
+  "variants": [
+    {
+      "variant": 1,
+      "source": "underwater-underground-imagegen-variant-01-source.png",
+      "tile128": "underwater-underground-imagegen-variant-01-128.png",
+      "baseColor": "#644c34",
+      "style": "imagegen pixel-art",
+      "tileSize": [
+        128,
+        128
+      ]
+    },
+    {
+      "variant": 2,
+      "source": "underwater-underground-imagegen-variant-02-source.png",
+      "tile128": "underwater-underground-imagegen-variant-02-128.png",
+      "baseColor": "#644c34",
+      "style": "imagegen pixel-art",
+      "tileSize": [
+        128,
+        128
+      ]
+    },
+    {
+      "variant": 3,
+      "source": "underwater-underground-imagegen-variant-03-source.png",
+      "tile128": "underwater-underground-imagegen-variant-03-128.png",
+      "baseColor": "#644c34",
+      "style": "imagegen pixel-art",
+      "tileSize": [
+        128,
+        128
+      ]
+    },
+    {
+      "variant": 4,
+      "source": "underwater-underground-imagegen-variant-04-source.png",
+      "tile128": "underwater-underground-imagegen-variant-04-128.png",
+      "baseColor": "#644c34",
+      "style": "imagegen pixel-art",
+      "tileSize": [
+        128,
+        128
+      ]
+    },
+    {
+      "variant": 5,
+      "source": "underwater-underground-imagegen-variant-05-source.png",
+      "tile128": "underwater-underground-imagegen-variant-05-128.png",
+      "baseColor": "#644c34",
+      "style": "imagegen pixel-art",
+      "tileSize": [
+        128,
+        128
+      ]
+    },
+    {
+      "variant": 6,
+      "source": "underwater-underground-imagegen-variant-06-source.png",
+      "tile128": "underwater-underground-imagegen-variant-06-128.png",
+      "baseColor": "#644c34",
+      "style": "imagegen pixel-art",
+      "tileSize": [
+        128,
+        128
+      ]
+    },
+    {
+      "variant": 7,
+      "source": "underwater-underground-imagegen-variant-07-source.png",
+      "tile128": "underwater-underground-imagegen-variant-07-128.png",
+      "baseColor": "#644c34",
+      "style": "imagegen pixel-art",
+      "tileSize": [
+        128,
+        128
+      ]
+    },
+    {
+      "variant": 8,
+      "source": "underwater-underground-imagegen-variant-08-source.png",
+      "tile128": "underwater-underground-imagegen-variant-08-128.png",
+      "baseColor": "#644c34",
+      "style": "imagegen pixel-art",
+      "tileSize": [
+        128,
+        128
+      ]
+    },
+    {
+      "variant": 9,
+      "source": "underwater-underground-imagegen-variant-09-source.png",
+      "tile128": "underwater-underground-imagegen-variant-09-128.png",
+      "baseColor": "#644c34",
+      "style": "imagegen pixel-art",
+      "tileSize": [
+        128,
+        128
+      ]
+    },
+    {
+      "variant": 10,
+      "source": "underwater-underground-imagegen-variant-10-source.png",
+      "tile128": "underwater-underground-imagegen-variant-10-128.png",
+      "baseColor": "#644c34",
+      "style": "imagegen pixel-art",
+      "tileSize": [
+        128,
+        128
+      ]
+    }
+  ]
+}

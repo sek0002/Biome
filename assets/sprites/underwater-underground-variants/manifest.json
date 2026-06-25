@@ -1,0 +1,94 @@
+{
+  "variants": [
+    {
+      "file": "underwater-underground-variant-01.png",
+      "size": [
+        128,
+        128
+      ],
+      "baseColor": "#644c34",
+      "tileable": true
+    },
+    {
+      "file": "underwater-underground-variant-02.png",
+      "size": [
+        128,
+        128
+      ],
+      "baseColor": "#644c34",
+      "tileable": true
+    },
+    {
+      "file": "underwater-underground-variant-03.png",
+      "size": [
+        128,
+        128
+      ],
+      "baseColor": "#644c34",
+      "tileable": true
+    },
+    {
+      "file": "underwater-underground-variant-04.png",
+      "size": [
+        128,
+        128
+      ],
+      "baseColor": "#644c34",
+      "tileable": true
+    },
+    {
+      "file": "underwater-underground-variant-05.png",
+      "size": [
+        128,
+        128
+      ],
+      "baseColor": "#644c34",
+      "tileable": true
+    },
+    {
+      "file": "underwater-underground-variant-06.png",
+      "size": [
+        128,
+        128
+      ],
+      "baseColor": "#644c34",
+      "tileable": true
+    },
+    {
+      "file": "underwater-underground-variant-07.png",
+      "size": [
+        128,
+        128
+      ],
+      "baseColor": "#644c34",
+      "tileable": true
+    },
+    {
+      "file": "underwater-underground-variant-08.png",
+      "size": [
+        128,
+        128
+      ],
+      "baseColor": "#644c34",
+      "tileable": true
+    },
+    {
+      "file": "underwater-underground-variant-09.png",
+      "size": [
+        128,
+        128
+      ],
+      "baseColor": "#644c34",
+      "tileable": true
+    },
+    {
+      "file": "underwater-underground-variant-10.png",
+      "size": [
+        128,
+        128
+      ],
+      "baseColor": "#644c34",
+      "tileable": true
+    }
+  ]
+}

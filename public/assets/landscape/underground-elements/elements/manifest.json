@@ -1,0 +1,368 @@
+{
+  "elements": [
+    {
+      "key": "underground-element-01",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-01.png",
+      "width": 178,
+      "height": 160,
+      "kind": "shell"
+    },
+    {
+      "key": "underground-element-02",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-02.png",
+      "width": 189,
+      "height": 185,
+      "kind": "shell"
+    },
+    {
+      "key": "underground-element-03",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-03.png",
+      "width": 145,
+      "height": 166,
+      "kind": "shell"
+    },
+    {
+      "key": "underground-element-04",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-04.png",
+      "width": 161,
+      "height": 171,
+      "kind": "shell"
+    },
+    {
+      "key": "underground-element-05",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-05.png",
+      "width": 161,
+      "height": 180,
+      "kind": "shell"
+    },
+    {
+      "key": "underground-element-06",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-06.png",
+      "width": 121,
+      "height": 150,
+      "kind": "shell"
+    },
+    {
+      "key": "underground-element-07",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-07.png",
+      "width": 153,
+      "height": 136,
+      "kind": "shell"
+    },
+    {
+      "key": "underground-element-08",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-08.png",
+      "width": 164,
+      "height": 152,
+      "kind": "shell"
+    },
+    {
+      "key": "underground-element-09",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-09.png",
+      "width": 178,
+      "height": 117,
+      "kind": "shell"
+    },
+    {
+      "key": "underground-element-10",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-10.png",
+      "width": 128,
+      "height": 138,
+      "kind": "shell"
+    },
+    {
+      "key": "underground-element-11",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-11.png",
+      "width": 81,
+      "height": 89,
+      "kind": "shell"
+    },
+    {
+      "key": "underground-element-12",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-12.png",
+      "width": 94,
+      "height": 95,
+      "kind": "shell"
+    },
+    {
+      "key": "underground-element-13",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-13.png",
+      "width": 88,
+      "height": 94,
+      "kind": "shell"
+    },
+    {
+      "key": "underground-element-14",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-14.png",
+      "width": 66,
+      "height": 69,
+      "kind": "shell"
+    },
+    {
+      "key": "underground-element-15",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-15.png",
+      "width": 61,
+      "height": 80,
+      "kind": "shell"
+    },
+    {
+      "key": "underground-element-16",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-16.png",
+      "width": 53,
+      "height": 49,
+      "kind": "shell"
+    },
+    {
+      "key": "underground-element-17",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-17.png",
+      "width": 168,
+      "height": 150,
+      "kind": "coral"
+    },
+    {
+      "key": "underground-element-18",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-18.png",
+      "width": 175,
+      "height": 169,
+      "kind": "coral"
+    },
+    {
+      "key": "underground-element-19",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-19.png",
+      "width": 143,
+      "height": 155,
+      "kind": "coral"
+    },
+    {
+      "key": "underground-element-20",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-20.png",
+      "width": 136,
+      "height": 164,
+      "kind": "coral"
+    },
+    {
+      "key": "underground-element-21",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-21.png",
+      "width": 126,
+      "height": 121,
+      "kind": "coral"
+    },
+    {
+      "key": "underground-element-22",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-22.png",
+      "width": 152,
+      "height": 145,
+      "kind": "coral"
+    },
+    {
+      "key": "underground-element-23",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-23.png",
+      "width": 94,
+      "height": 100,
+      "kind": "coral"
+    },
+    {
+      "key": "underground-element-24",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-24.png",
+      "width": 158,
+      "height": 132,
+      "kind": "rock"
+    },
+    {
+      "key": "underground-element-25",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-25.png",
+      "width": 173,
+      "height": 132,
+      "kind": "rock"
+    },
+    {
+      "key": "underground-element-26",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-26.png",
+      "width": 157,
+      "height": 150,
+      "kind": "rock"
+    },
+    {
+      "key": "underground-element-27",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-27.png",
+      "width": 152,
+      "height": 148,
+      "kind": "rock"
+    },
+    {
+      "key": "underground-element-28",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-28.png",
+      "width": 246,
+      "height": 177,
+      "kind": "rock"
+    },
+    {
+      "key": "underground-element-29",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-29.png",
+      "width": 138,
+      "height": 130,
+      "kind": "rock"
+    },
+    {
+      "key": "underground-element-30",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-30.png",
+      "width": 93,
+      "height": 86,
+      "kind": "rock"
+    },
+    {
+      "key": "underground-element-31",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-31.png",
+      "width": 81,
+      "height": 74,
+      "kind": "rock"
+    },
+    {
+      "key": "underground-element-32",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-32.png",
+      "width": 77,
+      "height": 75,
+      "kind": "rock"
+    },
+    {
+      "key": "underground-element-33",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-33.png",
+      "width": 72,
+      "height": 62,
+      "kind": "rock"
+    },
+    {
+      "key": "underground-element-34",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-34.png",
+      "width": 65,
+      "height": 62,
+      "kind": "rock"
+    },
+    {
+      "key": "underground-element-35",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-35.png",
+      "width": 57,
+      "height": 57,
+      "kind": "rock"
+    },
+    {
+      "key": "underground-element-36",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-36.png",
+      "width": 49,
+      "height": 42,
+      "kind": "mineral"
+    },
+    {
+      "key": "underground-element-37",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-37.png",
+      "width": 46,
+      "height": 41,
+      "kind": "mineral"
+    },
+    {
+      "key": "underground-element-38",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-38.png",
+      "width": 37,
+      "height": 35,
+      "kind": "mineral"
+    },
+    {
+      "key": "underground-element-39",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-39.png",
+      "width": 36,
+      "height": 34,
+      "kind": "mineral"
+    },
+    {
+      "key": "underground-element-40",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-40.png",
+      "width": 38,
+      "height": 36,
+      "kind": "mineral"
+    },
+    {
+      "key": "underground-element-41",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-41.png",
+      "width": 60,
+      "height": 61,
+      "kind": "mineral"
+    },
+    {
+      "key": "underground-element-42",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-42.png",
+      "width": 59,
+      "height": 55,
+      "kind": "mineral"
+    },
+    {
+      "key": "underground-element-43",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-43.png",
+      "width": 45,
+      "height": 47,
+      "kind": "mineral"
+    },
+    {
+      "key": "underground-element-44",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-44.png",
+      "width": 44,
+      "height": 42,
+      "kind": "mineral"
+    },
+    {
+      "key": "underground-element-45",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-45.png",
+      "width": 38,
+      "height": 40,
+      "kind": "mineral"
+    },
+    {
+      "key": "underground-element-46",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-46.png",
+      "width": 46,
+      "height": 42,
+      "kind": "mineral"
+    },
+    {
+      "key": "underground-element-47",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-47.png",
+      "width": 39,
+      "height": 41,
+      "kind": "mineral"
+    },
+    {
+      "key": "underground-element-48",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-48.png",
+      "width": 39,
+      "height": 37,
+      "kind": "mineral"
+    },
+    {
+      "key": "underground-element-49",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-49.png",
+      "width": 39,
+      "height": 40,
+      "kind": "mineral"
+    },
+    {
+      "key": "underground-element-50",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-50.png",
+      "width": 39,
+      "height": 33,
+      "kind": "mineral"
+    },
+    {
+      "key": "underground-element-51",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-51.png",
+      "width": 30,
+      "height": 30,
+      "kind": "mineral"
+    },
+    {
+      "key": "underground-element-52",
+      "url": "/assets/landscape/underground-elements/elements/underground-element-52.png",
+      "width": 33,
+      "height": 32,
+      "kind": "mineral"
+    }
+  ]
+}

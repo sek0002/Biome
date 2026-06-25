@@ -1,0 +1,12 @@
+{
+  "image": "sea-sweep-horizontal-sheet-fixed-body.png",
+  "frameWidth": 416,
+  "frameHeight": 288,
+  "frames": 6,
+  "direction": "left",
+  "animation": {
+    "name": "swim",
+    "fps": 9,
+    "loop": true
+  }
+}
