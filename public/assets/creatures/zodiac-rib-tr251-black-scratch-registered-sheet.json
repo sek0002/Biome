@@ -1,0 +1,25 @@
+{
+  "image": "zodiac-rib-tr251-black-scratch-registered-sheet.png",
+  "source": "zodiac-rib-tr251-black-scratch-sheet.png",
+  "reference": "Screen Recording 2026-06-25 at 11.29.26 am.mov",
+  "frameWidth": 320,
+  "frameHeight": 240,
+  "frames": [
+    { "index": 0, "sourceIndex": 0, "pose": "scratch blue RIB planing with black TR-251 on front pontoon" },
+    { "index": 1, "sourceIndex": 1, "pose": "scratch blue RIB lifting over wake with black TR-251 on front pontoon" },
+    { "index": 2, "sourceIndex": 2, "pose": "scratch blue RIB bow dipping with black TR-251 on front pontoon" },
+    { "index": 3, "sourceIndex": 3, "pose": "scratch blue RIB canopy bob with black TR-251 on front pontoon" },
+    { "index": 4, "sourceIndex": 4, "pose": "scratch blue RIB level glide with black TR-251 on front pontoon" },
+    { "index": 5, "sourceIndex": 5, "pose": "scratch blue RIB cresting over ripple with black TR-251 on front pontoon" },
+    { "index": 6, "sourceIndex": 6, "pose": "scratch blue RIB trailing foamy wake with black TR-251 on front pontoon" },
+    { "index": 7, "sourceIndex": 7, "pose": "scratch blue RIB settling into glide with black TR-251 on front pontoon" }
+  ],
+  "loop": [0, 1, 2, 3, 4, 5, 6, 7],
+  "frameDurationMs": 100,
+  "registration": {
+    "anchor": "alpha bbox center x and bottom edge",
+    "targetCenterX": 159,
+    "targetBottom": 158
+  },
+  "notes": "Registered derivative of zodiac-rib-tr251-black-scratch-sheet.png for in-game moving boat animation."
+}

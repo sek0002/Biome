@@ -14,6 +14,7 @@ import {
   WORLD_HEIGHT,
   WORLD_WIDTH,
   WORLD_MAX_DEPTH_METERS,
+  ZONES,
   depthAtPosition,
   generateWorld,
   maxDepthAtX,
@@ -26,6 +27,25 @@ type KeySet = Record<"left" | "right" | "up" | "down", Phaser.Input.Keyboard.Key
 type TouchControl = keyof KeySet;
 type HeroVisibilityStatus = "visible" | "hidden";
 type PerformanceProfile = "desktop" | "mobile";
+type FlythroughBiomeId = "coral" | "kelp" | "surface" | "dropoff" | "deep";
+type FlythroughBiome = {
+  id: FlythroughBiomeId;
+  name: string;
+  startX: number;
+  endX: number;
+};
+type CreatureInfoEntry = {
+  title: string;
+  kicker?: string;
+  summary?: string;
+  Description?: string;
+  Habitat?: string;
+  "Maximum Size"?: string;
+  "Global Distribution"?: string;
+  imageUrls?: string[];
+};
+type CreatureInfoData = Partial<Record<CreatureKey, CreatureInfoEntry>>;
+const CREATURE_INFO_SECTION_HEADERS = ["Description", "Habitat", "Maximum Size", "Global Distribution"] as const;
 type FinalBiomeBackgroundLayer = {
   image: Phaser.GameObjects.Image;
   mask: Phaser.GameObjects.Graphics;
@@ -69,6 +89,9 @@ type DevCameraTools = {
   seedInput: HTMLInputElement;
   seedApply: HTMLButtonElement;
   seedRandom: HTMLButtonElement;
+  biomeSelect: HTMLSelectElement;
+  biomeRandom: HTMLButtonElement;
+  biomeReload: HTMLButtonElement;
   readout: HTMLOutputElement;
 };
 type CreatureTrackPoint = {
@@ -127,7 +150,7 @@ const AIR_GRAVITY = 980;
 const DEPTH_GAUGE_MAX = WORLD_MAX_DEPTH_METERS;
 const BUBBLE_TEXTURE_KEY = "procedural-pixel-bubble";
 const BUBBLE_COUNT = 5760;
-const BUBBLE_STREAM_COUNT = 76;
+const BUBBLE_STREAM_COUNT = 304;
 const BUBBLE_MIN_SPACING_FROM_TERRAIN = 42;
 const HERO_RENDER_WIDTH = 115;
 const HERO_VISIBLE_DEPTH = 20;
@@ -147,6 +170,7 @@ const CREATURE_TERRAIN_UPHILL_ROTATION_MAX_DEGREES = 34;
 const CREATURE_TERRAIN_DOWNHILL_ROTATION_MAX_DEGREES = 56;
 const CREATURE_TRACK_ROTATION_RESPONSE = 0.16;
 const CREATURE_TERRAIN_TRACK_LIFT = 2;
+const NUDHHI_SEAFLOOR_SINK = 8;
 const CREATURE_TERRAIN_TRACK_SAMPLE = 7;
 const CREATURE_TERRAIN_ALIGN_MIN_STEEP_DEGREES = 20;
 const CREATURE_TERRAIN_ALIGN_MAX_STEEP_DEGREES = 56;
@@ -158,6 +182,7 @@ const CREATURE_SCHOOL_TERRAIN_GUIDE_RESPONSE = 0.72;
 const CREATURE_FRONT_TRACK_DEFAULT_OFFSET_RATIO = 0.42;
 const CREATURE_FRONT_TRACK_RAY_OFFSET_RATIO = 0.34;
 const CREATURE_FRONT_TRACK_SEADRAGON_OFFSET_RATIO = 0.34;
+const CREATURE_INFO_PREVIEW_ZOOM_CROP = 1.42;
 const HERO_SWIM_FRAMES = [
   CREATURES.hero.frames.tailRight.key,
   CREATURES.hero.frames.center.key,
@@ -255,6 +280,7 @@ const LEATHERJACKET_BASE_WIDTH = 78;
 const LEATHERJACKET_DEPTH = -3.44;
 const LEATHERJACKET_APPROACH_DISTANCE = 190;
 const LEATHERJACKET_RELEASE_DISTANCE = 255;
+const LEATHERJACKET_HOVER_SPIKE_HOLD_MS = 4000;
 const LEATHERJACKET_MIN_SPEED = 8;
 const LEATHERJACKET_MAX_SPEED = 15;
 const LEATHERJACKET_IDLE_DRIFT_X = 24;
@@ -287,6 +313,9 @@ const BULL_RAY_SWIM_FRAME_RATE = 4;
 const BULL_RAY_REST_MAX_SLOPE_DEGREES = 8;
 const BULL_RAY_REST_SEARCH_ATTEMPTS = 10;
 const BULL_RAY_REST_SEARCH_RADIUS = 340;
+const PORT_JACKSON_BASE_WIDTH = HERO_RENDER_WIDTH;
+const PORT_JACKSON_DEPTH = -3.5;
+const PORT_JACKSON_SWIM_FRAME_RATE = 6;
 const FLATHEAD_FIN_WAVE_KEY = "flathead-fin-wave";
 const FLATHEAD_BASE_WIDTH = 118;
 const FLATHEAD_DEPTH = -3.34;
@@ -299,6 +328,20 @@ const FLATHEAD_FLEE_MIN_SPEED = 82;
 const FLATHEAD_FLEE_MAX_SPEED = 126;
 const FLATHEAD_FLEE_COOLDOWN = 1600;
 const FLATHEAD_REST_SLOPE_SAMPLE = 48;
+const FLATHEAD_CAMERA_TRIGGER_CHANCE_PER_SECOND = 0.11;
+const FLATHEAD_CAMERA_TRIGGER_COOLDOWN = 4200;
+const FLATHEAD_CAMERA_TRIGGER_VIEW_MARGIN = 120;
+const SPIDER_CRAB_SCUTTLE_KEY = "spider-crab-side-scuttle";
+const SPIDER_CRAB_BASE_WIDTH = 108;
+const SPIDER_CRAB_DEPTH = -3.3;
+const SPIDER_CRAB_FRAME_COUNT = 8;
+const SPIDER_CRAB_MIN_SPEED = 12;
+const SPIDER_CRAB_MAX_SPEED = 22;
+const SPIDER_CRAB_ANIMATION_BASE_SPEED = (SPIDER_CRAB_MIN_SPEED + SPIDER_CRAB_MAX_SPEED) / 2;
+const SPIDER_CRAB_MIN_PAUSE_DURATION = 4200;
+const SPIDER_CRAB_MAX_PAUSE_DURATION = 14000;
+const SPIDER_CRAB_TARGET_EDGE_PADDING = 170;
+const SPIDER_CRAB_ORIGIN_Y = 91 / 96;
 const SEAGRASS_MEADOW_SOURCE_HEIGHT = 526;
 const CORAL_BACKGROUND_DISPLAY_WIDTH = 9820;
 const CORAL_BACKGROUND_DISPLAY_HEIGHT = 1946;
@@ -320,8 +363,9 @@ const FINAL_BIOME_BACKGROUND_SCALE = 0.42;
 const FINAL_BIOME_BACKGROUND_ZOOM_OUT = 0.68;
 const FINAL_BIOME_BACKGROUND_DESKTOP_KEY = "final-background-combined";
 const FINAL_BIOME_BACKGROUND_MOBILE_KEY = "final-background-combined-mobile";
-const FINAL_BIOME_BACKGROUND_DESKTOP_URL = "/assets/landscape/coral-area/finalbackgrounds/combined-seamfix.png";
-const FINAL_BIOME_BACKGROUND_MOBILE_URL = "/assets/landscape/coral-area/finalbackgrounds/combined-seamfix-mobile.png";
+const FINAL_BIOME_BACKGROUND_ASSET_VERSION = "background-v2";
+const FINAL_BIOME_BACKGROUND_DESKTOP_URL = `/assets/landscape/coral-area/finalbackgrounds/combined-seamfix.png?v=${FINAL_BIOME_BACKGROUND_ASSET_VERSION}`;
+const FINAL_BIOME_BACKGROUND_MOBILE_URL = `/assets/landscape/coral-area/finalbackgrounds/combined-seamfix-mobile.png?v=${FINAL_BIOME_BACKGROUND_ASSET_VERSION}`;
 const FINAL_BIOME_SEAGRASS_IMAGE_END = 0.25;
 const FINAL_BIOME_KELP_IMAGE_END = 2 / 3;
 const DISTAL_WATER_COLUMN_KEY = "distal-water-column-imagegen";
@@ -346,6 +390,26 @@ const CORAL_GARDEN_BACKDROP_ALPHA = 0.46;
 const CORAL_GARDEN_BACKDROP_ZONE_FADE_DISTANCE = 900;
 const WATER_OVERLAY_DEPTH = -4.9;
 const WATER_DETAIL_DEPTH = -4.85;
+const ZODIAC_BOAT_KEY = "zodiac-rib-tr251-black-scratch-registered";
+const ZODIAC_BOAT_STATIC_KEY = "zodiac-rib-stationary-no-waves-registered";
+const ZODIAC_BOAT_ANIMATION_KEY = "zodiac-rib-surface-zoom";
+const ZODIAC_BOAT_URL = "/assets/creatures/zodiac-rib-tr251-black-scratch-registered-sheet.png";
+const ZODIAC_BOAT_STATIC_URL = "/assets/creatures/zodiac-rib-stationary-no-waves-registered-frame.png";
+const ZODIAC_BOAT_FRAME_WIDTH = 320;
+const ZODIAC_BOAT_FRAME_HEIGHT = 240;
+const ZODIAC_BOAT_FRAME_COUNT = 8;
+const ZODIAC_BOAT_DISPLAY_WIDTH = 347;
+const ZODIAC_BOAT_DISPLAY_HEIGHT = 200;
+const ZODIAC_BOAT_MARGIN = 360;
+const ZODIAC_BOAT_SPEED = 215;
+const ZODIAC_BOAT_DRIFT_MIN_CRUISE_MS = 10000;
+const ZODIAC_BOAT_DRIFT_MAX_CRUISE_MS = 18000;
+const ZODIAC_BOAT_DRIFT_MIN_DURATION_MS = 2600;
+const ZODIAC_BOAT_DRIFT_MAX_DURATION_MS = 5200;
+const ZODIAC_BOAT_DRIFT_MIN_DISTANCE = 24;
+const ZODIAC_BOAT_DRIFT_MAX_DISTANCE = 82;
+const ZODIAC_BOAT_DEPTH = WATER_DETAIL_DEPTH + 0.44;
+const ZODIAC_BOAT_SURFACE_Y_OFFSET = 30;
 const IMAGEGEN_PARALLAX_LAYERS = [
   {
     id: "water",
@@ -462,10 +526,66 @@ const SAND_PALETTE_DARK = 0x3a2316;
 const TERRAIN_GRADIENT_TEXTURE_KEY = "terrain-sand-gradient-scale";
 const TERRAIN_GRADIENT_TEXTURE_WIDTH = 1200;
 const TERRAIN_GRADIENT_TEXTURE_HEIGHT = 720;
+const UNDERGROUND_TILE_SIZE = 64;
+const UNDERGROUND_TILE_ALPHA = 0.74;
+const UNDERGROUND_TILE_SPACING_X = 118;
+const UNDERGROUND_TILE_SPACING_Y = 96;
+const UNDERGROUND_TILE_BAND_DEPTH = 620;
+const UNDERGROUND_TILE_DENSITY = 0.34;
+const UNDERGROUND_TILE_START_X = BEACH_SHELF_END_X + 420;
+const UNDERGROUND_TILE_VARIANTS = Array.from({ length: 10 }, (_, index) => {
+  const id = (index + 1).toString().padStart(2, "0");
+
+  return {
+    key: `underwater-underground-tile-${id}`,
+    url: `/assets/landscape/underground-tiles/underwater-underground-imagegen-variant-${id}-detail.png`,
+  };
+});
 const CAMERA_TELEPORT_SYNC_THRESHOLD = 220;
+const flythroughBiomeFromZone = (id: FlythroughBiomeId, inset = 80): FlythroughBiome => {
+  const zone = ZONES.find((candidate) => candidate.id === id) ?? ZONES[0];
+  return {
+    id,
+    name: zone.name,
+    startX: zone.startX + inset,
+    endX: zone.endX - inset,
+  };
+};
+const FLYTHROUGH_BIOMES: FlythroughBiome[] = [
+  flythroughBiomeFromZone("coral"),
+  flythroughBiomeFromZone("kelp"),
+];
+const FLYTHROUGH_SPEED = 14;
+const FLYTHROUGH_SURFACE_PADDING = 88;
+const FLYTHROUGH_FLOOR_MIN_SCREEN_RATIO = 0.95;
+const FLYTHROUGH_FLOOR_TARGET_SCREEN_RATIO = 0.95;
+const FLYTHROUGH_FLOOR_TRACK_SAMPLE_WIDTH_RATIO = 0.74;
+const FLYTHROUGH_TERRAIN_CURVE_INFLUENCE_MIN = 0.08;
+const FLYTHROUGH_TERRAIN_CURVE_INFLUENCE_MAX = 0.16;
+const FLYTHROUGH_TRAJECTORY_SLOPE_MIN = 0.006;
+const FLYTHROUGH_TRAJECTORY_SLOPE_MAX = 0.019;
+const FLYTHROUGH_TRAJECTORY_DRIFT = 36;
+const FLYTHROUGH_OPEN_OCEAN_MID_COLUMN_RATIO = 0.46;
+const FLYTHROUGH_OPEN_OCEAN_VERTICAL_DRIFT = 110;
+const FLYTHROUGH_VERTICAL_SMOOTHING = 0.012;
+const FLYTHROUGH_HORIZONTAL_SMOOTHING = 0.016;
+const FLYTHROUGH_MAX_VERTICAL_PAN_SPEED = 64;
+const FLYTHROUGH_MIN_BEHAVIOR_DELAY_MS = 14000;
+const FLYTHROUGH_MAX_BEHAVIOR_DELAY_MS = 28000;
+const FLYTHROUGH_MIN_PAUSE_MS = 2200;
+const FLYTHROUGH_MAX_PAUSE_MS = 5200;
+const FLYTHROUGH_MANUAL_RESUME_PAUSE_MS = 2600;
+const FLYTHROUGH_REVERSE_CHANCE = 0.34;
+const FLYTHROUGH_PAUSE_CHANCE = 0.28;
+const FLYTHROUGH_REVERSE_AFTER_PAUSE_CHANCE = 0.42;
+const ACTIVE_BIOME_RENDER_MARGIN = 0;
+const ACTIVE_BIOME_TERRAIN_MARGIN = 900;
+const ACTIVE_BIOME_MIN_BUBBLE_STREAMS = 64;
+const ACTIVE_BIOME_MIN_BUBBLES = 960;
 type SeagrassFrameSet = (typeof SEAGRASS_MEADOW_VARIANTS)[number]["frames"];
 export class OceanScene extends Phaser.Scene {
   private hero!: Phaser.Physics.Arcade.Sprite;
+  private heroTerrainCollider?: Phaser.Physics.Arcade.Collider;
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
   private keys!: KeySet;
   private touchInput = { x: 0, y: 0 };
@@ -482,6 +602,14 @@ export class OceanScene extends Phaser.Scene {
   private depthGaugeFill?: HTMLElement | null;
   private depthGaugeMax?: HTMLElement | null;
   private depthMarker?: HTMLElement | null;
+  private creatureInfoEntries: CreatureInfoData = {};
+  private creatureInfoPopup?: HTMLElement;
+  private creatureInfoPreviewCanvas?: HTMLCanvasElement;
+  private creatureInfoKicker?: HTMLElement;
+  private creatureInfoTitle?: HTMLElement;
+  private creatureInfoSummary?: HTMLElement;
+  private creatureInfoImages?: HTMLElement;
+  private creatureInfoPreviewTarget?: Phaser.GameObjects.Image | Phaser.GameObjects.Sprite;
   private lightingOverlay!: Phaser.GameObjects.Graphics;
   private caveTileLayer?: Phaser.GameObjects.Graphics;
   private caveBiomeCurtain?: Phaser.GameObjects.Rectangle;
@@ -538,6 +666,27 @@ export class OceanScene extends Phaser.Scene {
     fixedScrollY: number;
     range: number;
   };
+  private flythroughBiome: FlythroughBiome = FLYTHROUGH_BIOMES[0];
+  private flythroughX = FLYTHROUGH_BIOMES[0].startX;
+  private flythroughDirection: -1 | 1 = 1;
+  private flythroughBehaviorDelayMs = 0;
+  private flythroughPauseMs = 0;
+  private flythroughManualYOffset = 0;
+  private flythroughTrajectoryAnchorX = FLYTHROUGH_BIOMES[0].startX;
+  private flythroughTrajectoryAnchorFloorY = WATERLINE_Y;
+  private flythroughTrajectoryAnchorY = WATERLINE_Y;
+  private flythroughTrajectorySlope = 0;
+  private flythroughTrajectoryCurveInfluence = 0.24;
+  private flythroughTrajectoryPhase = 0;
+  private flythroughManualResumePending = false;
+  private flythroughManualDragging = false;
+  private flythroughManualDragStart?: {
+    pointerX: number;
+    pointerY: number;
+    scrollX: number;
+    scrollY: number;
+    centerX: number;
+  };
   private devCameraTools?: DevCameraTools;
   private devCameraEnabled = false;
   private devCameraDragging = false;
@@ -568,9 +717,72 @@ export class OceanScene extends Phaser.Scene {
     super("OceanScene");
   }
 
-  init(data: { caveSeed?: number }) {
+  init(data: { caveSeed?: number; flythroughBiomeId?: FlythroughBiomeId }) {
+    this.resetSceneStateForRestart();
     const seed = Number(data?.caveSeed);
     this.caveSeed = Number.isFinite(seed) ? Math.max(0, Math.floor(seed)) : DEFAULT_CAVE_SEED;
+    this.flythroughBiome = this.resolveFlythroughBiome(data?.flythroughBiomeId);
+    this.flythroughX = this.randomFlythroughStartX(this.flythroughBiome);
+    this.flythroughDirection = Math.random() < 0.5 ? -1 : 1;
+    this.randomizeFlythroughTrajectory();
+    this.resetFlythroughBehaviorTimer();
+  }
+
+  private resetSceneStateForRestart() {
+    this.heroTerrainCollider?.destroy();
+    this.heroTerrainCollider = undefined;
+    this.caveTiles = new Set<string>();
+    this.terrainTopByColumn = new Map<number, number>();
+    this.terrainLabelLayer = [];
+    this.bubbleStreams = [];
+    this.bubbles = [];
+    this.skyClouds = [];
+    this.finalBiomeBackgrounds = [];
+    this.seagrassMeadow = [];
+    this.kelpForest = [];
+    this.flatheads = [];
+    this.bakedKelpForest = [];
+    this.seagrassFrameTimer?.remove(false);
+    this.seagrassFrameTimer = undefined;
+    this.currentZoneId = "";
+    this.heroVisibilityStatus = "visible";
+    this.heroSpawned = false;
+    this.flythroughDirection = 1;
+    this.flythroughBehaviorDelayMs = 0;
+    this.flythroughPauseMs = 0;
+    this.flythroughManualYOffset = 0;
+    this.flythroughTrajectoryAnchorX = FLYTHROUGH_BIOMES[0].startX;
+    this.flythroughTrajectoryAnchorFloorY = WATERLINE_Y;
+    this.flythroughTrajectoryAnchorY = WATERLINE_Y;
+    this.flythroughTrajectorySlope = 0;
+    this.flythroughTrajectoryCurveInfluence = 0.24;
+    this.flythroughTrajectoryPhase = 0;
+    this.flythroughManualResumePending = false;
+    this.flythroughManualDragging = false;
+    this.flythroughManualDragStart = undefined;
+    this.devCameraTools = undefined;
+    this.devCameraEnabled = false;
+    this.devCameraDragging = false;
+    this.devCameraDragStart = undefined;
+    this.devTouchPointers.clear();
+    this.devTouchStart = undefined;
+    this.splashOverlayActive = true;
+    this.loadingReady = false;
+    this.backgroundImageVisibility = 1;
+    this.backgroundImageVisibilityTween = undefined;
+    this.parallaxCameraLastScroll = undefined;
+    this.distalWaterColumn = undefined;
+    this.distalWaterColumnMask = undefined;
+    this.distalWaterLastScroll = undefined;
+    this.distalWaterScrollOffset = { x: 0, y: 0 };
+    this.distalWaterOffset = { x: 0, y: 0 };
+    this.coralGardenBackdrop = undefined;
+    this.coralGardenBackdropMask = undefined;
+    this.coralGardenBackdropZone = undefined;
+    this.coralGardenBackdropLastScroll = undefined;
+    this.coralGardenBackdropScrollOffset = { x: 0, y: 0 };
+    this.coralGardenBackdropOffset = { x: 0, y: 0 };
+    this.hideCreatureInfoPopup();
   }
 
   preload() {
@@ -594,6 +806,7 @@ export class OceanScene extends Phaser.Scene {
       creature.key !== CREATURES.leatherjacket.key &&
       creature.key !== CREATURES.bullRay.key &&
       creature.key !== CREATURES.flathead.key &&
+      creature.key !== CREATURES.spiderCrab.key &&
       creature.key !== CREATURES.kingGeorgeWhiting.key &&
       creature.key !== CREATURES.yellowBlueFish.key
     ))) {
@@ -645,6 +858,15 @@ export class OceanScene extends Phaser.Scene {
       frameWidth: CREATURES.flathead.frameWidth,
       frameHeight: CREATURES.flathead.frameHeight,
     });
+    this.load.spritesheet(CREATURES.spiderCrab.key, CREATURES.spiderCrab.url, {
+      frameWidth: CREATURES.spiderCrab.frameWidth,
+      frameHeight: CREATURES.spiderCrab.frameHeight,
+    });
+    this.load.spritesheet(ZODIAC_BOAT_KEY, assetUrl(ZODIAC_BOAT_URL), {
+      frameWidth: ZODIAC_BOAT_FRAME_WIDTH,
+      frameHeight: ZODIAC_BOAT_FRAME_HEIGHT,
+    });
+    this.load.image(ZODIAC_BOAT_STATIC_KEY, assetUrl(ZODIAC_BOAT_STATIC_URL));
     for (const variant of SEAGRASS_MEADOW_VARIANTS) {
       for (const frame of variant.frames) {
         this.load.image(frame.key, frame.url);
@@ -655,6 +877,9 @@ export class OceanScene extends Phaser.Scene {
         frameWidth: variant.frameWidth,
         frameHeight: variant.frameHeight,
       });
+    }
+    for (const variant of UNDERGROUND_TILE_VARIANTS) {
+      this.load.image(variant.key, assetUrl(variant.url));
     }
     this.load.image("shipwreck", assetUrl("/assets/landscape/shipwreck.png"));
     this.load.image("beach-house-only", assetUrl("/assets/landscape/beach-house-only.png"));
@@ -676,20 +901,68 @@ export class OceanScene extends Phaser.Scene {
   }
 
   create() {
-    this.autoStartAfterLoad = new URLSearchParams(window.location.search).has("noStartupSlide");
+    this.autoStartAfterLoad = true;
+    document.getElementById("app")?.classList.add("splash-mode");
     document.getElementById("app")?.classList.remove("splash-scene-ready");
+    document.getElementById("splash")?.classList.remove("is-ready");
+    document.getElementById("splash")?.setAttribute("aria-hidden", "false");
+    this.initializeCreatureInfoPopup();
+    void this.loadCreatureInfoEntries();
     this.runWorldPrepStages();
+  }
+
+  private initializeCreatureInfoPopup() {
+    const popup = document.getElementById("creature-info-popup");
+    const previewCanvas = document.getElementById("creature-info-preview-canvas");
+    const kicker = document.getElementById("creature-info-kicker");
+    const title = document.getElementById("creature-info-title");
+    const summary = document.getElementById("creature-info-summary");
+    const images = document.getElementById("creature-info-images");
+
+    if (
+      !(popup instanceof HTMLElement) ||
+      !(previewCanvas instanceof HTMLCanvasElement) ||
+      !(kicker instanceof HTMLElement) ||
+      !(title instanceof HTMLElement) ||
+      !(summary instanceof HTMLElement) ||
+      !(images instanceof HTMLElement)
+    ) {
+      return;
+    }
+
+    this.creatureInfoPopup = popup;
+    this.creatureInfoPreviewCanvas = previewCanvas;
+    this.creatureInfoKicker = kicker;
+    this.creatureInfoTitle = title;
+    this.creatureInfoSummary = summary;
+    this.creatureInfoImages = images;
+    this.hideCreatureInfoPopup();
+  }
+
+  private async loadCreatureInfoEntries() {
+    try {
+      const response = await fetch(assetUrl("/data/creature-info.json"), { cache: "no-cache" });
+      if (!response.ok) return;
+      const data = await response.json();
+      if (data && typeof data === "object") {
+        this.creatureInfoEntries = data as CreatureInfoData;
+      }
+    } catch {
+      this.creatureInfoEntries = {};
+    }
   }
 
   private runWorldPrepStages() {
     let world!: ReturnType<typeof generateWorld>;
+    let activeWorld!: ReturnType<typeof generateWorld>;
     const stages: Array<{ progress: number; status: string; run: () => void }> = [
       {
         progress: 0.91,
         status: "Generating world",
         run: () => {
           world = generateWorld(this.caveSeed);
-          this.caveTiles = world.caveTiles;
+          activeWorld = this.filterWorldToActiveBiome(world);
+          this.caveTiles = activeWorld.caveTiles;
           this.zoneLabel = document.getElementById("zone-label");
           this.depthLabel = document.getElementById("depth-label");
           this.depthGaugeFill = document.getElementById("depth-gauge-fill");
@@ -705,17 +978,17 @@ export class OceanScene extends Phaser.Scene {
         progress: 0.93,
         status: "Painting ocean",
         run: () => {
-          this.createBackground(world.zones);
+          this.createBackground(activeWorld.zones);
           if (SHOW_DISTAL_WATER_COLUMN) {
-            this.createDistalWaterColumn(world.zones);
-            this.createCoralGardenBackdrop(world.zones);
+            this.createDistalWaterColumn(activeWorld.zones);
+            this.createCoralGardenBackdrop(activeWorld.zones);
           }
           this.createFinalBiomeBackgrounds();
           if (SHOW_CORAL_BACKGROUND_REVIEW_ASSET) {
-            this.createCoralBackground(world.zones);
+            this.createCoralBackground(activeWorld.zones);
           }
           if (SHOW_IMAGEGEN_PARALLAX_OVERLAY) {
-            this.createImagegenParallaxOverlay(world.zones);
+            this.createImagegenParallaxOverlay(activeWorld.zones);
           }
         },
       },
@@ -723,10 +996,12 @@ export class OceanScene extends Phaser.Scene {
         progress: 0.95,
         status: "Building terrain",
         run: () => {
-          this.createBeach();
+          if (this.isInActiveBiome(BEACH_END_X, ACTIVE_BIOME_RENDER_MARGIN)) {
+            this.createBeach();
+          }
           this.createWaterSurface();
-          this.createRocks(world.rocks, world.caveTiles);
-          this.createTerrainGuideOverlay(world.rocks, world.zones);
+          this.createRocks(activeWorld.rocks, activeWorld.caveTiles);
+          this.createTerrainGuideOverlay(activeWorld.rocks, activeWorld.zones);
           this.createBubbleField();
         },
       },
@@ -735,9 +1010,9 @@ export class OceanScene extends Phaser.Scene {
         status: "Growing seagrass and kelp",
         run: () => {
           this.prepareSeagrassTextures();
-          this.createSeagrassMeadows(world.zones);
-          this.createKelpForest(world.zones);
-          this.createDecorations(world.decorations);
+          this.createSeagrassMeadows(activeWorld.zones);
+          this.createKelpForest(activeWorld.zones);
+          this.createDecorations(activeWorld.decorations);
         },
       },
       {
@@ -745,7 +1020,8 @@ export class OceanScene extends Phaser.Scene {
         status: "Placing creatures",
         run: () => {
           this.createCreatureAnimations();
-          this.createCreatures(world.creatures);
+          this.createZodiacSurfaceBoats(activeWorld.zones);
+          this.createCreatures(activeWorld.creatures);
           this.createDeepShipwreck();
         },
       },
@@ -758,9 +1034,9 @@ export class OceanScene extends Phaser.Scene {
           this.createDeveloperTools();
           this.createLightingOverlay();
 
-          this.physics.add.collider(this.hero, this.rocks);
+          this.heroTerrainCollider = this.physics.add.collider(this.hero, this.rocks);
           this.splashOverlayActive = true;
-          this.prepareSplashScreen(world.zones, world.creatures);
+          this.prepareSplashScreen(activeWorld.zones, activeWorld.creatures);
         },
       },
     ];
@@ -849,7 +1125,7 @@ export class OceanScene extends Phaser.Scene {
       }
     }
 
-    this.enterSplashCameraMode(zones, creatures);
+    this.enterFlythroughMode();
     const splashRoot = this.splashRoot;
     const app = document.getElementById("app");
     if (app instanceof HTMLElement) {
@@ -874,11 +1150,8 @@ export class OceanScene extends Phaser.Scene {
     if (app instanceof HTMLElement) {
       app.classList.add("splash-scene-ready");
     }
-    this.updateLoadingScreen(1, "Press Start to dive");
-    this.startButton?.focus();
-    if (this.autoStartAfterLoad) {
-      requestAnimationFrame(() => this.startGame());
-    }
+    this.updateLoadingScreen(1, "Flythrough ready");
+    requestAnimationFrame(() => this.startGame());
   }
 
   private enterSplashCameraMode(
@@ -942,9 +1215,9 @@ export class OceanScene extends Phaser.Scene {
   }
 
   private startGame() {
-    if (!this.loadingReady || !this.splashOverlayActive) return;
+    if (!this.loadingReady) return;
     this.splashOverlayActive = false;
-    this.spawnHero();
+    this.hideHeroUntilStart();
 
     const splash = this.splashRoot ?? document.getElementById("splash");
     splash?.classList.add("is-ready");
@@ -954,9 +1227,311 @@ export class OceanScene extends Phaser.Scene {
       app.classList.remove("splash-mode", "splash-scene-ready");
     }
 
-    this.setGamePlayingCamera();
+    this.enterFlythroughMode();
     this.updateDeveloperToolState();
     this.clearTouchInput();
+  }
+
+  private resolveFlythroughBiome(id?: FlythroughBiomeId) {
+    if (id) {
+      const selected = FLYTHROUGH_BIOMES.find((biome) => biome.id === id);
+      if (selected) return selected;
+    }
+
+    return Phaser.Utils.Array.GetRandom(FLYTHROUGH_BIOMES);
+  }
+
+  private randomFlythroughBiomeId() {
+    return Phaser.Utils.Array.GetRandom(FLYTHROUGH_BIOMES).id;
+  }
+
+  private activeBiomeBounds(margin = 0) {
+    return {
+      startX: Phaser.Math.Clamp(this.flythroughBiome.startX - margin, 0, WORLD_WIDTH),
+      endX: Phaser.Math.Clamp(this.flythroughBiome.endX + margin, 0, WORLD_WIDTH),
+    };
+  }
+
+  private activeBiomeWidth(margin = 0) {
+    const bounds = this.activeBiomeBounds(margin);
+    return Math.max(1, bounds.endX - bounds.startX);
+  }
+
+  private isInActiveBiome(x: number, margin = 0) {
+    const bounds = this.activeBiomeBounds(margin);
+    return x >= bounds.startX && x <= bounds.endX;
+  }
+
+  private randomXInActiveBiome(margin = 0) {
+    const bounds = this.activeBiomeBounds(margin);
+    return Phaser.Math.FloatBetween(bounds.startX, bounds.endX);
+  }
+
+  private filterWorldToActiveBiome(world: ReturnType<typeof generateWorld>) {
+    const renderBounds = this.activeBiomeBounds(ACTIVE_BIOME_RENDER_MARGIN);
+    const terrainBounds = this.activeBiomeBounds(ACTIVE_BIOME_TERRAIN_MARGIN);
+    const overlaps = (startX: number, endX: number) => endX >= renderBounds.startX && startX <= renderBounds.endX;
+
+    return {
+      ...world,
+      zones: world.zones.filter((zone) => overlaps(zone.startX, zone.endX)),
+      rocks: world.rocks.filter((rock) => rock.x >= terrainBounds.startX && rock.x <= terrainBounds.endX),
+      decorations: world.decorations.filter((decoration) => decoration.x >= renderBounds.startX && decoration.x <= renderBounds.endX),
+      creatures: world.creatures.filter((creature) => creature.x >= renderBounds.startX && creature.x <= renderBounds.endX),
+      caveTiles: new Set<string>(),
+    };
+  }
+
+  private enterFlythroughMode() {
+    const camera = this.cameras.main;
+    const visibleHalfWidth = camera.width / camera.zoom / 2;
+    const minX = this.flythroughMinCenterX(visibleHalfWidth);
+    const maxX = this.flythroughMaxCenterX(visibleHalfWidth);
+    this.flythroughX = Phaser.Math.Clamp(
+      this.flythroughX,
+      minX,
+      maxX,
+    );
+    camera.stopFollow();
+    camera.setDeadzone(0, 0);
+    camera.setZoom(1);
+    camera.setBounds(this.flythroughBiome.startX, 0, this.flythroughBiome.endX - this.flythroughBiome.startX, WORLD_HEIGHT);
+    camera.useBounds = true;
+    this.setFlythroughTrajectoryAnchor(this.flythroughX);
+    const target = this.flythroughTargetAt(this.flythroughX);
+    camera.centerOn(target.x, target.y);
+    this.moveHiddenHeroTo(target.x, target.y);
+    this.updateHud();
+    this.updateCaveVisibility();
+    this.lightingOverlay?.clear();
+  }
+
+  private updateFlythroughCamera(delta: number) {
+    if (this.devCameraEnabled || this.splashOverlayActive) return;
+    if (this.flythroughManualDragging) {
+      this.syncFlythroughFromCamera();
+      return;
+    }
+    if (this.flythroughManualResumePending) {
+      this.flythroughPauseMs = Math.max(0, this.flythroughPauseMs - delta);
+      this.syncFlythroughFromCamera();
+      this.updateDeveloperToolReadout();
+      if (this.flythroughPauseMs > 0) return;
+      this.flythroughManualResumePending = false;
+      this.resetFlythroughBehaviorTimer();
+    }
+
+    const camera = this.cameras.main;
+    const visibleHalfWidth = camera.width / camera.zoom / 2;
+    const visibleHalfHeight = camera.height / camera.zoom / 2;
+    const minX = this.flythroughMinCenterX(visibleHalfWidth);
+    const maxX = this.flythroughMaxCenterX(visibleHalfWidth);
+    const seconds = delta / 1000;
+
+    this.updateFlythroughBehavior(delta);
+    if (this.flythroughPauseMs <= 0) {
+      this.flythroughX += FLYTHROUGH_SPEED * this.flythroughDirection * seconds;
+    }
+    if (this.flythroughX >= maxX) {
+      this.flythroughX = maxX;
+      this.flythroughDirection = -1;
+    } else if (this.flythroughX <= minX) {
+      this.flythroughX = minX;
+      this.flythroughDirection = 1;
+    }
+
+    const target = this.flythroughTargetAt(this.flythroughX);
+    const centerX = Phaser.Math.Clamp(target.x, minX, maxX);
+    const desiredCenterY = Phaser.Math.Clamp(
+      this.capFlythroughFloorCoverage(centerX, target.y + this.flythroughManualYOffset),
+      visibleHalfHeight,
+      WORLD_HEIGHT - visibleHalfHeight,
+    );
+    const currentCenterY = camera.scrollY + visibleHalfHeight;
+    const maxVerticalStep = FLYTHROUGH_MAX_VERTICAL_PAN_SPEED * seconds;
+    const centerY = Phaser.Math.Clamp(
+      desiredCenterY,
+      currentCenterY - maxVerticalStep,
+      currentCenterY + maxVerticalStep,
+    );
+    camera.centerOn(
+      Phaser.Math.Linear(camera.scrollX + visibleHalfWidth, centerX, FLYTHROUGH_HORIZONTAL_SMOOTHING),
+      Phaser.Math.Linear(camera.scrollY + visibleHalfHeight, centerY, FLYTHROUGH_VERTICAL_SMOOTHING),
+    );
+    this.moveHiddenHeroTo(centerX, centerY);
+  }
+
+  private syncFlythroughFromCamera() {
+    const camera = this.cameras.main;
+    const visibleHalfWidth = camera.width / camera.zoom / 2;
+    const visibleHalfHeight = camera.height / camera.zoom / 2;
+    const centerX = Phaser.Math.Clamp(
+      camera.scrollX + visibleHalfWidth,
+      this.flythroughMinCenterX(visibleHalfWidth),
+      this.flythroughMaxCenterX(visibleHalfWidth),
+    );
+    const centerY = Phaser.Math.Clamp(camera.scrollY + visibleHalfHeight, visibleHalfHeight, WORLD_HEIGHT - visibleHalfHeight);
+    this.flythroughX = centerX;
+    this.moveHiddenHeroTo(centerX, centerY);
+    return { centerX, centerY };
+  }
+
+  private flythroughMinCenterX(visibleHalfWidth: number) {
+    return Math.min(
+      this.flythroughBiome.endX,
+      this.flythroughBiome.startX + visibleHalfWidth,
+    );
+  }
+
+  private flythroughMaxCenterX(visibleHalfWidth: number) {
+    return Math.max(
+      this.flythroughMinCenterX(visibleHalfWidth),
+      this.flythroughBiome.endX - visibleHalfWidth,
+    );
+  }
+
+  private updateFlythroughBehavior(delta: number) {
+    if (this.flythroughPauseMs > 0) {
+      this.flythroughPauseMs = Math.max(0, this.flythroughPauseMs - delta);
+      if (this.flythroughPauseMs === 0 && Math.random() < FLYTHROUGH_REVERSE_AFTER_PAUSE_CHANCE) {
+        this.reverseFlythroughDirection();
+      }
+      return;
+    }
+
+    this.flythroughBehaviorDelayMs -= delta;
+    if (this.flythroughBehaviorDelayMs > 0) return;
+
+    const roll = Math.random();
+    if (roll < FLYTHROUGH_PAUSE_CHANCE) {
+      this.flythroughPauseMs = Phaser.Math.Between(FLYTHROUGH_MIN_PAUSE_MS, FLYTHROUGH_MAX_PAUSE_MS);
+    } else if (roll < FLYTHROUGH_PAUSE_CHANCE + FLYTHROUGH_REVERSE_CHANCE) {
+      this.reverseFlythroughDirection();
+    }
+    this.resetFlythroughBehaviorTimer();
+  }
+
+  private reverseFlythroughDirection() {
+    this.flythroughDirection = this.flythroughDirection === 1 ? -1 : 1;
+  }
+
+  private resetFlythroughBehaviorTimer() {
+    this.flythroughBehaviorDelayMs = Phaser.Math.Between(
+      FLYTHROUGH_MIN_BEHAVIOR_DELAY_MS,
+      FLYTHROUGH_MAX_BEHAVIOR_DELAY_MS,
+    );
+  }
+
+  private randomizeFlythroughTrajectory() {
+    const slopeMagnitude = Phaser.Math.FloatBetween(FLYTHROUGH_TRAJECTORY_SLOPE_MIN, FLYTHROUGH_TRAJECTORY_SLOPE_MAX);
+    this.flythroughTrajectorySlope = slopeMagnitude * (Math.random() < 0.5 ? -1 : 1);
+    this.flythroughTrajectoryCurveInfluence = Phaser.Math.FloatBetween(
+      FLYTHROUGH_TERRAIN_CURVE_INFLUENCE_MIN,
+      FLYTHROUGH_TERRAIN_CURVE_INFLUENCE_MAX,
+    );
+    this.flythroughTrajectoryPhase = Math.random() * Math.PI * 2;
+  }
+
+  private setFlythroughTrajectoryAnchor(x: number) {
+    const camera = this.cameras.main;
+    const visibleHeight = camera.height / camera.zoom;
+    const sampleHalfWidth = this.flythroughFloorSampleHalfWidth();
+    const anchorX = Phaser.Math.Clamp(x, this.flythroughBiome.startX, this.flythroughBiome.endX);
+    const floorY = this.flythroughBiome.id === "deep"
+      ? WORLD_HEIGHT
+      : this.flythroughTrackedFloorYAt(anchorX, sampleHalfWidth);
+
+    this.flythroughTrajectoryAnchorX = anchorX;
+    this.flythroughTrajectoryAnchorFloorY = floorY;
+    this.flythroughTrajectoryAnchorY = floorY - visibleHeight * (FLYTHROUGH_FLOOR_TARGET_SCREEN_RATIO - 0.5);
+  }
+
+  private randomFlythroughStartX(biome: FlythroughBiome) {
+    const camera = this.cameras?.main;
+    const visibleHalfWidth = camera ? camera.width / camera.zoom / 2 : 0;
+    const startX = biome.startX + visibleHalfWidth;
+    const endX = Math.max(startX, biome.endX - visibleHalfWidth);
+    return Phaser.Math.FloatBetween(startX, endX);
+  }
+
+  private flythroughTargetAt(x: number) {
+    const camera = this.cameras.main;
+    if (this.flythroughBiome.id === "deep") {
+      const midColumnY =
+        WATERLINE_Y +
+        (WORLD_HEIGHT - WATERLINE_Y) * FLYTHROUGH_OPEN_OCEAN_MID_COLUMN_RATIO +
+        Math.sin(x * 0.00045) * FLYTHROUGH_OPEN_OCEAN_VERTICAL_DRIFT +
+        Math.sin(x * 0.0011 + 1.7) * FLYTHROUGH_OPEN_OCEAN_VERTICAL_DRIFT * 0.35;
+      const visibleHalfHeight = camera.height / camera.zoom / 2;
+
+      return {
+        x,
+        y: Phaser.Math.Clamp(midColumnY, WATERLINE_Y + visibleHalfHeight, WORLD_HEIGHT - visibleHalfHeight),
+      };
+    }
+
+    const sampleX = Phaser.Math.Clamp(x, this.flythroughBiome.startX, this.flythroughBiome.endX);
+    const sampleHalfWidth = this.flythroughFloorSampleHalfWidth();
+    const floorY = this.flythroughTrackedFloorYAt(sampleX, sampleHalfWidth);
+    const visibleHeight = camera.height / camera.zoom;
+    const angledY = this.flythroughTrajectoryAnchorY + (x - this.flythroughTrajectoryAnchorX) * this.flythroughTrajectorySlope;
+    const curveY = (floorY - this.flythroughTrajectoryAnchorFloorY) * this.flythroughTrajectoryCurveInfluence;
+    const driftY =
+      Math.sin(x * 0.00056 + this.flythroughTrajectoryPhase) * FLYTHROUGH_TRAJECTORY_DRIFT +
+      Math.sin(x * 0.00135 + this.flythroughTrajectoryPhase * 0.47) * FLYTHROUGH_TRAJECTORY_DRIFT * 0.36;
+    const trajectoryY = angledY + curveY + driftY;
+    return {
+      x,
+      y: Phaser.Math.Clamp(
+        this.capFlythroughFloorCoverage(x, trajectoryY),
+        WATERLINE_Y + FLYTHROUGH_SURFACE_PADDING,
+        WORLD_HEIGHT - visibleHeight / 2,
+      ),
+    };
+  }
+
+  private flythroughFloorSampleHalfWidth() {
+    const camera = this.cameras.main;
+    return (camera.width / camera.zoom) * FLYTHROUGH_FLOOR_TRACK_SAMPLE_WIDTH_RATIO * 0.5;
+  }
+
+  private capFlythroughFloorCoverage(x: number, y: number) {
+    if (this.flythroughBiome.id === "deep") return y;
+
+    const camera = this.cameras.main;
+    const visibleHeight = camera.height / camera.zoom;
+    const floorY = this.flythroughTrackedFloorYAt(
+      Phaser.Math.Clamp(x, this.flythroughBiome.startX, this.flythroughBiome.endX),
+      this.flythroughFloorSampleHalfWidth(),
+    );
+    const maxCenterY = floorY - visibleHeight * (FLYTHROUGH_FLOOR_MIN_SCREEN_RATIO - 0.5);
+    return Math.min(y, maxCenterY);
+  }
+
+  private flythroughTrackedFloorYAt(centerX: number, sampleHalfWidth: number) {
+    const centerGuideY = this.smoothedTerrainGuideYAt(
+      Phaser.Math.Clamp(centerX, this.flythroughBiome.startX, this.flythroughBiome.endX),
+      this.terrainTopByColumn,
+    );
+    const leftGuideY = this.smoothedTerrainGuideYAt(
+      Phaser.Math.Clamp(centerX - sampleHalfWidth, this.flythroughBiome.startX, this.flythroughBiome.endX),
+      this.terrainTopByColumn,
+    );
+    const rightGuideY = this.smoothedTerrainGuideYAt(
+      Phaser.Math.Clamp(centerX + sampleHalfWidth, this.flythroughBiome.startX, this.flythroughBiome.endX),
+      this.terrainTopByColumn,
+    );
+    const edgeFloorY = Math.max(leftGuideY, rightGuideY);
+    return Phaser.Math.Linear(centerGuideY, edgeFloorY, 0.18);
+  }
+
+  private moveHiddenHeroTo(x: number, y: number) {
+    if (!this.hero) return;
+    this.hero.setPosition(x, y);
+    const body = this.hero.body as Phaser.Physics.Arcade.Body | undefined;
+    body?.reset(x, y);
+    body?.setVelocity(0, 0);
+    body?.setAcceleration(0, 0);
   }
 
   private setGamePlayingCamera() {
@@ -970,29 +1545,23 @@ export class OceanScene extends Phaser.Scene {
   update(time: number, delta: number) {
     this.updateDeveloperCamera(delta);
     this.updateSplashCameraDrift(time);
-    if (!this.splashOverlayActive) {
-      this.handleInput(delta);
-      this.updateSurfacePhysics(time);
-      this.clampHeroSwimVelocity();
-      this.updateHeroPresentation();
-      this.keepHeroInCameraView();
-    }
+    this.updateFlythroughCamera(delta);
     this.updateBubbles(time, delta);
     this.updateKelpForest();
-    this.updateFlatheads(time);
+    this.updateFlatheads(time, delta);
     this.updateParallax(delta);
     this.updateTerrainLabelScale();
-    if (this.splashOverlayActive) {
-      this.lightingOverlay?.clear();
-      return;
-    }
+    this.updateCreatureInfoPreview();
+    this.lightingOverlay?.clear();
+    if (this.splashOverlayActive) return;
     this.updateHeroVisibilityStatus();
     this.updateCaveVisibility();
     this.updateHud();
-    this.updateLighting();
   }
 
   private createBackground(zones: OceanZone[]) {
+    const bounds = this.activeBiomeBounds(ACTIVE_BIOME_RENDER_MARGIN);
+    const width = bounds.endX - bounds.startX;
     const skyBandHeight = 2;
     for (let y = 0; y < WATERLINE_Y; y += skyBandHeight) {
       const t = this.smooth01(y / WATERLINE_Y);
@@ -1001,7 +1570,7 @@ export class OceanScene extends Phaser.Scene {
         : this.mixHexColor(0xcdf7ef, 0xfff5cf, (t - 0.62) / 0.38);
       const height = Math.min(skyBandHeight, WATERLINE_Y - y);
       this.add
-        .rectangle(0, y, WORLD_WIDTH, height, color)
+        .rectangle(bounds.startX, y, width, height, color)
         .setOrigin(0)
         .setDepth(-80);
     }
@@ -1011,7 +1580,7 @@ export class OceanScene extends Phaser.Scene {
     for (let y = WATERLINE_Y; y < WORLD_HEIGHT; y += bandHeight) {
       const color = this.depthColorAtY(y + bandHeight / 2);
       this.add
-        .rectangle(0, y, WORLD_WIDTH, bandHeight + 1, color)
+        .rectangle(bounds.startX, y, width, bandHeight + 1, color)
         .setOrigin(0)
         .setDepth(-60)
         .setAlpha(0.98);
@@ -1020,8 +1589,9 @@ export class OceanScene extends Phaser.Scene {
     for (let row = 0; row < 4; row += 1) {
       const y = WATERLINE_Y + 170 + row * 275;
       const bandColor = row < 2 ? 0x75eff4 : 0x075f9b;
-      for (let i = 0; i < 170; i += 1) {
-        const x = ((i * 73 + row * 131) % WORLD_WIDTH);
+      const count = Math.max(18, Math.ceil(width / 300));
+      for (let i = 0; i < count; i += 1) {
+        const x = bounds.startX + ((i * 73 + row * 131) % Math.max(1, width));
         const blockSize = 8 + ((i + row) % 3) * 6;
         if ((i + row * 3) % 4 !== 0) {
           this.add
@@ -1038,8 +1608,9 @@ export class OceanScene extends Phaser.Scene {
       }
     }
 
-    for (let i = 0; i < 174; i += 1) {
-      const x = (i * 181) % WORLD_WIDTH;
+    const fleckCount = Math.max(24, Math.ceil(width / 260));
+    for (let i = 0; i < fleckCount; i += 1) {
+      const x = bounds.startX + ((i * 181) % Math.max(1, width));
       const y = 120 + ((i * 211) % (WORLD_HEIGHT - 260));
       const size = y > WATERLINE_Y + 900 ? 2 : 3;
       this.add
@@ -1263,11 +1834,12 @@ export class OceanScene extends Phaser.Scene {
   }
 
   private createSkyClouds() {
+    const bounds = this.activeBiomeBounds(ACTIVE_BIOME_RENDER_MARGIN);
     const largeSpacing = 1650;
-    const largeCount = Math.ceil(WORLD_WIDTH / largeSpacing);
+    const largeCount = Math.ceil((bounds.endX - bounds.startX) / largeSpacing);
     for (let i = 0; i < largeCount; i += 1) {
-      const segmentStart = i * largeSpacing;
-      const segmentEnd = Math.min(WORLD_WIDTH, segmentStart + largeSpacing);
+      const segmentStart = bounds.startX + i * largeSpacing;
+      const segmentEnd = Math.min(bounds.endX, segmentStart + largeSpacing);
       const x = Phaser.Math.Clamp(
         segmentStart + largeSpacing * 0.36 + Math.sin(i * 1.73) * 230,
         segmentStart + 180,
@@ -1280,10 +1852,10 @@ export class OceanScene extends Phaser.Scene {
     }
 
     const smallSpacing = 520;
-    const smallCount = Math.ceil(WORLD_WIDTH / smallSpacing);
+    const smallCount = Math.ceil((bounds.endX - bounds.startX) / smallSpacing);
     for (let i = 0; i < smallCount; i += 1) {
-      const segmentStart = i * smallSpacing;
-      const segmentEnd = Math.min(WORLD_WIDTH, segmentStart + smallSpacing);
+      const segmentStart = bounds.startX + i * smallSpacing;
+      const segmentEnd = Math.min(bounds.endX, segmentStart + smallSpacing);
       const x = Phaser.Math.Clamp(
         segmentStart + 76 + ((i * 137) % 330),
         segmentStart + 48,
@@ -1715,9 +2287,10 @@ export class OceanScene extends Phaser.Scene {
   }
 
   private createWaterSurface() {
+    const bounds = this.activeBiomeBounds(ACTIVE_BIOME_RENDER_MARGIN);
     const surfaceTint = this.add.graphics().setDepth(WATER_OVERLAY_DEPTH);
     surfaceTint.fillStyle(0x2f8da0, 0.38);
-    surfaceTint.fillRect(0, WATERLINE_Y, WORLD_WIDTH, 15);
+    surfaceTint.fillRect(bounds.startX, WATERLINE_Y, bounds.endX - bounds.startX, 15);
 
     this.addAnimatedWaveRibbon(WATERLINE_Y - 2, 0xd5fff2, 0.9, 5, 0.019, 13, 30, 14, 4200);
     this.addAnimatedWaveRibbon(WATERLINE_Y + 18, 0x75d2de, 0.6, 3, 0.015, 19, -24, 11, 4700);
@@ -1741,8 +2314,9 @@ export class OceanScene extends Phaser.Scene {
       );
     }
 
-    for (let i = 0; i < 230; i += 1) {
-      const x = 22 + i * 42;
+    const glintCount = Math.max(28, Math.ceil((bounds.endX - bounds.startX) / 42));
+    for (let i = 0; i < glintCount; i += 1) {
+      const x = bounds.startX + 22 + i * 42;
       const y = WATERLINE_Y + 18 + ((i * 29) % 145);
       const nearHorizon = y < WATERLINE_Y + 62;
       const color = nearHorizon && i % 4 === 0 ? 0xffd597 : i % 3 === 0 ? 0xd9fff5 : 0x8fdde8;
@@ -1771,20 +2345,145 @@ export class OceanScene extends Phaser.Scene {
     }
   }
 
+  private createZodiacSurfaceBoats(zones: OceanZone[]) {
+    this.textures.get(ZODIAC_BOAT_KEY).setFilter(Phaser.Textures.FilterMode.NEAREST);
+    this.textures.get(ZODIAC_BOAT_STATIC_KEY).setFilter(Phaser.Textures.FilterMode.NEAREST);
+    if (!this.anims.exists(ZODIAC_BOAT_ANIMATION_KEY)) {
+      this.anims.create({
+        key: ZODIAC_BOAT_ANIMATION_KEY,
+        frames: this.anims.generateFrameNumbers(ZODIAC_BOAT_KEY, {
+          frames: Array.from({ length: ZODIAC_BOAT_FRAME_COUNT }, (_, index) => index),
+        }),
+        frameRate: 10,
+        repeat: -1,
+      });
+    }
+
+    const boatZones = zones.filter((zone) => zone.id !== "beach" && zone.id !== "cave");
+    const fallbackZones = boatZones.length > 0 ? boatZones : [this.flythroughBiome];
+
+    for (const zone of fallbackZones) {
+      this.createZodiacSurfaceBoatForZone(zone);
+    }
+  }
+
+  private createZodiacSurfaceBoatForZone(zone: Pick<OceanZone, "startX" | "endX">) {
+    const startX = zone.startX - ZODIAC_BOAT_MARGIN;
+    const endX = zone.endX + ZODIAC_BOAT_MARGIN;
+    const travelDistance = Math.max(1, endX - startX);
+    const duration = (travelDistance / ZODIAC_BOAT_SPEED) * 1000;
+    const startDelay = Math.floor(
+      this.deterministicUnit(Math.floor(zone.startX / TILE), this.caveSeed + 2521, 0x7a0d1ac) * duration * 0.45,
+    );
+    const y = WATERLINE_Y + ZODIAC_BOAT_SURFACE_Y_OFFSET + Phaser.Math.Linear(
+      -5,
+      7,
+      this.deterministicUnit(Math.floor(zone.endX / TILE), this.caveSeed + 2593, 0xb0a7),
+    );
+    const boat = this.add
+      .sprite(startX, y, ZODIAC_BOAT_KEY)
+      .setOrigin(0.5, 0.72)
+      .setDisplaySize(ZODIAC_BOAT_DISPLAY_WIDTH, ZODIAC_BOAT_DISPLAY_HEIGHT)
+      .setDepth(ZODIAC_BOAT_DEPTH)
+      .play(ZODIAC_BOAT_ANIMATION_KEY);
+
+    this.time.delayedCall(startDelay, () => {
+      if (!boat.active) return;
+      this.cruiseZodiacSurfaceBoat(boat, startX, endX, 1);
+    });
+
+    this.tweens.add({
+      targets: boat,
+      y: y + 6,
+      duration: 760,
+      delay: startDelay % 380,
+      yoyo: true,
+      repeat: -1,
+      ease: "Sine.inOut",
+    });
+  }
+
+  private cruiseZodiacSurfaceBoat(
+    boat: Phaser.GameObjects.Sprite,
+    startX: number,
+    endX: number,
+    directionX: -1 | 1,
+  ) {
+    if (!boat.active) return;
+    boat.setTexture(ZODIAC_BOAT_KEY);
+    boat.setDisplaySize(ZODIAC_BOAT_DISPLAY_WIDTH, ZODIAC_BOAT_DISPLAY_HEIGHT);
+    boat.setFlipX(directionX < 0);
+    boat.play(ZODIAC_BOAT_ANIMATION_KEY, true);
+
+    const targetEdge = directionX > 0 ? endX : startX;
+    const distanceToEdge = Math.abs(targetEdge - boat.x);
+    const plannedCruiseMs = Phaser.Math.Between(ZODIAC_BOAT_DRIFT_MIN_CRUISE_MS, ZODIAC_BOAT_DRIFT_MAX_CRUISE_MS);
+    const plannedCruiseDistance = (plannedCruiseMs / 1000) * ZODIAC_BOAT_SPEED;
+    const cruiseDistance = Math.min(distanceToEdge, plannedCruiseDistance);
+    const cruiseTargetX = boat.x + directionX * cruiseDistance;
+    const cruiseDuration = Math.max(1, (cruiseDistance / ZODIAC_BOAT_SPEED) * 1000);
+
+    this.tweens.add({
+      targets: boat,
+      x: cruiseTargetX,
+      duration: cruiseDuration,
+      ease: "Sine.inOut",
+      onComplete: () => {
+        if (!boat.active) return;
+        if (Math.abs(targetEdge - boat.x) < 1 || cruiseDistance >= distanceToEdge) {
+          this.cruiseZodiacSurfaceBoat(boat, startX, endX, directionX > 0 ? -1 : 1);
+          return;
+        }
+        this.driftZodiacSurfaceBoat(boat, startX, endX, directionX);
+      },
+    });
+  }
+
+  private driftZodiacSurfaceBoat(
+    boat: Phaser.GameObjects.Sprite,
+    startX: number,
+    endX: number,
+    directionX: -1 | 1,
+  ) {
+    if (!boat.active) return;
+    boat.anims.stop();
+    boat.setTexture(ZODIAC_BOAT_STATIC_KEY);
+    boat.setDisplaySize(ZODIAC_BOAT_DISPLAY_WIDTH, ZODIAC_BOAT_DISPLAY_HEIGHT);
+    boat.setFlipX(directionX < 0);
+
+    const driftDistance = Phaser.Math.Between(ZODIAC_BOAT_DRIFT_MIN_DISTANCE, ZODIAC_BOAT_DRIFT_MAX_DISTANCE);
+    const driftTargetX = Phaser.Math.Clamp(boat.x + directionX * driftDistance, startX, endX);
+    const driftDuration = Phaser.Math.Between(ZODIAC_BOAT_DRIFT_MIN_DURATION_MS, ZODIAC_BOAT_DRIFT_MAX_DURATION_MS);
+
+    this.tweens.add({
+      targets: boat,
+      x: driftTargetX,
+      duration: driftDuration,
+      ease: "Sine.inOut",
+      onComplete: () => {
+        if (!boat.active) return;
+        this.cruiseZodiacSurfaceBoat(boat, startX, endX, directionX);
+      },
+    });
+  }
+
   private createBubbleField() {
     this.createBubbleTexture();
     this.bubbles = [];
-    this.bubbleStreams = Array.from({ length: BUBBLE_STREAM_COUNT }, (_, index) =>
-      this.createBubbleStream(index / BUBBLE_STREAM_COUNT, true),
+    const activeRatio = this.activeBiomeWidth(ACTIVE_BIOME_RENDER_MARGIN) / WORLD_WIDTH;
+    const streamCount = Math.max(ACTIVE_BIOME_MIN_BUBBLE_STREAMS, Math.ceil(BUBBLE_STREAM_COUNT * activeRatio));
+    const bubbleCount = Math.max(ACTIVE_BIOME_MIN_BUBBLES, Math.ceil(BUBBLE_COUNT * activeRatio));
+    this.bubbleStreams = Array.from({ length: streamCount }, (_, index) =>
+      this.createBubbleStream(index / streamCount, true),
     );
 
-    for (let i = 0; i < BUBBLE_COUNT; i += 1) {
+    for (let i = 0; i < bubbleCount; i += 1) {
       const sprite = this.add
         .image(0, 0, BUBBLE_TEXTURE_KEY)
         .setDepth(WATER_DETAIL_DEPTH + 0.18)
         .setBlendMode(Phaser.BlendModes.SCREEN);
-      const streamIndex = i % BUBBLE_STREAM_COUNT;
-      const memberIndex = Math.floor(i / BUBBLE_STREAM_COUNT);
+      const streamIndex = i % streamCount;
+      const memberIndex = Math.floor(i / streamCount);
 
       const bubble: BubbleParticle = {
         sprite,
@@ -1879,12 +2578,14 @@ export class OceanScene extends Phaser.Scene {
   }
 
   private createBubbleStream(xRatio = Math.random(), randomizeAge = false): BubbleStream {
-    let x = Phaser.Math.Clamp(xRatio * WORLD_WIDTH + (Math.random() - 0.5) * 680, 24, WORLD_WIDTH - 24);
+    const bounds = this.activeBiomeBounds(ACTIVE_BIOME_RENDER_MARGIN);
+    const width = Math.max(1, bounds.endX - bounds.startX);
+    let x = Phaser.Math.Clamp(bounds.startX + xRatio * width + (Math.random() - 0.5) * 680, bounds.startX + 24, bounds.endX - 24);
     for (let attempt = 0; attempt < 8; attempt += 1) {
       const surfaceLimit = this.bubbleSurfaceLimitYAt(x);
       const terrainLimit = this.bubbleTerrainLimitYAt(x);
       if (terrainLimit - surfaceLimit > 72) break;
-      x = 24 + Math.random() * (WORLD_WIDTH - 48);
+      x = bounds.startX + 24 + Math.random() * Math.max(1, width - 48);
     }
     const surfaceLimit = this.bubbleSurfaceLimitYAt(x);
     const terrainLimit = this.bubbleTerrainLimitYAt(x);
@@ -1930,9 +2631,11 @@ export class OceanScene extends Phaser.Scene {
 
   private nearbyBubbleStreamRatio() {
     if (this.bubbleStreams.length === 0 || Math.random() > 0.38) return Math.random();
+    const bounds = this.activeBiomeBounds(ACTIVE_BIOME_RENDER_MARGIN);
+    const width = Math.max(1, bounds.endX - bounds.startX);
     const anchor = this.bubbleStreams[Math.floor(Math.random() * this.bubbleStreams.length)];
     const nearbyX = anchor.x + this.randomSignedPower(1.6) * (180 + Math.random() * 620);
-    return Phaser.Math.Clamp(nearbyX / WORLD_WIDTH, 0, 1);
+    return Phaser.Math.Clamp((nearbyX - bounds.startX) / width, 0, 1);
   }
 
   private randomSignedPower(power: number) {
@@ -1986,9 +2689,10 @@ export class OceanScene extends Phaser.Scene {
     frequency: number,
     phase: number,
   ) {
+    const bounds = this.activeBiomeBounds(ACTIVE_BIOME_RENDER_MARGIN);
     graphics.lineStyle(thickness, color, alpha);
     graphics.beginPath();
-    for (let x = -96; x <= WORLD_WIDTH + 96; x += 18) {
+    for (let x = bounds.startX - 96; x <= bounds.endX + 96; x += 18) {
       const y =
         baseY +
         Math.sin(x * frequency + phase) * 7 +
@@ -2000,8 +2704,10 @@ export class OceanScene extends Phaser.Scene {
   }
 
   private createCurrentLines() {
-    for (let i = 0; i < 190; i += 1) {
-      const x = i * 55;
+    const bounds = this.activeBiomeBounds(ACTIVE_BIOME_RENDER_MARGIN);
+    const count = Math.max(24, Math.ceil((bounds.endX - bounds.startX) / 55));
+    for (let i = 0; i < count; i += 1) {
+      const x = bounds.startX + i * 55;
       const y = WATERLINE_Y + 76 + ((i * 137) % (WORLD_HEIGHT - WATERLINE_Y - 260));
       const line = this.add
         .rectangle(
@@ -2057,7 +2763,7 @@ export class OceanScene extends Phaser.Scene {
     const surfaceRocks = this.add.graphics().setDepth(-5.25);
     this.drawSurfaceRockDecorations(surfaceRocks, rocks);
     this.caveBiomeCurtain = this.add
-      .rectangle(0, 0, WORLD_WIDTH, WORLD_HEIGHT, 0x02070c, 0.82)
+      .rectangle(this.activeBiomeBounds(ACTIVE_BIOME_RENDER_MARGIN).startX, 0, this.activeBiomeWidth(ACTIVE_BIOME_RENDER_MARGIN), WORLD_HEIGHT, 0x02070c, 0.82)
       .setOrigin(0)
       .setDepth(-4.75)
       .setVisible(false);
@@ -2077,7 +2783,7 @@ export class OceanScene extends Phaser.Scene {
   }
 
   private createTerrainGuideOverlay(rocks: { x: number; y: number }[], zones: OceanZone[]) {
-    const line = this.add.graphics().setDepth(4499).setVisible(true);
+    const line = this.add.graphics().setDepth(4499).setVisible(this.devCameraEnabled);
     const guide = this.add.graphics().setDepth(4500).setVisible(false);
     this.terrainLineLayer = line;
     this.terrainGuideLayer = guide;
@@ -2085,8 +2791,9 @@ export class OceanScene extends Phaser.Scene {
     const topByColumn = this.buildTerrainTopByColumn(rocks);
     const columnStep = TILE * 2;
     const guideSpacing = TILE * 18;
+    const bounds = this.activeBiomeBounds(ACTIVE_BIOME_TERRAIN_MARGIN);
     guide.lineStyle(1, 0xdcc15f, 0.42);
-    for (let x = 0; x <= WORLD_WIDTH; x += guideSpacing) {
+    for (let x = bounds.startX; x <= bounds.endX; x += guideSpacing) {
       const terrainY = this.terrainSurfaceYAt(x, topByColumn);
       guide.beginPath();
       guide.moveTo(x, WATERLINE_Y);
@@ -2107,7 +2814,8 @@ export class OceanScene extends Phaser.Scene {
     step: number,
   ) {
     const points: Array<{ x: number; y: number }> = [];
-    for (let x = 0; x <= WORLD_WIDTH; x += step) {
+    const bounds = this.activeBiomeBounds(ACTIVE_BIOME_TERRAIN_MARGIN);
+    for (let x = bounds.startX; x <= bounds.endX; x += step) {
       points.push({ x, y: this.smoothedTerrainGuideYAt(x, topByColumn) });
     }
     if (points.length < 2) return;
@@ -2351,6 +3059,7 @@ export class OceanScene extends Phaser.Scene {
       .setDepth(graphics.depth)
       .setMask(terrainMask);
 
+    this.createUndergroundTileOverlay(terrainMask, graphics.depth + 0.02, terrainTopByColumn);
     graphics.setMask(terrainMask);
 
     for (let y = WATERLINE_Y + 320; y < WORLD_HEIGHT; y += 720) {
@@ -2361,6 +3070,69 @@ export class OceanScene extends Phaser.Scene {
     }
 
     this.drawTerrainSandTexture(graphics, terrainTopByColumn);
+  }
+
+  private createUndergroundTileOverlay(
+    mask: Phaser.Display.Masks.GeometryMask,
+    depth: number,
+    terrainTopByColumn: Map<number, number>,
+  ) {
+    const bounds = this.activeBiomeBounds(ACTIVE_BIOME_TERRAIN_MARGIN);
+    const startX = Math.max(bounds.startX, UNDERGROUND_TILE_START_X);
+    const endX = Math.min(bounds.endX, WORLD_WIDTH);
+    const width = endX - startX;
+    if (width <= 0) return;
+
+    for (const variant of UNDERGROUND_TILE_VARIANTS) {
+      this.textures.get(variant.key).setFilter(Phaser.Textures.FilterMode.NEAREST);
+    }
+
+    const columns = Math.ceil(width / UNDERGROUND_TILE_SPACING_X);
+    const rows = Math.ceil(UNDERGROUND_TILE_BAND_DEPTH / UNDERGROUND_TILE_SPACING_Y);
+
+    for (let column = 0; column <= columns; column += 1) {
+      const baseX = startX + column * UNDERGROUND_TILE_SPACING_X;
+      for (let row = 0; row <= rows; row += 1) {
+        const occupancy = this.deterministicUnit(column * 41 + row * 13, this.caveSeed + 1409, 0x6ea7);
+        if (occupancy > UNDERGROUND_TILE_DENSITY) continue;
+
+        const jitterX = Phaser.Math.Linear(
+          -UNDERGROUND_TILE_SPACING_X * 0.38,
+          UNDERGROUND_TILE_SPACING_X * 0.38,
+          this.deterministicUnit(column * 59 + row * 23, this.caveSeed + 1511, 0x97ab),
+        );
+        const x = Phaser.Math.Clamp(baseX + jitterX, startX, endX);
+        const floorY = this.smoothedTerrainGuideYAt(x, terrainTopByColumn);
+        const jitterY = Phaser.Math.Linear(
+          -UNDERGROUND_TILE_SPACING_Y * 0.34,
+          UNDERGROUND_TILE_SPACING_Y * 0.34,
+          this.deterministicUnit(column * 29 + row * 67, this.caveSeed + 1697, 0xb11d),
+        );
+        const y = floorY + 28 + row * UNDERGROUND_TILE_SPACING_Y + jitterY;
+        if (y >= WORLD_HEIGHT - UNDERGROUND_TILE_SIZE * 0.5) continue;
+
+        const variantIndex = Math.floor(
+          this.deterministicUnit(column * 31 + row * 17, this.caveSeed + 911, 0x644c34) * UNDERGROUND_TILE_VARIANTS.length,
+        ) % UNDERGROUND_TILE_VARIANTS.length;
+        const variant = UNDERGROUND_TILE_VARIANTS[variantIndex];
+        const sizeNoise = this.deterministicUnit(column * 73 + row * 37, this.caveSeed + 1733, 0x2d51);
+        const displaySize = Phaser.Math.Linear(UNDERGROUND_TILE_SIZE * 0.82, UNDERGROUND_TILE_SIZE * 1.18, sizeNoise);
+        const depthFade = 1 - this.smooth01(row / Math.max(1, rows));
+        const sprite = this.add
+          .image(x, y, variant.key)
+          .setDepth(depth)
+          .setDisplaySize(displaySize, displaySize)
+          .setAlpha(UNDERGROUND_TILE_ALPHA * Phaser.Math.Linear(0.58, 1, depthFade))
+          .setMask(mask);
+
+        const orientation = Math.floor(
+          this.deterministicUnit(column * 97 + row * 43, this.caveSeed + 1811, 0xf00d) * 8,
+        );
+        sprite.setFlipX((orientation & 1) === 1);
+        sprite.setFlipY((orientation & 2) === 2);
+        sprite.setRotation((Math.floor(orientation / 2) % 4) * Phaser.Math.DegToRad(90));
+      }
+    }
   }
 
   private drawTerrainSandTexture(
@@ -2953,7 +3725,9 @@ export class OceanScene extends Phaser.Scene {
 
   private createTerrainSurfaceCollision(terrainTopByColumn: Map<number, number>) {
     const segmentWidth = 32;
-    for (let x = segmentWidth / 2; x <= WORLD_WIDTH; x += segmentWidth) {
+    const bounds = this.activeBiomeBounds(ACTIVE_BIOME_TERRAIN_MARGIN);
+    const startX = Math.max(segmentWidth / 2, Math.floor(bounds.startX / segmentWidth) * segmentWidth + segmentWidth / 2);
+    for (let x = startX; x <= bounds.endX; x += segmentWidth) {
       const top = this.smoothedTerrainGuideYAt(x, terrainTopByColumn);
       const height = TILE * 1.4;
       const blocker = this.add
@@ -2967,8 +3741,41 @@ export class OceanScene extends Phaser.Scene {
     for (const variant of SEAGRASS_MEADOW_VARIANTS) {
       for (const frame of variant.frames) {
         this.textures.get(frame.key).setFilter(Phaser.Textures.FilterMode.NEAREST);
+        this.removeSeagrassChromaKey(frame.key);
       }
     }
+  }
+
+  private removeSeagrassChromaKey(textureKey: string) {
+    const texture = this.textures.get(textureKey);
+    const source = texture.getSourceImage() as HTMLImageElement | HTMLCanvasElement | undefined;
+    if (!source || source.width <= 0 || source.height <= 0) return;
+
+    const canvas = document.createElement("canvas");
+    canvas.width = source.width;
+    canvas.height = source.height;
+    const context = canvas.getContext("2d", { willReadFrequently: true });
+    if (!context) return;
+
+    context.drawImage(source, 0, 0);
+    const image = context.getImageData(0, 0, canvas.width, canvas.height);
+    const data = image.data;
+    let changed = false;
+    for (let index = 0; index < data.length; index += 4) {
+      const red = data[index] ?? 0;
+      const green = data[index + 1] ?? 0;
+      const blue = data[index + 2] ?? 0;
+      const alpha = data[index + 3] ?? 0;
+      if (alpha > 0 && green > 210 && red < 80 && blue < 100) {
+        data[index + 3] = 0;
+        changed = true;
+      }
+    }
+    if (!changed) return;
+
+    context.putImageData(image, 0, 0);
+    texture.setDataSource([canvas]);
+    texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
   }
 
   private createSeagrassMeadows(zones: OceanZone[]) {
@@ -3306,11 +4113,13 @@ export class OceanScene extends Phaser.Scene {
     scale: number;
     directionX?: -1 | 1;
     rotation?: number;
-    schoolId?: number;
-    schoolOffsetX?: number;
-    schoolOffsetY?: number;
-    zoneId?: OceanZone["id"];
-  }>) {
+	    schoolId?: number;
+	    schoolOffsetX?: number;
+	    schoolOffsetY?: number;
+	    roamMinX?: number;
+	    roamMaxX?: number;
+	    zoneId?: OceanZone["id"];
+	  }>) {
     const yellowBlueFishSchools = new Map<number, {
       motion: { x: number; y: number };
       drift: number;
@@ -3335,10 +4144,14 @@ export class OceanScene extends Phaser.Scene {
 	                    ? CREATURES.redSnapper
 	                    : spawn.assetKey === "banded-wrasse"
 	                      ? CREATURES.bandedWrasse
-	                      : spawn.assetKey === "leatherjacket"
-	                        ? CREATURES.leatherjacket
-	                        : spawn.assetKey === "flathead"
-	                          ? CREATURES.flathead
+		                      : spawn.assetKey === "leatherjacket"
+		                        ? CREATURES.leatherjacket
+		                        : spawn.assetKey === "flathead"
+		                          ? CREATURES.flathead
+                              : spawn.assetKey === "spider-crab"
+                                ? CREATURES.spiderCrab
+		                          : spawn.assetKey === "port-jackson"
+		                            ? CREATURES.hero
 	                        : NPC_CREATURES.find((creature) => creature.key === spawn.assetKey);
       if (!asset) continue;
       const sprite =
@@ -3362,9 +4175,13 @@ export class OceanScene extends Phaser.Scene {
 	                          ? this.add.sprite(spawn.x, spawn.y, CREATURES.leatherjacket.sheets.spikeDown.key, 0)
 	                          : spawn.assetKey === "bull-ray"
 	                            ? this.add.sprite(spawn.x, spawn.y, CREATURES.bullRay.key, 0)
-	                            : spawn.assetKey === "flathead"
-	                              ? this.add.sprite(spawn.x, spawn.y, CREATURES.flathead.key, FLATHEAD_REST_FRAME)
-                              : this.add.image(spawn.x, spawn.y, asset.key);
+		                            : spawn.assetKey === "port-jackson"
+		                              ? this.add.sprite(spawn.x, spawn.y, CREATURES.hero.frames.center.key)
+		                            : spawn.assetKey === "flathead"
+		                              ? this.add.sprite(spawn.x, spawn.y, CREATURES.flathead.key, FLATHEAD_REST_FRAME)
+                                  : spawn.assetKey === "spider-crab"
+                                    ? this.add.sprite(spawn.x, spawn.y, CREATURES.spiderCrab.key, 0)
+	                              : this.add.image(spawn.x, spawn.y, asset.key);
       const depth =
         spawn.assetKey === "grass-whiting-peek"
           ? GRASS_WHITING_PEEK_DEPTH
@@ -3382,9 +4199,13 @@ export class OceanScene extends Phaser.Scene {
 	                      ? LEATHERJACKET_DEPTH
 	                      : spawn.assetKey === "bull-ray"
 	                        ? BULL_RAY_DEPTH
-	                        : spawn.assetKey === "flathead"
-	                          ? FLATHEAD_DEPTH
-                          : 4;
+	                        : spawn.assetKey === "port-jackson"
+	                          ? PORT_JACKSON_DEPTH
+		                        : spawn.assetKey === "flathead"
+		                          ? FLATHEAD_DEPTH
+                              : spawn.assetKey === "spider-crab"
+                                ? SPIDER_CRAB_DEPTH
+	                          : 4;
 
       sprite
         .setOrigin(0.5, this.creatureOriginY(spawn.assetKey))
@@ -3408,6 +4229,8 @@ export class OceanScene extends Phaser.Scene {
       } else {
         this.faceSprite(sprite, spawn.assetKey, spawn.directionX ?? 1);
       }
+
+      this.registerCreatureInfoHover(sprite, spawn.assetKey);
 
       if (spawn.assetKey === "grass-whiting-peek" && sprite instanceof Phaser.GameObjects.Sprite) {
         sprite.setY(this.grassWhitingPeekRestYAt(spawn.x));
@@ -3474,12 +4297,24 @@ export class OceanScene extends Phaser.Scene {
         continue;
       }
 
-      if (spawn.assetKey === "flathead" && sprite instanceof Phaser.GameObjects.Sprite) {
-        this.addFlatheadRestAndFlee(sprite, spawn);
+      if (spawn.assetKey === "port-jackson" && sprite instanceof Phaser.GameObjects.Sprite) {
+        this.addBullRayRoam(sprite, spawn);
         continue;
       }
 
-      if (this.isTerrainFollowingCreature(spawn.assetKey)) {
+	      if (spawn.assetKey === "flathead" && sprite instanceof Phaser.GameObjects.Sprite) {
+	        this.addFlatheadRestAndFlee(sprite, spawn);
+	        continue;
+	      }
+
+      if (spawn.assetKey === "spider-crab" && sprite instanceof Phaser.GameObjects.Sprite) {
+        this.addSpiderCrabRoam(sprite, spawn);
+        continue;
+      }
+
+      if (spawn.assetKey === "nudhhi") {
+        this.addNudhhiSeafloorTween(sprite, spawn);
+      } else if (this.isTerrainFollowingCreature(spawn.assetKey)) {
         this.addTerrainFollowingCreatureTween(sprite, spawn);
       } else if (spawn.assetKey === "crayfish") {
         this.addCaveFloorCreatureTween(sprite, spawn);
@@ -3494,6 +4329,297 @@ export class OceanScene extends Phaser.Scene {
     this.createCreatureTrackGuideLayer(creatures);
   }
 
+  private registerCreatureInfoHover(
+    sprite: Phaser.GameObjects.Image | Phaser.GameObjects.Sprite,
+    assetKey: CreatureKey,
+  ) {
+    sprite.setInteractive({ useHandCursor: true });
+    sprite.on("pointerover", (pointer: Phaser.Input.Pointer) => {
+      this.creatureInfoPreviewTarget = sprite;
+      this.setCreatureInfoHoverState(assetKey, sprite, true, pointer);
+      this.showCreatureInfoPopup(assetKey, sprite, pointer);
+    });
+    sprite.on("pointermove", (pointer: Phaser.Input.Pointer) => {
+      this.positionCreatureInfoPopup(pointer);
+    });
+    sprite.on("pointerout", () => {
+      this.setCreatureInfoHoverState(assetKey, sprite, false);
+      this.hideCreatureInfoPopup();
+    });
+  }
+
+  private showCreatureInfoPopup(
+    assetKey: CreatureKey,
+    sprite: Phaser.GameObjects.Image | Phaser.GameObjects.Sprite,
+    pointer: Phaser.Input.Pointer,
+  ) {
+    if (!this.creatureInfoPopup) this.initializeCreatureInfoPopup();
+    if (
+      !this.creatureInfoPopup ||
+      !this.creatureInfoKicker ||
+      !this.creatureInfoTitle ||
+      !this.creatureInfoSummary ||
+      !this.creatureInfoImages
+    ) {
+      return;
+    }
+
+    const entry = this.creatureInfoEntryFor(assetKey);
+    this.creatureInfoKicker.textContent = entry.kicker ?? "Field Notes";
+    this.creatureInfoTitle.textContent = entry.title;
+    this.renderCreatureInfoSections(entry);
+    this.renderCreatureInfoImages(entry);
+    this.renderCreaturePreview(sprite);
+    this.creatureInfoPopup.hidden = false;
+    this.positionCreatureInfoPopup(pointer);
+  }
+
+  private hideCreatureInfoPopup() {
+    this.creatureInfoPreviewTarget = undefined;
+    if (this.creatureInfoPopup) {
+      this.creatureInfoPopup.hidden = true;
+    }
+  }
+
+  private setCreatureInfoHoverState(
+    assetKey: CreatureKey,
+    sprite: Phaser.GameObjects.Image | Phaser.GameObjects.Sprite,
+    hovered: boolean,
+    pointer?: Phaser.Input.Pointer,
+  ) {
+    if (!(sprite instanceof Phaser.GameObjects.Sprite)) return;
+
+    if (assetKey === "leatherjacket") {
+      sprite.setData("creatureInfoHovered", hovered);
+      const action = sprite.getData(hovered ? "raiseSpike" : "holdSpikeThenLower");
+      if (typeof action === "function") action();
+      return;
+    }
+
+    if (assetKey === "flathead" && hovered) {
+      const action = sprite.getData("hoverFlee");
+      const triggerX = pointer ? this.cameras.main.getWorldPoint(pointer.x, pointer.y).x : this.cameras.main.worldView.centerX;
+      if (typeof action === "function") action(triggerX);
+    }
+  }
+
+  private creatureInfoEntryFor(assetKey: CreatureKey): CreatureInfoEntry {
+    return this.creatureInfoEntries[assetKey] ?? {
+      title: this.creatureInfoTitleFor(assetKey),
+      kicker: "Field Notes",
+      Description: "Placeholder description. Add notes for this creature in public/data/creature-info.json.",
+      Habitat: "To be added.",
+      "Maximum Size": "To be added.",
+      "Global Distribution": "To be added.",
+      imageUrls: [this.defaultCreatureInfoImageUrl(assetKey)],
+    };
+  }
+
+  private renderCreatureInfoSections(entry: CreatureInfoEntry) {
+    if (!this.creatureInfoSummary) return;
+
+    this.creatureInfoSummary.replaceChildren();
+    const sections = CREATURE_INFO_SECTION_HEADERS
+      .map((header) => ({ header, body: entry[header] }))
+      .filter((section): section is { header: (typeof CREATURE_INFO_SECTION_HEADERS)[number]; body: string } => (
+        typeof section.body === "string" && section.body.trim().length > 0
+      ));
+
+    if (sections.length === 0 && entry.summary) {
+      this.creatureInfoSummary.textContent = entry.summary;
+      return;
+    }
+
+    for (const section of sections) {
+      const wrapper = document.createElement("section");
+      wrapper.className = "creature-info-section";
+      const heading = document.createElement("h3");
+      heading.textContent = section.header;
+      const body = document.createElement("p");
+      body.textContent = section.body;
+      wrapper.append(heading, body);
+      this.creatureInfoSummary.append(wrapper);
+    }
+  }
+
+  private creatureInfoTitleFor(assetKey: CreatureKey) {
+    return assetKey
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  }
+
+  private defaultCreatureInfoImageUrl(assetKey: CreatureKey) {
+    if (assetKey === "port-jackson") return CREATURES.hero.url;
+    if (assetKey === "blue-devil") return CREATURES.blueDevil.url;
+    if (assetKey === "crayfish") return CREATURES.crayfish.url;
+    if (assetKey === "nudhhi") return CREATURES.nudhhi.url;
+    if (assetKey === "seadragon") return CREATURES.seadragon.url;
+    if (assetKey === "smooth-sting-ray") return CREATURES.stingray.url;
+    if (assetKey === "killer-whale") return CREATURES.killerWhale.url;
+    if (assetKey === "yellow-blue-fish") return CREATURES.yellowBlueFish.url;
+    if (assetKey === "grass-whiting-peek") return CREATURES.grassWhitingPeek.url;
+    if (assetKey === "grass-whiting-peck") return CREATURES.grassWhitingPeck.url;
+    if (assetKey === "king-george-whiting") return CREATURES.kingGeorgeWhiting.url;
+    if (assetKey === "dusky-morwong") return CREATURES.duskyMorwong.url;
+    if (assetKey === "red-snapper") return CREATURES.redSnapper.url;
+    if (assetKey === "banded-wrasse") return CREATURES.bandedWrasse.url;
+    if (assetKey === "leatherjacket") return CREATURES.leatherjacket.url;
+    if (assetKey === "bull-ray") return CREATURES.bullRay.url;
+    return CREATURES.flathead.url;
+  }
+
+  private renderCreatureInfoImages(entry: CreatureInfoEntry) {
+    if (!this.creatureInfoImages) return;
+
+    this.creatureInfoImages.replaceChildren();
+    for (const imageUrl of (entry.imageUrls ?? []).slice(0, 1)) {
+      const image = document.createElement("img");
+      image.src = this.resolveCreatureInfoImageUrl(imageUrl);
+      image.alt = "";
+      image.decoding = "async";
+      this.creatureInfoImages.append(image);
+    }
+  }
+
+  private resolveCreatureInfoImageUrl(imageUrl: string) {
+    if (/^(https?:|data:|blob:)/.test(imageUrl)) return imageUrl;
+    return assetUrl(imageUrl);
+  }
+
+  private renderCreaturePreview(sprite: Phaser.GameObjects.Image | Phaser.GameObjects.Sprite) {
+    if (this.renderCreatureScenePreview(sprite)) return;
+    this.renderCreatureFramePreview(sprite);
+  }
+
+  private updateCreatureInfoPreview() {
+    if (!this.creatureInfoPreviewTarget || !this.creatureInfoPopup || this.creatureInfoPopup.hidden) return;
+    if (!this.creatureInfoPreviewTarget.active || !this.creatureInfoPreviewTarget.visible) {
+      this.hideCreatureInfoPopup();
+      return;
+    }
+
+    this.renderCreaturePreview(this.creatureInfoPreviewTarget);
+  }
+
+  private renderCreatureScenePreview(sprite: Phaser.GameObjects.Image | Phaser.GameObjects.Sprite) {
+    const canvas = this.creatureInfoPreviewCanvas;
+    const context = canvas?.getContext("2d");
+    const sourceCanvas = this.game.canvas;
+    if (!canvas || !context || !sourceCanvas || sourceCanvas.width <= 0 || sourceCanvas.height <= 0) return false;
+
+    const camera = this.cameras.main;
+    const screenX = (sprite.x - camera.scrollX) * camera.zoom;
+    const screenY = (sprite.y - camera.scrollY) * camera.zoom;
+    if (
+      screenX < -sprite.displayWidth ||
+      screenX > camera.width + sprite.displayWidth ||
+      screenY < -sprite.displayHeight ||
+      screenY > camera.height + sprite.displayHeight
+    ) {
+      return false;
+    }
+
+    const previewAspect = canvas.width / Math.max(1, canvas.height);
+    const sourceScaleX = sourceCanvas.width / Math.max(1, camera.width);
+    const sourceScaleY = sourceCanvas.height / Math.max(1, camera.height);
+    const sourceScreenX = screenX * sourceScaleX;
+    const sourceScreenY = screenY * sourceScaleY;
+    const creatureWidth = Math.max(48, sprite.displayWidth * camera.zoom * sourceScaleX);
+    const creatureHeight = Math.max(40, sprite.displayHeight * camera.zoom * sourceScaleY);
+    const cropWidth = Phaser.Math.Clamp(
+      Math.max(creatureWidth * CREATURE_INFO_PREVIEW_ZOOM_CROP, creatureHeight * CREATURE_INFO_PREVIEW_ZOOM_CROP * previewAspect, 72),
+      72,
+      Math.min(sourceCanvas.width, sourceCanvas.height * previewAspect),
+    );
+    const cropHeight = cropWidth / previewAspect;
+    const maxSourceX = Math.max(0, sourceCanvas.width - cropWidth);
+    const maxSourceY = Math.max(0, sourceCanvas.height - cropHeight);
+    const sourceX = Phaser.Math.Clamp(sourceScreenX - cropWidth / 2, 0, maxSourceX);
+    const sourceY = Phaser.Math.Clamp(sourceScreenY - cropHeight / 2, 0, maxSourceY);
+
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.imageSmoothingEnabled = false;
+    context.drawImage(
+      sourceCanvas,
+      sourceX,
+      sourceY,
+      cropWidth,
+      cropHeight,
+      0,
+      0,
+      canvas.width,
+      canvas.height,
+    );
+    return true;
+  }
+
+  private renderCreatureFramePreview(sprite: Phaser.GameObjects.Image | Phaser.GameObjects.Sprite) {
+    const canvas = this.creatureInfoPreviewCanvas;
+    const context = canvas?.getContext("2d");
+    const frame = sprite.frame;
+    const sourceImage = frame?.source.image as CanvasImageSource | undefined;
+    if (!canvas || !context || !frame || !sourceImage) return;
+
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.imageSmoothingEnabled = false;
+    const padding = 14;
+    const fitScale = Math.min(
+      (canvas.width - padding * 2) / Math.max(1, frame.cutWidth),
+      (canvas.height - padding * 2) / Math.max(1, frame.cutHeight),
+    );
+    const scale = Math.min(3.2, Math.max(fitScale, fitScale * 1.75));
+    const drawWidth = frame.cutWidth * scale;
+    const drawHeight = frame.cutHeight * scale;
+
+    context.save();
+    context.translate(canvas.width / 2, canvas.height / 2);
+    context.scale(sprite.flipX ? -1 : 1, sprite.flipY ? -1 : 1);
+    context.drawImage(
+      sourceImage,
+      frame.cutX,
+      frame.cutY,
+      frame.cutWidth,
+      frame.cutHeight,
+      -drawWidth / 2,
+      -drawHeight / 2,
+      drawWidth,
+      drawHeight,
+    );
+    context.restore();
+  }
+
+  private positionCreatureInfoPopup(pointer: Phaser.Input.Pointer) {
+    const popup = this.creatureInfoPopup;
+    if (!popup || popup.hidden) return;
+
+    const canvas = this.game.canvas;
+    const canvasRect = canvas.getBoundingClientRect();
+    const pointerEvent = pointer.event as PointerEvent | MouseEvent | undefined;
+    const clientX = pointerEvent && "clientX" in pointerEvent
+      ? pointerEvent.clientX
+      : canvasRect.left + (pointer.x / Math.max(1, this.cameras.main.width)) * canvasRect.width;
+    const clientY = pointerEvent && "clientY" in pointerEvent
+      ? pointerEvent.clientY
+      : canvasRect.top + (pointer.y / Math.max(1, this.cameras.main.height)) * canvasRect.height;
+    const margin = 12;
+    const offset = 18;
+    const popupRect = popup.getBoundingClientRect();
+    let left = clientX + offset;
+    let top = clientY + offset;
+
+    if (left + popupRect.width > window.innerWidth - margin) {
+      left = clientX - popupRect.width - offset;
+    }
+    if (top + popupRect.height > window.innerHeight - margin) {
+      top = clientY - popupRect.height - offset;
+    }
+
+    left = Phaser.Math.Clamp(left, margin, Math.max(margin, window.innerWidth - popupRect.width - margin));
+    top = Phaser.Math.Clamp(top, margin, Math.max(margin, window.innerHeight - popupRect.height - margin));
+    popup.style.transform = `translate3d(${Math.round(left)}px, ${Math.round(top)}px, 0)`;
+  }
+
   private createCreatureAnimations() {
     this.textures.get(CREATURES.seadragon.key).setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get(CREATURES.yellowBlueFish.key).setFilter(Phaser.Textures.FilterMode.NEAREST);
@@ -3503,11 +4629,15 @@ export class OceanScene extends Phaser.Scene {
     this.textures.get(CREATURES.duskyMorwong.key).setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get(CREATURES.redSnapper.key).setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get(CREATURES.bandedWrasse.key).setFilter(Phaser.Textures.FilterMode.NEAREST);
+    this.textures.get(CREATURES.hero.frames.center.key).setFilter(Phaser.Textures.FilterMode.NEAREST);
+    this.textures.get(CREATURES.hero.frames.tailRight.key).setFilter(Phaser.Textures.FilterMode.NEAREST);
+    this.textures.get(CREATURES.hero.frames.tailLeft.key).setFilter(Phaser.Textures.FilterMode.NEAREST);
     for (const sheet of Object.values(CREATURES.leatherjacket.sheets)) {
       this.textures.get(sheet.key).setFilter(Phaser.Textures.FilterMode.NEAREST);
     }
     this.textures.get(CREATURES.bullRay.key).setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get(CREATURES.flathead.key).setFilter(Phaser.Textures.FilterMode.NEAREST);
+    this.textures.get(CREATURES.spiderCrab.key).setFilter(Phaser.Textures.FilterMode.NEAREST);
     if (!this.anims.exists(YELLOW_BLUE_FISH_SWIM_KEY)) {
       this.anims.create({
         key: YELLOW_BLUE_FISH_SWIM_KEY,
@@ -3628,6 +4758,17 @@ export class OceanScene extends Phaser.Scene {
           frames: Array.from({ length: FLATHEAD_FRAME_COUNT }, (_, index) => index),
         }),
         frameRate: 8,
+        repeat: -1,
+      });
+    }
+
+    if (!this.anims.exists(SPIDER_CRAB_SCUTTLE_KEY)) {
+      this.anims.create({
+        key: SPIDER_CRAB_SCUTTLE_KEY,
+        frames: this.anims.generateFrameNumbers(CREATURES.spiderCrab.key, {
+          frames: Array.from({ length: SPIDER_CRAB_FRAME_COUNT }, (_, index) => index),
+        }),
+        frameRate: 7,
         repeat: -1,
       });
     }
@@ -4184,6 +5325,13 @@ export class OceanScene extends Phaser.Scene {
     let currentDriftDirection: -1 | 1 = spawnFacing;
     const baseRotation = this.seadragonBaseRotation(spawnFacing, baseRotationMagnitude);
     sprite.setRotation(baseRotation);
+    let currentPoint: CreatureTrackPoint = {
+      x: spawn.x,
+      y: this.seadragonSafeYAt(spawn.x, spawn.y),
+      directionX: spawnFacing,
+      pitch: 0,
+    };
+    this.placeCreatureFrontOnTrack(sprite, spawn.assetKey, currentPoint, 1, baseRotation);
 
     const wobbleDegrees = Phaser.Math.Between(SEADRAGON_ROTATION_WOBBLE_MIN_DEGREES, SEADRAGON_ROTATION_WOBBLE_MAX_DEGREES);
     this.tweens.add({
@@ -4197,13 +5345,18 @@ export class OceanScene extends Phaser.Scene {
 
     const driftToNextPoint = () => {
       if (!sprite.active) return;
-      const nextDirection: -1 | 1 = sprite.x <= anchor.x ? 1 : -1;
+      const nextDirection: -1 | 1 = currentPoint.x <= anchor.x ? 1 : -1;
       const driftX = Phaser.Math.Clamp(spawn.drift + Phaser.Math.Between(-24, 36), SEADRAGON_MIN_DRIFT_X, SEADRAGON_MAX_DRIFT_X);
       const driftY = Phaser.Math.Between(-SEADRAGON_MAX_DRIFT_Y, SEADRAGON_MAX_DRIFT_Y);
       currentDriftDirection = nextDirection;
       const targetX = anchor.x + currentDriftDirection * driftX;
-      const start = { x: sprite.x, y: sprite.y };
-      const target = { x: targetX, y: this.seadragonSafeYAt(targetX, anchor.y + driftY) };
+      const start = currentPoint;
+      const target: CreatureTrackPoint = {
+        x: targetX,
+        y: this.seadragonSafeYAt(targetX, anchor.y + driftY),
+        directionX: currentDriftDirection,
+        pitch: 0,
+      };
       const distance = Phaser.Math.Distance.Between(start.x, start.y, target.x, target.y);
       const progress = { value: 0 };
 
@@ -4221,6 +5374,7 @@ export class OceanScene extends Phaser.Scene {
             0.45,
             0,
           );
+          currentPoint = point;
           this.placeCreatureFrontOnTrack(
             sprite,
             spawn.assetKey,
@@ -4229,7 +5383,10 @@ export class OceanScene extends Phaser.Scene {
             this.seadragonBaseRotation(spawnFacing, baseRotationMagnitude) + point.pitch * 0.55,
           );
         },
-        onComplete: driftToNextPoint,
+        onComplete: () => {
+          currentPoint = target;
+          driftToNextPoint();
+        },
       });
     };
 
@@ -4548,6 +5705,7 @@ export class OceanScene extends Phaser.Scene {
     let current = this.leatherjacketSafePoint(spawn.x, spawn.y, corridor);
     let spikeState: "down" | "raising" | "up" | "lowering" = "down";
     let idleTween: Phaser.Tweens.Tween | undefined;
+    let hoverSpikeLowerTimer: Phaser.Time.TimerEvent | undefined;
 
     sprite.setPosition(current.x, current.y);
     this.faceSprite(sprite, spawn.assetKey, spawn.directionX ?? 1);
@@ -4575,7 +5733,15 @@ export class OceanScene extends Phaser.Scene {
     };
 
     const raiseSpike = () => {
-      if (!sprite.active || spikeState === "up" || spikeState === "raising") return;
+      if (!sprite.active) return;
+      hoverSpikeLowerTimer?.remove(false);
+      hoverSpikeLowerTimer = undefined;
+      sprite.setData("spikeHoldUntil", 0);
+      if (spikeState === "up") {
+        sprite.anims.resume();
+        return;
+      }
+      if (spikeState === "raising") return;
       sprite.off(`animationcomplete-${LEATHERJACKET_SPIKE_UP_TO_DOWN_KEY}`);
       spikeState = "raising";
       sprite.play(LEATHERJACKET_SPIKE_DOWN_TO_UP_KEY);
@@ -4590,6 +5756,36 @@ export class OceanScene extends Phaser.Scene {
       sprite.once(`animationcomplete-${LEATHERJACKET_SPIKE_UP_TO_DOWN_KEY}`, playSpikeDown);
     };
 
+    const holdSpikeThenLower = () => {
+      if (!sprite.active) return;
+      const holdUntil = this.time.now + LEATHERJACKET_HOVER_SPIKE_HOLD_MS;
+      sprite.setData("spikeHoldUntil", holdUntil);
+      const pauseRaisedSpike = () => {
+        if (sprite.active && spikeState === "up" && sprite.anims.currentAnim?.key === LEATHERJACKET_SPIKE_UP_SWIM_KEY) {
+          sprite.anims.pause();
+        }
+      };
+      if (spikeState === "up") {
+        pauseRaisedSpike();
+      } else if (spikeState === "raising") {
+        sprite.once(`animationcomplete-${LEATHERJACKET_SPIKE_DOWN_TO_UP_KEY}`, pauseRaisedSpike);
+      }
+      hoverSpikeLowerTimer?.remove(false);
+      hoverSpikeLowerTimer = this.time.delayedCall(LEATHERJACKET_HOVER_SPIKE_HOLD_MS, () => {
+        hoverSpikeLowerTimer = undefined;
+        if (!sprite.active || sprite.getData("creatureInfoHovered")) return;
+        sprite.setData("spikeHoldUntil", 0);
+        lowerSpike();
+      });
+    };
+
+    sprite.setData("raiseSpike", raiseSpike);
+    sprite.setData("lowerSpike", lowerSpike);
+    sprite.setData("holdSpikeThenLower", holdSpikeThenLower);
+    sprite.setData("creatureInfoHovered", false);
+    sprite.setData("spikeHoldUntil", 0);
+    if (sprite.getData("creatureInfoHovered")) raiseSpike();
+
     const proximityTimer = this.time.addEvent({
       delay: 140,
       loop: true,
@@ -4598,6 +5794,11 @@ export class OceanScene extends Phaser.Scene {
           proximityTimer.remove();
           return;
         }
+        if (sprite.getData("creatureInfoHovered")) {
+          raiseSpike();
+          return;
+        }
+        if ((sprite.getData("spikeHoldUntil") ?? 0) > this.time.now) return;
         if (!this.hero?.active || this.splashOverlayActive) {
           lowerSpike();
           return;
@@ -4666,11 +5867,11 @@ export class OceanScene extends Phaser.Scene {
             phase,
           );
           const safePoint = this.leatherjacketSafePoint(point.x, point.y, corridor);
-          this.placeCreatureFrontOnTrack(sprite, spawn.assetKey, { ...point, ...safePoint }, 0.24);
+          this.placeCreatureCenterOnTrack(sprite, spawn.assetKey, { ...point, ...safePoint }, 0.24);
         },
         onComplete: () => {
           current = this.leatherjacketSafePoint(target.x, target.y, corridor);
-          this.placeCreatureFrontOnTrack(sprite, spawn.assetKey, { ...current, directionX, pitch: sprite.rotation * directionX }, 1);
+          this.placeCreatureCenterOnTrack(sprite, spawn.assetKey, { ...current, directionX, pitch: sprite.rotation * directionX }, 1);
           startIdleDrift();
           this.time.delayedCall(Phaser.Math.Between(900, 2600), swimNext);
         },
@@ -4877,17 +6078,21 @@ export class OceanScene extends Phaser.Scene {
       zoneId?: OceanZone["id"];
     },
   ) {
-    const corridor = this.bullRayCorridor(spawn.zoneId === "kelp" ? "kelp" : "coral");
+    const corridor = this.bullRayCorridor(spawn.zoneId ?? "coral");
     let current = this.bullRaySafePoint(spawn.x, spawn.y, corridor, "cruise");
 
     sprite.setPosition(current.x, current.y);
     sprite.stop();
-    sprite.setFrame(0);
+    if (spawn.assetKey === "port-jackson") {
+      sprite.setTexture(CREATURES.hero.frames.center.key);
+    } else {
+      sprite.setFrame(0);
+    }
     this.faceSprite(sprite, spawn.assetKey, spawn.directionX ?? 1);
 
     const scheduleNext = () => {
       if (!sprite.active) return;
-      if (Math.random() < BULL_RAY_REST_CHANCE) {
+      if (spawn.assetKey === "bull-ray" && Math.random() < BULL_RAY_REST_CHANCE) {
         const restPoint = this.bullRayFlatRestPoint(current, corridor);
         if (restPoint) {
           this.bullRayRest(sprite, current, restPoint, corridor, () => {
@@ -4909,22 +6114,27 @@ export class OceanScene extends Phaser.Scene {
     this.time.delayedCall(Phaser.Math.Between(600, 3600), scheduleNext);
   }
 
-  private bullRayCorridor(zoneId: "coral" | "kelp") {
-    const zone =
+  private bullRayCorridor(zoneId: OceanZone["id"]) {
+    const biomeId: FlythroughBiomeId =
       zoneId === "kelp"
-        ? { startX: CORAL_END_X, endX: KELP_END_X }
-        : { startX: BEACH_END_X, endX: CORAL_END_X };
+        ? "kelp"
+        : zoneId === "surface"
+          ? "surface"
+          : zoneId === "deep" || zoneId === "dropoff"
+            ? "deep"
+            : "coral";
+    const biome = FLYTHROUGH_BIOMES.find((candidate) => candidate.id === biomeId) ?? FLYTHROUGH_BIOMES[0];
 
     return {
-      zoneId,
-      minX: zone.startX + 260,
-      maxX: zone.endX - 260,
+      zoneId: biomeId,
+      minX: biome.startX + 260,
+      maxX: biome.endX - 260,
     };
   }
 
   private bullRayTarget(
     current: { x: number; y: number },
-    corridor: { minX: number; maxX: number; zoneId: "coral" | "kelp" },
+    corridor: { minX: number; maxX: number; zoneId: FlythroughBiomeId },
     drift: number,
   ) {
     const midpoint = (corridor.minX + corridor.maxX) / 2;
@@ -4963,6 +6173,9 @@ export class OceanScene extends Phaser.Scene {
     const placeAt = (t: number) => {
       const point = this.creatureTrackPoint(start, target, t, Phaser.Math.Clamp(distance * 0.012, 6, 24), 0.35, 0);
       this.placeCreatureFrontOnTrack(sprite, assetKey, point, 0.3);
+      if (assetKey === "port-jackson") {
+        this.setPortJacksonSwimFrame(sprite, t, glideDuration);
+      }
     };
 
     const setAnimationSpeed = (timeScale: number) => {
@@ -4970,6 +6183,10 @@ export class OceanScene extends Phaser.Scene {
     };
 
     const playImpulseAnimation = (timeScale = 1) => {
+      if (assetKey === "port-jackson") {
+        this.setPortJacksonSwimFrame(sprite, 0, glideDuration);
+        return;
+      }
       if (!sprite.anims.isPlaying) {
         sprite.play({
           key: BULL_RAY_SWIM_KEY,
@@ -4981,7 +6198,11 @@ export class OceanScene extends Phaser.Scene {
 
     const pauseAnimation = () => {
       setAnimationSpeed(1);
-      sprite.stop();
+      if (assetKey === "port-jackson") {
+        sprite.setTexture(CREATURES.hero.frames.center.key);
+      } else {
+        sprite.stop();
+      }
     };
 
     const progress = { t: 0 };
@@ -5001,11 +6222,16 @@ export class OceanScene extends Phaser.Scene {
     });
   }
 
+  private setPortJacksonSwimFrame(sprite: Phaser.GameObjects.Sprite, progress: number, durationMs: number) {
+    const frame = Math.floor((progress * durationMs * PORT_JACKSON_SWIM_FRAME_RATE) / 1000) % HERO_SWIM_FRAMES.length;
+    sprite.setTexture(HERO_SWIM_FRAMES[frame]);
+  }
+
   private bullRayRest(
     sprite: Phaser.GameObjects.Sprite,
     current: { x: number; y: number },
     restPoint: { x: number; y: number },
-    corridor: { minX: number; maxX: number; zoneId: "coral" | "kelp" },
+    corridor: { minX: number; maxX: number; zoneId: FlythroughBiomeId },
     onComplete: () => void,
   ) {
     const resumePoint = this.bullRaySafePoint(
@@ -5085,7 +6311,7 @@ export class OceanScene extends Phaser.Scene {
 
   private bullRayFlatRestPoint(
     current: { x: number; y: number },
-    corridor: { minX: number; maxX: number; zoneId: "coral" | "kelp" },
+    corridor: { minX: number; maxX: number; zoneId: FlythroughBiomeId },
   ) {
     const candidates: Array<{ x: number; y: number; slope: number; distance: number }> = [];
     for (let attempt = 0; attempt < BULL_RAY_REST_SEARCH_ATTEMPTS; attempt += 1) {
@@ -5111,7 +6337,7 @@ export class OceanScene extends Phaser.Scene {
   private bullRaySafePoint(
     x: number,
     y: number,
-    corridor: { minX: number; maxX: number; zoneId: "coral" | "kelp" },
+    corridor: { minX: number; maxX: number; zoneId: FlythroughBiomeId },
     mode: "cruise" | "rest",
   ) {
     const safeX = Phaser.Math.Clamp(x, corridor.minX, corridor.maxX);
@@ -5132,11 +6358,17 @@ export class OceanScene extends Phaser.Scene {
 
   private bullRayCruiseYAt(
     x: number,
-    corridor: { zoneId: "coral" | "kelp" },
+    corridor: { zoneId: FlythroughBiomeId },
   ) {
     const floorY = this.creatureTerrainGuideYAt(x);
     if (corridor.zoneId === "coral") {
       return Phaser.Math.Clamp(this.seagrassCreatureTrackYAt(x, CREATURE_SEAGRASS_TRACK_MARGIN + 170), WATERLINE_Y + 150, floorY - 170);
+    }
+    if (corridor.zoneId === "surface") {
+      return Phaser.Math.Clamp(floorY - 310, WATERLINE_Y + 170, floorY - 165);
+    }
+    if (corridor.zoneId === "deep") {
+      return Phaser.Math.Clamp(floorY - 430, WATERLINE_Y + 210, floorY - 180);
     }
 
     return Phaser.Math.Clamp(floorY - 270, WATERLINE_Y + 165, floorY - 150);
@@ -5172,30 +6404,50 @@ export class OceanScene extends Phaser.Scene {
     sprite.stop();
     sprite.setFrame(FLATHEAD_REST_FRAME);
     this.placeFlatheadOnSeafloor(state, 1);
+    sprite.setData("hoverFlee", (triggerX: number) => this.fleeFlathead(state, triggerX));
     this.flatheads.push(state);
   }
 
-  private updateFlatheads(time: number) {
-    if (this.flatheads.length === 0 || !this.hero?.active || this.splashOverlayActive) return;
+  private updateFlatheads(time: number, delta: number) {
+    if (this.flatheads.length === 0 || this.splashOverlayActive) return;
 
     for (const state of this.flatheads) {
       if (!state.sprite.active || state.mode !== "resting" || time < state.cooldownUntil) continue;
-      const distance = Phaser.Math.Distance.Between(
-        state.sprite.x,
-        state.sprite.y,
-        this.hero.x,
-        this.hero.y,
-      );
-      if (distance > FLATHEAD_APPROACH_DISTANCE) continue;
 
-      this.fleeFlathead(state);
+      if (this.hero?.active) {
+        const distance = Phaser.Math.Distance.Between(
+          state.sprite.x,
+          state.sprite.y,
+          this.hero.x,
+          this.hero.y,
+        );
+        if (distance <= FLATHEAD_APPROACH_DISTANCE) {
+          this.fleeFlathead(state, this.hero.x);
+          continue;
+        }
+      }
+
+      if (!this.isFlatheadInCameraTriggerZone(state)) continue;
+      if (Math.random() > FLATHEAD_CAMERA_TRIGGER_CHANCE_PER_SECOND * (delta / 1000)) continue;
+
+      this.fleeFlathead(state, this.cameras.main.worldView.centerX);
     }
   }
 
-  private fleeFlathead(state: FlatheadState) {
+  private isFlatheadInCameraTriggerZone(state: FlatheadState) {
+    const view = this.cameras.main.worldView;
+    return (
+      state.sprite.x >= view.left - FLATHEAD_CAMERA_TRIGGER_VIEW_MARGIN &&
+      state.sprite.x <= view.right + FLATHEAD_CAMERA_TRIGGER_VIEW_MARGIN &&
+      state.sprite.y >= view.top - FLATHEAD_CAMERA_TRIGGER_VIEW_MARGIN &&
+      state.sprite.y <= view.bottom + FLATHEAD_CAMERA_TRIGGER_VIEW_MARGIN
+    );
+  }
+
+  private fleeFlathead(state: FlatheadState, triggerX: number) {
     if (state.mode !== "resting") return;
 
-    const directionX: -1 | 1 = this.hero.x <= state.sprite.x ? 1 : -1;
+    const directionX: -1 | 1 = triggerX <= state.sprite.x ? 1 : -1;
     const corridor = this.flatheadCorridor(state.zoneId);
     const distance = Phaser.Math.Between(FLATHEAD_FLEE_MIN_DISTANCE, FLATHEAD_FLEE_MAX_DISTANCE);
     let targetX = Phaser.Math.Clamp(state.sprite.x + directionX * distance, corridor.minX, corridor.maxX);
@@ -5240,7 +6492,7 @@ export class OceanScene extends Phaser.Scene {
         state.current = target;
         state.directionX = directionX;
         state.mode = "resting";
-        state.cooldownUntil = this.time.now + FLATHEAD_FLEE_COOLDOWN;
+        state.cooldownUntil = this.time.now + Math.max(FLATHEAD_FLEE_COOLDOWN, FLATHEAD_CAMERA_TRIGGER_COOLDOWN);
         state.sprite.stop();
         state.sprite.setFrame(FLATHEAD_REST_FRAME);
         this.placeFlatheadOnSeafloor(state, 1);
@@ -5559,6 +6811,25 @@ export class OceanScene extends Phaser.Scene {
     );
   }
 
+  private placeCreatureCenterOnTrack(
+    sprite: Phaser.GameObjects.Image | Phaser.GameObjects.Sprite,
+    assetKey: CreatureKey,
+    point: CreatureTrackPoint,
+    response = CREATURE_TRACK_ROTATION_RESPONSE,
+    rotationOverride?: number,
+  ) {
+    if (assetKey !== "seadragon") {
+      this.faceSprite(sprite, assetKey, point.directionX);
+    }
+
+    const constrained = this.constrainTrackPointToTerrainBoundary(sprite, point);
+    const targetPitch = this.terrainAlignedTrackPitch(constrained);
+    const targetRotation = rotationOverride ?? point.directionX * targetPitch;
+    const delta = Phaser.Math.Angle.Wrap(targetRotation - sprite.rotation);
+    sprite.setRotation(sprite.rotation + delta * response);
+    sprite.setPosition(constrained.x, constrained.y);
+  }
+
   private constrainTrackPointToTerrainBoundary(
     sprite: Phaser.GameObjects.Image | Phaser.GameObjects.Sprite,
     point: CreatureTrackPoint,
@@ -5653,8 +6924,124 @@ export class OceanScene extends Phaser.Scene {
     if (assetKey === "leatherjacket") return (LEATHERJACKET_BASE_WIDTH / sprite.width) * relativeScale;
     if (assetKey === "red-snapper") return (RED_SNAPPER_BASE_WIDTH / sprite.width) * relativeScale;
     if (assetKey === "bull-ray") return (BULL_RAY_BASE_WIDTH / sprite.width) * relativeScale;
+    if (assetKey === "port-jackson") return (PORT_JACKSON_BASE_WIDTH / sprite.width) * relativeScale;
     if (assetKey === "flathead") return (FLATHEAD_BASE_WIDTH / sprite.width) * relativeScale;
+    if (assetKey === "spider-crab") return (SPIDER_CRAB_BASE_WIDTH / sprite.width) * relativeScale;
     return relativeScale;
+  }
+
+  private addSpiderCrabRoam(
+    sprite: Phaser.GameObjects.Sprite,
+    spawn: {
+      x: number;
+      y: number;
+      assetKey: CreatureKey;
+      drift: number;
+      directionX?: -1 | 1;
+      roamMinX?: number;
+      roamMaxX?: number;
+    },
+  ) {
+    const minX = Phaser.Math.Clamp(
+      (spawn.roamMinX ?? spawn.x - spawn.drift) + SPIDER_CRAB_TARGET_EDGE_PADDING,
+      0,
+      WORLD_WIDTH,
+    );
+    const maxX = Phaser.Math.Clamp(
+      (spawn.roamMaxX ?? spawn.x + spawn.drift) - SPIDER_CRAB_TARGET_EDGE_PADDING,
+      minX + 1,
+      WORLD_WIDTH,
+    );
+    let directionX = spawn.directionX ?? 1;
+    const startPoint = this.spiderCrabTrackPointAt(Phaser.Math.Clamp(spawn.x, minX, maxX), directionX);
+    sprite.setFrame(0);
+    this.placeSpiderCrabOnSeafloor(sprite, startPoint, 1);
+
+    const pickTargetX = () => {
+      const range = maxX - minX;
+      const longStep = Phaser.Math.FloatBetween(range * 0.12, range * 0.32);
+      let targetX = sprite.x + directionX * longStep;
+      if (targetX <= minX || targetX >= maxX || Math.random() < 0.22) {
+        directionX = sprite.x < (minX + maxX) * 0.5 ? 1 : -1;
+        targetX = directionX > 0
+          ? Phaser.Math.FloatBetween(sprite.x + range * 0.08, Math.min(maxX, sprite.x + range * 0.28))
+          : Phaser.Math.FloatBetween(Math.max(minX, sprite.x - range * 0.28), sprite.x - range * 0.08);
+      }
+      return Phaser.Math.Clamp(targetX, minX, maxX);
+    };
+
+    const pauseThenMove = () => {
+      if (!sprite.active) return;
+      this.pauseSpiderCrabScuttle(sprite);
+      const restDirection = directionX;
+      const restPoint = this.spiderCrabTrackPointAt(sprite.x, restDirection);
+      this.placeSpiderCrabOnSeafloor(sprite, restPoint, 0.48);
+      this.time.delayedCall(
+        Phaser.Math.Between(SPIDER_CRAB_MIN_PAUSE_DURATION, SPIDER_CRAB_MAX_PAUSE_DURATION),
+        moveNext,
+      );
+    };
+
+    const moveNext = () => {
+      if (!sprite.active) return;
+      const startX = Phaser.Math.Clamp(sprite.x, minX, maxX);
+      const targetX = pickTargetX();
+      directionX = targetX >= startX ? 1 : -1;
+      const distance = Math.abs(targetX - startX);
+      const speed = Phaser.Math.FloatBetween(SPIDER_CRAB_MIN_SPEED, SPIDER_CRAB_MAX_SPEED);
+      const motion = { x: startX };
+      this.playSpiderCrabScuttle(sprite, speed);
+
+      this.tweens.add({
+        targets: motion,
+        x: targetX,
+        duration: Math.max(1200, (distance / speed) * 1000),
+        ease: "Sine.inOut",
+        onUpdate: () => {
+          const point = this.spiderCrabTrackPointAt(motion.x, directionX);
+          this.placeSpiderCrabOnSeafloor(sprite, point, 0.36);
+        },
+        onComplete: pauseThenMove,
+      });
+    };
+
+    this.time.delayedCall(Phaser.Math.Between(350, 3600), Math.random() < 0.82 ? pauseThenMove : moveNext);
+  }
+
+  private playSpiderCrabScuttle(sprite: Phaser.GameObjects.Sprite, speed: number) {
+    const timeScale = Phaser.Math.Clamp(speed / SPIDER_CRAB_ANIMATION_BASE_SPEED, 0.68, 1.32);
+    if (sprite.anims.currentAnim?.key === SPIDER_CRAB_SCUTTLE_KEY) {
+      sprite.anims.resume();
+    } else {
+      sprite.play({ key: SPIDER_CRAB_SCUTTLE_KEY, startFrame: Phaser.Math.Between(0, SPIDER_CRAB_FRAME_COUNT - 1) });
+    }
+    sprite.anims.timeScale = timeScale;
+  }
+
+  private pauseSpiderCrabScuttle(sprite: Phaser.GameObjects.Sprite) {
+    if (sprite.anims.currentAnim?.key === SPIDER_CRAB_SCUTTLE_KEY && sprite.anims.isPlaying) {
+      sprite.anims.pause();
+    }
+  }
+
+  private spiderCrabTrackPointAt(x: number, directionX: -1 | 1): CreatureTrackPoint {
+    const point = this.terrainTrackPointAt(x, directionX);
+    return {
+      ...point,
+      y: this.creatureTerrainGuideYAt(point.x),
+    };
+  }
+
+  private placeSpiderCrabOnSeafloor(
+    sprite: Phaser.GameObjects.Sprite,
+    point: CreatureTrackPoint,
+    response = CREATURE_TRACK_ROTATION_RESPONSE,
+  ) {
+    this.faceSprite(sprite, "spider-crab", point.directionX);
+    const targetRotation = point.directionX * point.pitch;
+    const delta = Phaser.Math.Angle.Wrap(targetRotation - sprite.rotation);
+    sprite.setRotation(sprite.rotation + delta * response);
+    sprite.setPosition(point.x, point.y);
   }
 
   private addTerrainFollowingCreatureTween(
@@ -5684,6 +7071,54 @@ export class OceanScene extends Phaser.Scene {
       onYoyo: () => this.faceSprite(sprite, spawn.assetKey, -1),
       onRepeat: () => this.faceSprite(sprite, spawn.assetKey, 1),
     });
+  }
+
+  private addNudhhiSeafloorTween(
+    sprite: Phaser.GameObjects.Image | Phaser.GameObjects.Sprite,
+    spawn: { x: number; y: number; assetKey: CreatureKey; drift: number },
+  ) {
+    const motion = { offset: -spawn.drift };
+    const initialPoint = this.nudhhiTrackPointAt(spawn.x + motion.offset, 1);
+    let previousX = initialPoint.x;
+    this.placeNudhhiOnSeafloor(sprite, initialPoint, 1);
+
+    this.tweens.add({
+      targets: motion,
+      offset: spawn.drift,
+      duration: 4200 + spawn.drift * 52,
+      yoyo: true,
+      repeat: -1,
+      ease: "Sine.inOut",
+      onUpdate: () => {
+        const x = spawn.x + motion.offset;
+        const directionX: -1 | 1 = x >= previousX ? 1 : -1;
+        previousX = x;
+        const point = this.nudhhiTrackPointAt(x, directionX);
+        this.placeNudhhiOnSeafloor(sprite, point, 0.3);
+      },
+      onYoyo: () => this.faceSprite(sprite, "nudhhi", -1),
+      onRepeat: () => this.faceSprite(sprite, "nudhhi", 1),
+    });
+  }
+
+  private nudhhiTrackPointAt(x: number, directionX: -1 | 1): CreatureTrackPoint {
+    const point = this.terrainTrackPointAt(x, directionX);
+    return {
+      ...point,
+      y: this.creatureTerrainGuideYAt(point.x) + NUDHHI_SEAFLOOR_SINK,
+    };
+  }
+
+  private placeNudhhiOnSeafloor(
+    sprite: Phaser.GameObjects.Image | Phaser.GameObjects.Sprite,
+    point: CreatureTrackPoint,
+    response = CREATURE_TRACK_ROTATION_RESPONSE,
+  ) {
+    this.faceSprite(sprite, "nudhhi", point.directionX);
+    const targetRotation = point.directionX * point.pitch;
+    const delta = Phaser.Math.Angle.Wrap(targetRotation - sprite.rotation);
+    sprite.setRotation(sprite.rotation + delta * response);
+    sprite.setPosition(point.x, point.y);
   }
 
   private addCaveFloorCreatureTween(
@@ -5785,6 +7220,7 @@ export class OceanScene extends Phaser.Scene {
   }
 
   private creatureOriginY(assetKey: CreatureKey) {
+    if (assetKey === "spider-crab") return SPIDER_CRAB_ORIGIN_Y;
     if (assetKey === "crayfish" || assetKey === "nudhhi" || assetKey === "smooth-sting-ray") return 1;
     if (assetKey === "flathead") return 0.58;
     if (assetKey === "grass-whiting-peek") return GRASS_WHITING_PEEK_ORIGIN_Y;
@@ -5794,11 +7230,13 @@ export class OceanScene extends Phaser.Scene {
   }
 
   private createDeepShipwreck() {
+    if (this.flythroughBiome.id !== "deep") return;
+    const bounds = this.activeBiomeBounds(ACTIVE_BIOME_RENDER_MARGIN);
     const candidates: number[] = [];
-    for (let x = 6900; x < WORLD_WIDTH - 420; x += 80) {
+    for (let x = Math.max(bounds.startX + 240, 6900); x < Math.min(bounds.endX - 240, WORLD_WIDTH - 420); x += 80) {
       if (maxDepthAtX(x) >= 480) candidates.push(x);
     }
-    const x = candidates.length > 0 ? candidates[17 % candidates.length] : WORLD_WIDTH - 1200;
+    const x = candidates.length > 0 ? candidates[17 % candidates.length] : Phaser.Math.Clamp(this.flythroughBiome.startX + 640, bounds.startX, bounds.endX);
     const floorY = seafloorYAtX(x);
     this.add
       .image(x, floorY + 2, "shipwreck")
@@ -5813,7 +7251,7 @@ export class OceanScene extends Phaser.Scene {
     assetKey: CreatureKey | "port-jackson",
     directionX: -1 | 1,
   ) {
-    const nativeFacesLeft = assetKey !== "blue-devil" && assetKey !== "bull-ray" && assetKey !== "dusky-morwong" && assetKey !== "red-snapper" && assetKey !== "banded-wrasse";
+    const nativeFacesLeft = assetKey !== "blue-devil" && assetKey !== "bull-ray" && assetKey !== "dusky-morwong" && assetKey !== "red-snapper" && assetKey !== "banded-wrasse" && assetKey !== "spider-crab";
     sprite.setFlipX(nativeFacesLeft ? directionX > 0 : directionX < 0);
   }
 
@@ -5835,10 +7273,13 @@ export class OceanScene extends Phaser.Scene {
   }
 
   private hideHeroUntilStart() {
-    const body = this.hero.body as Phaser.Physics.Arcade.Body;
-    body.enable = false;
-    body.setVelocity(0, 0);
-    body.setAcceleration(0, 0);
+    const body = this.hero?.body as Phaser.Physics.Arcade.Body | undefined;
+    if (body) {
+      body.enable = false;
+      body.setVelocity(0, 0);
+      body.setAcceleration(0, 0);
+    }
+    if (!this.hero) return;
     this.hero.setVisible(false);
     this.hero.setActive(false);
     this.heroSpawned = false;
@@ -5870,6 +7311,70 @@ export class OceanScene extends Phaser.Scene {
       down: Phaser.Input.Keyboard.KeyCodes.S,
     }) as KeySet;
     this.createTouchControls();
+    this.createFlythroughDragControls();
+  }
+
+  private createFlythroughDragControls() {
+    this.input.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
+      if (this.devCameraEnabled || this.splashOverlayActive || !pointer.leftButtonDown()) return;
+      const camera = this.cameras.main;
+      this.flythroughManualDragging = true;
+      this.flythroughManualResumePending = false;
+      this.flythroughManualDragStart = {
+        pointerX: pointer.x,
+        pointerY: pointer.y,
+        scrollX: camera.scrollX,
+        scrollY: camera.scrollY,
+        centerX: camera.scrollX + camera.width / camera.zoom / 2,
+      };
+      this.flythroughPauseMs = 0;
+    });
+
+    this.input.on("pointermove", (pointer: Phaser.Input.Pointer) => {
+      if (!this.flythroughManualDragging || !this.flythroughManualDragStart || this.devCameraEnabled) return;
+      const camera = this.cameras.main;
+      camera.scrollX = this.flythroughManualDragStart.scrollX - (pointer.x - this.flythroughManualDragStart.pointerX) / camera.zoom;
+      camera.scrollY = this.flythroughManualDragStart.scrollY - (pointer.y - this.flythroughManualDragStart.pointerY) / camera.zoom;
+      this.clampFlythroughCamera();
+      this.syncFlythroughFromCamera();
+      this.updateDeveloperToolReadout();
+    });
+
+    const endDrag = () => this.finishFlythroughDrag();
+    this.input.on("pointerup", endDrag);
+    this.input.on("pointerupoutside", endDrag);
+    this.input.on("pointercancel", endDrag);
+  }
+
+  private finishFlythroughDrag() {
+    if (!this.flythroughManualDragging) return;
+    const startCenterX = this.flythroughManualDragStart?.centerX;
+    this.flythroughManualDragging = false;
+    this.flythroughManualDragStart = undefined;
+    this.clampFlythroughCamera();
+    const droppedCenter = this.syncFlythroughFromCamera();
+    const naturalTarget = this.flythroughTargetAt(droppedCenter.centerX);
+    this.flythroughManualYOffset = droppedCenter.centerY - naturalTarget.y;
+    if (startCenterX !== undefined && Math.abs(this.flythroughX - startCenterX) > 4) {
+      this.flythroughDirection = this.flythroughX > startCenterX ? 1 : -1;
+    }
+    this.flythroughPauseMs = FLYTHROUGH_MANUAL_RESUME_PAUSE_MS;
+    this.flythroughManualResumePending = true;
+    this.resetFlythroughBehaviorTimer();
+    this.updateDeveloperToolReadout();
+  }
+
+  private clampFlythroughCamera() {
+    const camera = this.cameras.main;
+    const visibleHalfWidth = camera.width / camera.zoom / 2;
+    const visibleHalfHeight = camera.height / camera.zoom / 2;
+    const centerX = Phaser.Math.Clamp(
+      camera.scrollX + visibleHalfWidth,
+      this.flythroughMinCenterX(visibleHalfWidth),
+      this.flythroughMaxCenterX(visibleHalfWidth),
+    );
+    const centerY = Phaser.Math.Clamp(camera.scrollY + visibleHalfHeight, visibleHalfHeight, WORLD_HEIGHT - visibleHalfHeight);
+    camera.centerOn(centerX, centerY);
   }
 
   private createTouchControls() {
@@ -6091,6 +7596,9 @@ export class OceanScene extends Phaser.Scene {
     const seedInput = document.getElementById("cave-seed-input");
     const seedApply = document.getElementById("cave-seed-apply");
     const seedRandom = document.getElementById("cave-seed-random");
+    const biomeSelect = document.getElementById("dev-biome");
+    const biomeRandom = document.getElementById("dev-biome-random");
+    const biomeReload = document.getElementById("dev-biome-reload");
     const readout = document.getElementById("dev-camera-readout");
 
     if (
@@ -6109,6 +7617,9 @@ export class OceanScene extends Phaser.Scene {
       !(seedInput instanceof HTMLInputElement) ||
       !(seedApply instanceof HTMLButtonElement) ||
       !(seedRandom instanceof HTMLButtonElement) ||
+      !(biomeSelect instanceof HTMLSelectElement) ||
+      !(biomeRandom instanceof HTMLButtonElement) ||
+      !(biomeReload instanceof HTMLButtonElement) ||
       !(readout instanceof HTMLOutputElement)
     ) {
       return;
@@ -6117,6 +7628,7 @@ export class OceanScene extends Phaser.Scene {
     xRange.max = String(WORLD_WIDTH);
     yRange.max = String(WORLD_HEIGHT);
     profileSelect.value = this.performanceProfile;
+    biomeSelect.value = this.flythroughBiome.id;
     renderHeightInput.value = String(window.getGameRenderHeight?.() ?? 720);
     seedInput.value = String(this.caveSeed);
     this.devCameraTools = {
@@ -6135,6 +7647,9 @@ export class OceanScene extends Phaser.Scene {
       seedInput,
       seedApply,
       seedRandom,
+      biomeSelect,
+      biomeRandom,
+      biomeReload,
       readout,
     };
 
@@ -6156,6 +7671,7 @@ export class OceanScene extends Phaser.Scene {
       this.setDeveloperCameraEnabled(true);
       const center = this.getDeveloperCameraCenter();
       this.teleportHeroTo(center.x, center.y);
+      this.flythroughX = Phaser.Math.Clamp(center.x, this.flythroughBiome.startX, this.flythroughBiome.endX);
       this.centerDeveloperCamera(this.hero.x, this.hero.y);
     };
     xRange.oninput = () => {
@@ -6169,6 +7685,12 @@ export class OceanScene extends Phaser.Scene {
     profileSelect.onchange = () => {
       this.setPerformanceProfile(profileSelect.value === "mobile" ? "mobile" : "desktop");
     };
+    const applySelectedBiome = () => {
+      this.restartWithFlythroughBiome(biomeSelect.value as FlythroughBiomeId);
+    };
+    biomeSelect.onchange = applySelectedBiome;
+    biomeRandom.onclick = () => this.restartWithFlythroughBiome(this.randomFlythroughBiomeId());
+    biomeReload.onclick = () => this.restartWithFlythroughBiome(this.flythroughBiome.id);
     renderApply.onclick = () => {
       const appliedHeight = window.setGameRenderHeight?.(Number(renderHeightInput.value)) ?? Number(renderHeightInput.value);
       renderHeightInput.value = String(appliedHeight);
@@ -6241,10 +7763,8 @@ export class OceanScene extends Phaser.Scene {
       this.setBackgroundImageVisibility(false);
     } else {
       camera.useBounds = true;
-      camera.setBounds(0, 0, WORLD_WIDTH, WORLD_HEIGHT);
       camera.setZoom(1);
-      camera.centerOn(this.hero.x, this.hero.y);
-      this.applyHeroCameraFollowSettings(true);
+      this.enterFlythroughMode();
       this.setBackgroundImageVisibility(true);
     }
 
@@ -6254,7 +7774,33 @@ export class OceanScene extends Phaser.Scene {
 
   private restartWithCaveSeed(seed: number) {
     const nextSeed = Number.isFinite(seed) ? Math.max(0, Math.floor(seed)) : DEFAULT_CAVE_SEED;
-    this.scene.restart({ caveSeed: nextSeed });
+    this.scene.restart({ caveSeed: nextSeed, flythroughBiomeId: this.flythroughBiome.id });
+  }
+
+  private restartWithFlythroughBiome(flythroughBiomeId: FlythroughBiomeId) {
+    this.scene.restart({ caveSeed: this.caveSeed, flythroughBiomeId });
+  }
+
+  private switchFlythroughBiome(flythroughBiomeId: FlythroughBiomeId) {
+    this.flythroughBiome = this.resolveFlythroughBiome(flythroughBiomeId);
+    this.flythroughX = this.randomFlythroughStartX(this.flythroughBiome);
+    this.flythroughDirection = Math.random() < 0.5 ? -1 : 1;
+    this.randomizeFlythroughTrajectory();
+    this.flythroughPauseMs = 0;
+    this.resetFlythroughBehaviorTimer();
+    this.devCameraEnabled = false;
+    this.devCameraDragging = false;
+    this.devCameraDragStart = undefined;
+    this.devTouchPointers.clear();
+    this.devTouchStart = undefined;
+    this.clearTouchInput();
+    this.setBackgroundImageVisibility(true);
+    this.enterFlythroughMode();
+    if (this.devCameraTools) {
+      this.devCameraTools.biomeSelect.value = this.flythroughBiome.id;
+    }
+    this.updateDeveloperToolState();
+    this.updateDeveloperToolReadout();
   }
 
   private updateDeveloperCamera(delta: number) {
@@ -6290,6 +7836,7 @@ export class OceanScene extends Phaser.Scene {
     this.devCameraTools.profileSelect.value = this.performanceProfile;
     this.devCameraTools.renderHeightInput.value = String(window.getGameRenderHeight?.() ?? Number(this.devCameraTools.renderHeightInput.value));
     this.touchJoystickElements?.root.classList.toggle("dev-nav", this.devCameraEnabled);
+    this.terrainLineLayer?.setVisible(this.devCameraEnabled);
     this.terrainGuideLayer?.setVisible(this.devCameraEnabled);
     this.creatureTrackGuideLayer?.setVisible(this.devCameraEnabled);
     this.updateCaveVisibility();
@@ -6305,7 +7852,7 @@ export class OceanScene extends Phaser.Scene {
     const renderHeight = window.getGameRenderHeight?.() ?? camera.height;
     this.devCameraTools.xRange.value = String(centerX);
     this.devCameraTools.yRange.value = String(centerY);
-    this.devCameraTools.readout.textContent = `x ${centerX} y ${centerY} z ${camera.zoom.toFixed(2)} ${this.performanceProfile} ${renderHeight}p vis ${this.heroVisibilityStatus}`;
+    this.devCameraTools.readout.textContent = `${this.flythroughBiome.name} x ${centerX} y ${centerY} z ${camera.zoom.toFixed(2)} ${this.performanceProfile} ${renderHeight}p`;
   }
 
   private teleportHeroTo(x: number, y: number) {
@@ -6879,6 +8426,7 @@ export class OceanScene extends Phaser.Scene {
   }
 
   private updateHud() {
+    if (!this.hero) return;
     const zone = this.isHeroInCave() ? CAVE_ZONE : zoneAtPosition(this.hero.x, this.hero.y);
     if (zone.id !== this.currentZoneId) {
       this.currentZoneId = zone.id;
@@ -6901,6 +8449,7 @@ export class OceanScene extends Phaser.Scene {
   }
 
   private updateHeroVisibilityStatus() {
+    if (!this.hero?.body) return;
     const nextStatus: HeroVisibilityStatus = this.isHeroInSeagrass() ? "hidden" : "visible";
     if (this.heroVisibilityStatus === nextStatus) return;
 
@@ -6909,6 +8458,7 @@ export class OceanScene extends Phaser.Scene {
   }
 
   private isHeroInSeagrass() {
+    if (!this.hero?.body) return false;
     const zone = zoneAtPosition(this.hero.x, this.hero.y);
     if (zone.id !== "coral" && zone.id !== "kelp") return false;
     if (this.hero.x > KELP_END_X - 140) return false;
@@ -6931,6 +8481,7 @@ export class OceanScene extends Phaser.Scene {
   }
 
   private isHeroInCave() {
+    if (!this.hero) return false;
     const tx = Math.floor(this.hero.x / TILE);
     const ty = Math.floor(this.hero.y / TILE);
     return this.caveTiles.has(tileKey(tx, ty));

@@ -60,10 +60,12 @@ export type CreatureKey =
   | "king-george-whiting"
   | "leatherjacket"
   | "nudhhi"
+  | "port-jackson"
   | "red-snapper"
   | "seadragon"
   | "dusky-morwong"
   | "smooth-sting-ray"
+  | "spider-crab"
   | "yellow-blue-fish";
 
 export interface CreatureSpawn {
@@ -78,6 +80,8 @@ export interface CreatureSpawn {
   schoolId?: number;
   schoolOffsetX?: number;
   schoolOffsetY?: number;
+  roamMinX?: number;
+  roamMaxX?: number;
 }
 
 export interface WorldModel {
@@ -3006,14 +3010,72 @@ function generateCreatures(solid: boolean[][], random: () => number) {
   addBandedWrasse(creatures, solid, random, usedCreatureTiles);
   addLeatherjackets(creatures, solid, random, usedCreatureTiles);
   addFlatheads(creatures, solid, random, usedCreatureTiles);
+  addSpiderCrabs(creatures, solid, random, usedCreatureTiles);
   addSeagrassMeadowSeadragons(creatures, solid, random, usedCreatureTiles);
   addBullRays(creatures, random);
+  addPortJacksonSharks(creatures, random);
   addHabitatCreatures(creatures, solid, random, usedCreatureTiles, "smooth-sting-ray", randomCount(random, 2, 5), coralAndOpenOceanBounds(), (tx, ty) => {
     const zoneId = zoneAtX(tx * TILE).id;
     return (isShallowGardenZone(zoneId) || zoneId === "surface") && isSupportedFloorTile(solid, tx, ty) && hasFloorCreatureClearance(solid, tx, ty);
   });
   addYellowBlueFishSchools(creatures, solid, random, usedCreatureTiles);
   return creatures;
+}
+
+function addSpiderCrabs(
+  creatures: CreatureSpawn[],
+  solid: boolean[][],
+  random: () => number,
+  usedCreatureTiles: Set<string>,
+) {
+  const used = new Set<string>();
+  const zones = [SEAGRASS_ZONE, KELP_ZONE, SHELF_ZONE];
+
+  for (const zone of zones) {
+    const count = zone.id === "surface" ? 2 : 3;
+    const margin = zone.id === "surface" ? 520 : 420;
+    const bounds = {
+      startTx: Math.floor((zone.startX + margin) / TILE),
+      endTx: Math.floor((zone.endX - margin) / TILE),
+      minTy: WATERLINE_TILE + 3,
+      maxTy: GRID_H - 5,
+    };
+    const span = (bounds.endTx - bounds.startTx) / count;
+
+    for (let index = 0; index < count; index += 1) {
+      const startTx = Math.floor(bounds.startTx + span * index + span * 0.14);
+      const endTx = Math.floor(bounds.startTx + span * (index + 1) - span * 0.14);
+      const sectionBounds = {
+        ...bounds,
+        startTx: clamp(startTx, bounds.startTx, bounds.endTx - 1),
+        endTx: clamp(endTx, bounds.startTx + 1, bounds.endTx),
+      };
+      const spawn = findSpawnTile(solid, random, sectionBounds, (tx, ty) => {
+        const key = tileKey(tx, ty);
+        return (
+          zoneAtX(tx * TILE).id === zone.id &&
+          !used.has(key) &&
+          !usedCreatureTiles.has(key) &&
+          isSupportedFloorTile(solid, tx, ty) &&
+          hasCreatureClearance(solid, tx, ty - 1, 4, 1)
+        );
+      });
+      if (!spawn) continue;
+
+      const key = tileKey(spawn.tx, spawn.ty);
+      used.add(key);
+      usedCreatureTiles.add(key);
+
+      const crab = makeCreatureSpawn(spawn.tx, spawn.ty, zoneAtX(spawn.tx * TILE), "spider-crab", random);
+      crab.x = spawn.tx * TILE + 16 + randomNormal(random, 0, 18);
+      crab.y = seafloorTileFor(spawn.tx) * TILE;
+      crab.directionX = random() > 0.5 ? 1 : -1;
+      crab.roamMinX = zone.startX + margin;
+      crab.roamMaxX = zone.endX - margin;
+      crab.scale *= clamp(0.7 + randomNormal(random, 0, 0.06), 0.6, 0.8);
+      creatures.push(crab);
+    }
+  }
 }
 
 function addBullRays(creatures: CreatureSpawn[], random: () => number) {
@@ -3035,6 +3097,36 @@ function addBullRays(creatures: CreatureSpawn[], random: () => number) {
     spawn.x = x;
     spawn.y = clamp(cruiseY, WATERLINE_Y + 150, floorY - 130);
     spawn.directionX = random() > 0.5 ? 1 : -1;
+    creatures.push(spawn);
+  }
+}
+
+function addPortJacksonSharks(creatures: CreatureSpawn[], random: () => number) {
+  for (const zone of [SEAGRASS_ZONE, KELP_ZONE, SHELF_ZONE, DEEP_ZONE]) {
+    const margin = zone.id === "deep" ? 760 : 520;
+    const spawnStartX = zone.id === "deep" ? Math.round(WORLD_WIDTH * 0.78) : zone.startX;
+    const x = clamp(
+      spawnStartX + margin + random() * Math.max(1, zone.endX - spawnStartX - margin * 2),
+      spawnStartX + 220,
+      zone.endX - 220,
+    );
+    const floorY = seafloorTileFor(Math.floor(x / TILE)) * TILE;
+    const cruiseLift =
+      zone.id === "coral"
+        ? 180 + random() * 140
+        : zone.id === "kelp"
+          ? 230 + random() * 190
+          : zone.id === "surface"
+            ? 260 + random() * 260
+            : 360 + random() * 420;
+    const cruiseY = floorY - cruiseLift;
+    const tx = Math.floor(x / TILE);
+    const ty = Math.floor(cruiseY / TILE);
+    const spawn = makeCreatureSpawn(tx, ty, zone, "port-jackson", random);
+    spawn.x = x;
+    spawn.y = clamp(cruiseY, WATERLINE_Y + 150, floorY - 120);
+    spawn.directionX = random() > 0.5 ? 1 : -1;
+    spawn.scale *= 0.85 + random() * 0.3;
     creatures.push(spawn);
   }
 }
@@ -3772,7 +3864,9 @@ function makeCreatureSpawn(
 function creatureDrift(assetKey: CreatureKey, random: () => number) {
   if (assetKey === "banded-wrasse") return 70 + random() * 80;
   if (assetKey === "bull-ray") return 1900 + random() * 2800;
+  if (assetKey === "port-jackson") return 1900 + random() * 2800;
   if (assetKey === "flathead") return 520 + random() * 360;
+  if (assetKey === "spider-crab") return 900 + random() * 1500;
   if (assetKey === "leatherjacket") return 48 + random() * 62;
   if (assetKey === "yellow-blue-fish") return 260 + random() * 420;
   if (assetKey === "king-george-whiting") return 72 + random() * 92;
@@ -3795,13 +3889,15 @@ function creatureScale(assetKey: CreatureKey, random: () => number) {
     "king-george-whiting": 1,
     leatherjacket: 1,
     nudhhi: 0.34,
+    "port-jackson": 1,
     "red-snapper": 1,
     seadragon: 0.44,
     "dusky-morwong": 1,
     "smooth-sting-ray": 0.68,
+    "spider-crab": 1,
     "yellow-blue-fish": 1,
   };
-  const spread = assetKey === "bull-ray" || assetKey === "killer-whale" || assetKey === "yellow-blue-fish" || assetKey === "king-george-whiting" || assetKey === "grass-whiting-peek" || assetKey === "grass-whiting-peck" || assetKey === "dusky-morwong" || assetKey === "red-snapper" || assetKey === "banded-wrasse" || assetKey === "leatherjacket" || assetKey === "flathead" ? 0.08 : 0.16;
+  const spread = assetKey === "port-jackson" ? 0 : assetKey === "bull-ray" || assetKey === "killer-whale" || assetKey === "yellow-blue-fish" || assetKey === "king-george-whiting" || assetKey === "grass-whiting-peek" || assetKey === "grass-whiting-peck" || assetKey === "dusky-morwong" || assetKey === "red-snapper" || assetKey === "banded-wrasse" || assetKey === "leatherjacket" || assetKey === "flathead" || assetKey === "spider-crab" ? 0.08 : 0.16;
   return Math.max(0.18, means[assetKey] * (1 + randomNormal(random, 0, spread)));
 }
 

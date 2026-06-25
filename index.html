@@ -8,10 +8,9 @@
   <body>
     <div id="app" class="splash-mode">
       <div id="game-root"></div>
-      <div id="splash" aria-hidden="true">
+      <div id="splash" aria-hidden="false">
         <div id="loading-panel">
           <img src="%BASE_URL%assets/creatures/muuc.svg" alt="" />
-          <div id="loading-title">Joey the Port Jackson Shark</div>
           <div id="loading-track" aria-hidden="true">
             <div id="loading-fill"></div>
           </div>
@@ -47,14 +46,34 @@
       <button id="fullscreen-toggle" type="button" aria-pressed="false" aria-label="Enter fullscreen" title="Fullscreen">
         <span class="fullscreen-icon" aria-hidden="true"></span>
       </button>
+      <aside id="creature-info-popup" class="creature-info-popup" aria-live="polite" hidden>
+        <div class="creature-info-preview">
+          <canvas id="creature-info-preview-canvas" width="180" height="120" aria-hidden="true"></canvas>
+          <div id="creature-info-images" class="creature-info-images" aria-label="Creature reference images"></div>
+        </div>
+        <div class="creature-info-copy">
+          <div class="creature-info-kicker" id="creature-info-kicker">Field Notes</div>
+          <h2 id="creature-info-title">Creature</h2>
+          <div id="creature-info-summary"></div>
+        </div>
+      </aside>
       <div id="dev-tools" aria-label="Developer world navigation">
         <button id="dev-toggle" type="button" aria-pressed="false" title="Developer camera">DEV</button>
         <div class="dev-extra">
           <button id="dev-zoom-out" type="button" title="Zoom out">-</button>
           <button id="dev-zoom-in" type="button" title="Zoom in">+</button>
           <button id="dev-fit" type="button" title="Fit world">[]</button>
-          <button id="dev-player" type="button" title="Follow player">@</button>
-          <button id="dev-teleport" type="button" title="Teleport player to dev view center">TP</button>
+          <button id="dev-player" type="button" title="Resume flythrough">@</button>
+          <button id="dev-teleport" type="button" title="Move flythrough marker to dev view center">TP</button>
+          <label class="dev-select" title="Flythrough biome">
+            <span>Biome</span>
+            <select id="dev-biome">
+              <option value="coral">Seagrass</option>
+              <option value="kelp">Kelp</option>
+            </select>
+          </label>
+          <button id="dev-biome-random" type="button" title="Load random biome">Random</button>
+          <button id="dev-biome-reload" type="button" title="Reload current biome">Reload</button>
           <label class="dev-select" title="Performance profile">
             <span>Profile</span>
             <select id="dev-profile">

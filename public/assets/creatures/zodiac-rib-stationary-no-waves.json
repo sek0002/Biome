@@ -1,0 +1,10 @@
+{
+  "image": "zodiac-rib-stationary-no-waves.png",
+  "reference": "codex-clipboard-38e72670-dcd3-4487-842f-b9faa77591dd.png",
+  "width": 1314,
+  "height": 694,
+  "pose": "stationary side-view blue RIB boat with no waves or wake",
+  "label": "TR-251",
+  "labelColor": "black",
+  "notes": "Generated from the attached reference image with a chroma-key background removed to alpha."
+}

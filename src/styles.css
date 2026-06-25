@@ -32,9 +32,8 @@ canvas {
   justify-content: space-between;
   gap: 12px;
   pointer-events: none;
-  opacity: 0;
-  transform: translateY(-8px);
-  animation: hud-in 460ms ease-out 1450ms forwards;
+  opacity: 1;
+  transform: none;
 }
 
 .hud-panel {
@@ -70,10 +69,10 @@ canvas {
 }
 
 #depth-gauge {
+  display: none;
   position: fixed;
   right: 18px;
   top: 86px;
-  display: grid;
   justify-items: center;
   gap: 7px;
   color: #d8fff6;
@@ -180,13 +179,14 @@ canvas {
   inset: 0;
   z-index: 18;
   display: none;
-  pointer-events: auto;
+  pointer-events: none;
   touch-action: none;
   user-select: none;
 }
 
 #touch-controls.dev-nav {
   display: block;
+  pointer-events: auto;
   cursor: grab;
 }
 
@@ -285,6 +285,124 @@ canvas {
   display: none;
 }
 
+.creature-info-popup {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 22;
+  display: grid;
+  grid-template-columns: 172px minmax(220px, 1fr);
+  align-items: stretch;
+  gap: 12px;
+  width: min(520px, calc(100vw - 24px));
+  min-height: 142px;
+  padding: 10px;
+  border: 1px solid rgba(155, 228, 219, 0.46);
+  background:
+    linear-gradient(180deg, rgba(7, 34, 45, 0.92), rgba(3, 15, 23, 0.92)),
+    rgba(4, 20, 28, 0.92);
+  color: #d8fff6;
+  box-shadow:
+    0 4px 0 rgba(0, 0, 0, 0.34),
+    0 14px 28px rgba(0, 0, 0, 0.28);
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+}
+
+.creature-info-popup[hidden] {
+  display: none;
+}
+
+.creature-info-preview {
+  display: grid;
+  grid-template-rows: auto auto;
+  align-content: stretch;
+  justify-items: center;
+  gap: 6px;
+  min-width: 0;
+  min-height: 120px;
+  padding: 5px;
+  border: 1px solid rgba(155, 228, 219, 0.28);
+  background:
+    radial-gradient(circle at 50% 45%, rgba(73, 212, 208, 0.18), rgba(2, 12, 18, 0.18) 64%),
+    rgba(2, 12, 18, 0.54);
+  overflow: hidden;
+}
+
+#creature-info-preview-canvas {
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+}
+
+.creature-info-copy {
+  min-width: 0;
+  display: grid;
+  align-content: start;
+  gap: 5px;
+}
+
+.creature-info-kicker {
+  color: #49d4d0;
+  font-size: 9px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+#creature-info-title {
+  margin: 0;
+  color: #f2fffb;
+  font-size: 14px;
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+#creature-info-summary {
+  margin: 0;
+  color: #a9ddd5;
+  font-size: 11px;
+  line-height: 1.36;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.creature-info-section {
+  display: grid;
+  gap: 1px;
+}
+
+.creature-info-section h3 {
+  margin: 0;
+  color: #d7fff8;
+  font-size: 9px;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.creature-info-section p {
+  margin: 0;
+  text-align: justify;
+}
+
+.creature-info-images {
+  display: grid;
+  gap: 5px;
+  min-height: 0;
+  width: 100%;
+  height: auto;
+}
+
+.creature-info-images img {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 54px;
+  object-fit: contain;
+  border: 1px solid rgba(155, 228, 219, 0.28);
+  background: rgba(2, 12, 18, 0.54);
+  image-rendering: pixelated;
+}
+
 #touch-joystick-ring,
 #touch-joystick-knob {
   position: absolute;
@@ -338,7 +456,7 @@ canvas {
   --dev-slider-width: clamp(76px, 11vw, 112px);
   --dev-seed-width: clamp(64px, 8vw, 82px);
   --dev-select-width: clamp(74px, 9vw, 92px);
-  --dev-readout-width: clamp(132px, 17vw, 184px);
+  --dev-readout-width: clamp(156px, 21vw, 220px);
 }
 
 #dev-tools button {
@@ -460,22 +578,14 @@ canvas {
   z-index: 30;
   display: grid;
   place-items: center;
-  pointer-events: none;
-  background:
-    linear-gradient(rgba(8, 24, 36, 0.006), rgba(10, 23, 34, 0.018)),
-    rgba(7, 20, 30, 0.008);
-  border: none;
-  backdrop-filter: blur(1.5px);
-  -webkit-backdrop-filter: blur(1.5px);
-  opacity: 1;
-  transition:
-    opacity 280ms ease,
-    visibility 280ms ease;
+  min-height: 100dvh;
+  padding: 12px;
+  background: #061722;
+  pointer-events: auto;
 }
 
 #splash.is-ready {
-  opacity: 0;
-  visibility: hidden;
+  display: none;
 }
 
 #splash::before {
@@ -685,6 +795,26 @@ canvas {
     max-width: calc(100vw - 68px);
   }
 
+  .creature-info-popup {
+    grid-template-columns: 128px minmax(150px, 1fr);
+    gap: 8px;
+    width: min(420px, calc(100vw - 20px));
+    min-height: 116px;
+    padding: 8px;
+  }
+
+  .creature-info-preview {
+    min-height: 94px;
+  }
+
+  #creature-info-title {
+    font-size: 12px;
+  }
+
+  #creature-info-summary {
+    font-size: 10px;
+  }
+
   .dev-slider {
     grid-template-columns: auto minmax(72px, 1fr);
     flex: 0 1 104px;
@@ -721,7 +851,11 @@ canvas {
 
 @media (hover: none), (pointer: coarse), (max-width: 900px) {
   #touch-controls {
-    display: flex;
+    display: none;
+  }
+
+  #touch-controls.dev-nav {
+    display: block;
   }
 
   #dev-tools {

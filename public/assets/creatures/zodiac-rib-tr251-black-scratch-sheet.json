@@ -1,0 +1,21 @@
+{
+  "image": "zodiac-rib-tr251-black-scratch-sheet.png",
+  "reference": "Screen Recording 2026-06-25 at 11.29.26 am.mov",
+  "frameWidth": 320,
+  "frameHeight": 240,
+  "frames": [
+    { "index": 0, "pose": "blue RIB planing with black TR-251 painted on the front pontoon" },
+    { "index": 1, "pose": "blue RIB lifting over wake with black TR-251 painted on the front pontoon" },
+    { "index": 2, "pose": "blue RIB bow dipping with black TR-251 painted on the front pontoon" },
+    { "index": 3, "pose": "blue RIB canopy bob with black TR-251 painted on the front pontoon" },
+    { "index": 4, "pose": "blue RIB level glide with black TR-251 painted on the front pontoon" },
+    { "index": 5, "pose": "blue RIB cresting over ripple with black TR-251 painted on the front pontoon" },
+    { "index": 6, "pose": "blue RIB trailing foamy wake with black TR-251 painted on the front pontoon" },
+    { "index": 7, "pose": "blue RIB settling into glide with black TR-251 painted on the front pontoon" }
+  ],
+  "loop": [0, 1, 2, 3, 4, 5, 6, 7],
+  "frameDurationMs": 100,
+  "motion": "horizontal left-to-right zodiac/RIB speedboat movement generated from scratch using the attached video reference",
+  "label": "TR-251",
+  "labelColor": "black"
+}

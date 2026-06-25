@@ -1,0 +1,164 @@
+{
+  "banded-wrasse": {
+    "title": "Bluethroat Wrasse",
+    "kicker": "Field Notes",
+    "Description": "This is the most common wrasse species in Victorian and Tasmanian waters.",
+    "Habitat": "Adults usually on deep exposed rocky reefs, juveniles in shallower weedy areas, in depths of 1-160 m.",
+    "Maximum Size": "Up to 50 cm.",
+    "Global Distribution": "Native to Australia.",
+    "imageUrls": ["https://portphillipmarinelife.net.au/images/species/speciesHeroThumb_419438.jpeg"]
+  },
+  "blue-devil": {
+    "title": "Blue Devil",
+    "kicker": "Field Notes",
+    "Description": "Placeholder description. Replace with identification notes, range, diet, and conservation context.",
+    "Habitat": "To be added.",
+    "Maximum Size": "To be added.",
+    "Global Distribution": "To be added.",
+    "imageUrls": ["/assets/creatures/blue devil.svg"]
+  },
+  "bull-ray": {
+    "title": "Smooth Stingray",
+    "kicker": "Field Notes",
+    "Description": "One of the largest stingrays in the world. It is common in shallow water off beaches and in estuaries during summer months. Although not aggressive, the spine is venomous and capable of inflicting a painful and sometimes fatal wound. They feed on benthic invertebrates and fishes, and are taken as bycatch in commercial fisheries. They are live-bearers - females give birth to 6-10 young per litter.",
+    "Habitat": "Sandy bottoms and rocky reefs in coastal areas, shallow bays, harbours and estuaries, in depths of 0-150 m..",
+    "Maximum Size": "2.1m",
+    "Global Distribution": "Australia",
+    "imageUrls": ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoGEfxNFJoxzXCPfmawduCofFU9cjQzR0iJSQgxz_8HA&s=10"]
+  },
+  "crayfish": {
+    "title": "Crayfish",
+    "kicker": "Field Notes",
+    "Description": "Placeholder description. Add shelter, reef association, and observation prompts here.",
+    "Habitat": "To be added.",
+    "Maximum Size": "To be added.",
+    "Global Distribution": "To be added.",
+    "imageUrls": ["/assets/creatures/crayfish.svg"]
+  },
+  "dusky-morwong": {
+    "title": "Dusky Morwong",
+    "kicker": "Field Notes",
+    "Description": "This commercially important species is often seen sheltering in small groups in caves and under overhangs. Juveniles are common in seagrass beds in Port Phillip Bay, Victoria.",
+    "Habitat": "Sheltered and exposed coastal reefs, in caves and under overhangs, in depths of 0-50 m.",
+    "Maximum Size": "1.2m",
+    "Global Distribution": "Native to Australia.",
+    "imageUrls": ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3wxw0UlQU0Hj3qmblKgUT7Z97Fria3mbj7uQ2H91nwQ&s=10"]
+  },
+  "flathead": {
+    "title": "Rock Flathead",
+    "kicker": "Field Notes",
+    "Description": "The numbers of Rock Flathead are increasing in south-eastern Tasmania. They are most active at night, and their fin spines are venomous.",
+    "Habitat": "Bays and along the coast, prefers weed-covered rocky reefs or seagrass beds, in depths of 1-20 m.",
+    "Maximum Size": "1.2m",
+    "Global Distribution": "Native to Australia.",
+    "imageUrls": ["https://portphillipmarinelife.net.au/images/species/speciesHeroThumb_417899.jpeg"]
+  },
+  "grass-whiting-peck": {
+    "title": "Blue Weed Whiting",
+    "kicker": "Field Notes",
+    "Description": "Although relatively common, this well-camouflaged species is rarely seen. It is often found in seagrass beds, where it feeds on small invertebrates.",
+    "Habitat": "In bays, harbours and along the coast, usually in seagrass beds and on shallow reefs with good algal cover, in depths of 1-15 m.",
+    "Maximum Size": "40cm",
+    "Global Distribution": "Native to Australia.",
+    "imageUrls": ["https://portphillipmarinelife.net.au/images/species/speciesHeroThumb_487374.jpeg"]
+  },
+  "grass-whiting-peek": {
+    "title": "Blue Weed Whiting",
+    "kicker": "Field Notes",
+    "Description": "Although relatively common, this well-camouflaged species is rarely seen. It is often found in seagrass beds, where it feeds on small invertebrates.",
+    "Habitat": "In bays, harbours and along the coast, usually in seagrass beds and on shallow reefs with good algal cover, in depths of 1-15 m.",
+    "Maximum Size": "40cm",
+    "Global Distribution": "Native to Australia.",
+    "imageUrls": ["https://portphillipmarinelife.net.au/images/species/speciesHeroThumb_487374.jpeg"]
+  },
+  "king-george-whiting": {
+    "title": "King George Whiting",
+    "kicker": "Field Notes",
+    "Description": "Body long, slender, covered in very small scales; snout long, pointed; dorsal fin in two barely separated parts; pectoral and pelvic fins small.",
+    "Habitat": "In bays and along the coast in habitats with seagrass, macroalgae or sand; juveniles abundant in seagrass beds in bays and estuaries, whereas adults feed on open sandy areas in deeper water. To depths of 0-25 m.",
+    "Maximum Size": "72cm",
+    "Global Distribution": "Native to Australia.",
+    "imageUrls": ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROJu2mHsKqichhSkIF1JeVaZiVW-TFW3NgxTklsgQ7Vg&s=10"]
+  },
+  "killer-whale": {
+    "title": "Killer Whale",
+    "kicker": "Field Notes",
+    "Description": "Placeholder description. Add offshore context and encounter notes here if used in this biome.",
+    "Habitat": "To be added.",
+    "Maximum Size": "To be added.",
+    "Global Distribution": "To be added.",
+    "imageUrls": ["/assets/creatures/killer whale.png"]
+  },
+  "leatherjacket": {
+    "title": "Sixspine Leatherjacket",
+    "kicker": "Field Notes",
+    "Description": "A common leatherjacket in southern Australia with a highly variable colour pattern. Adults have two to four pairs of curved spines on each side of the tail base, that are larger in males than in females and juveniles. Both males and females have a distinct dark crescent-shaped band near the hind margin of the tail.",
+    "Habitat": "On shallow reefs in bays, harbours and along the coast in depths to 145 m; juveniles in sheltered areas, especially seagrass beds.",
+    "Maximum Size": "55cm",
+    "Global Distribution": "Native to Australia.",
+    "imageUrls": ["https://fishesofaustralia.net.au/images/image/MeuscheniaFreycinetiMRLS.jpg"]
+  },
+  "nudhhi": {
+    "title": "Nudibranch",
+    "kicker": "Field Notes",
+    "Description": "Body shape slug-like with gill structures visible as multiple projections along the sides body. Pattern includes shades or colours of green and/or grey. Animal up to 1 cm long.",
+    "Habitat": "Intertidal under stones and on algae, to depth of 100 m.",
+    "Maximum Size": "1cm",
+    "Global Distribution": "Global",
+    "imageUrls": ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ47wpoIHkmMG4DfL5xbTt-agg5NxNpx-97TuZjLXkpBQ&s=10"]
+  },
+  "port-jackson": {
+    "title": "Port Jackson Shark",
+    "kicker": "Field Notes",
+    "Description": "The Port Jackson Shark has small sharp teeth in the front of the jaws and molars at the rear, used for crushing prey of molluscs, crustaceans and echinoderms. They often aggregate in gutters and caves during the winter breeding season. Females lay leathery spiral egg cases and wedge them into crevices on rocky reefs. ",
+    "Habitat": "Rocky reefs and adjacent sandy and seagrass areas, to depth of 275 m.",
+    "Maximum Size": "1.7m",
+    "Global Distribution": "Recorded from southern Queensland to southern Western Australia, including Tasmania.",
+    "imageUrls": ["https://portphillipmarinelife.net.au/images/species/speciesHeroThumb_417888.jpeg"    ]
+  },
+  "red-snapper": {
+    "title": "Snapper",
+    "kicker": "Field Notes",
+    "Description": "A silvery pink to coppery-pink seabream, becoming pale silvery below, with many small electric blue spots scattered on upper sides (especially in juveniles). Large fish of both sexes develop a prominent hump on the head. ",
+    "Habitat": "Widespread on rocky reefs in bays and along the coast, in depths of 0-200 m.",
+    "Maximum Size": "1.3m",
+    "Global Distribution": "Recorded from southern Queensland to southern Western Australia, including Tasmania.",
+    "imageUrls": ["https://fishesofaustralia.net.au/images/image/ChrysophrysAuratusDH.jpg"]
+  },
+  "seadragon": {
+    "title": "Weedy Seadragon",
+    "kicker": "Field Notes",
+    "Description": "Spectacular and remarkably camouflaged seahorse relatives with bodies encased in bony rings and decorated with elaborate weed-like appendages. These seadragons are often seen around piers, pylons and jetties in association with seagrasses and macroalgae, and are occasionally washed ashore after storms. They are carnivores, feeding on tiny crustaceans, such as mysid shrimps. ",
+    "Habitat": "Sheltered reef, macroalgal and seagrass habitats in shallow bays, estuaries and deeper offshore reefs, in depths of 1-50 m.",
+    "Maximum Size": "46cm",
+    "Global Distribution": "Native to Australia.",
+    "imageUrls": ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTRP58IfVwjMjkEaaSbUmR_hbovvk_0OjsWTI0NyK6Lg&s=10"]
+  },
+  "smooth-sting-ray": {
+    "title": "Smooth Stingray",
+    "kicker": "Field Notes",
+    "Description": "Placeholder description. Add seafloor movement and identification notes here.",
+    "Habitat": "To be added.",
+    "Maximum Size": "To be added.",
+    "Global Distribution": "To be added.",
+    "imageUrls": ["/assets/creatures/smooth sting ray.svg"]
+  },
+  "spider-crab": {
+    "title": "Great Spider Crab",
+    "kicker": "Field Notes",
+    "Description": "Carapace rounded and red-brown. Seaweed sometimes attached to body. Up to 16 cm wide (carapace). Giant Spider Crabs form large groups when breeding, often more than one hundred crabs to a group.",
+    "Habitat": "Seaweed, reef and sand areas, to depth of 820 m.",
+    "Maximum Size": "16cm",
+    "Global Distribution": "Native to Australia.",
+    "imageUrls": ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-H2W6zrHHPNT0wQFNe_f-d7ikRPce7ILhLsVKYolqHA&s"]
+  },
+  "yellow-blue-fish": {
+    "title": "Western Australian Salmon",
+    "kicker": "Field Notes",
+    "Description": "The Western Australian Salmon is a very popular angling fish, renowned as a fighter on rod and reel. It is also commercially important, although the flesh is rather dry and soft. Large schools migrate along the open coast.",
+    "Habitat": "Open coast, especially off beaches, juveniles in bays and estuaries, in depths of 0-30 m.",
+    "Maximum Size": "75cm",
+    "Global Distribution": "Native to Australia.",
+    "imageUrls": ["https://media.australian.museum/media/dd/images/Arripis_trutta.width-800.509ba6a.jpg"]
+  }
+}

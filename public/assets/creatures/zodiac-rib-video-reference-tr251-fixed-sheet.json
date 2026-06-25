@@ -1,0 +1,20 @@
+{
+  "image": "zodiac-rib-video-reference-tr251-fixed-sheet.png",
+  "reference": "Screen Recording 2026-06-25 at 11.29.26 am.mov",
+  "frameWidth": 320,
+  "frameHeight": 240,
+  "frames": [
+    { "index": 0, "pose": "blue RIB planing with compact wake and TR-251 bow label" },
+    { "index": 1, "pose": "blue RIB with hull slightly lifted and TR-251 bow label" },
+    { "index": 2, "pose": "blue RIB with bow dipping toward wake and TR-251 bow label" },
+    { "index": 3, "pose": "blue RIB with canopy and antenna bob and TR-251 bow label" },
+    { "index": 4, "pose": "blue RIB level glide with outboard wake and TR-251 bow label" },
+    { "index": 5, "pose": "blue RIB cresting over ripple and TR-251 bow label" },
+    { "index": 6, "pose": "blue RIB with foamy trailing wake and TR-251 bow label" },
+    { "index": 7, "pose": "blue RIB settling into forward glide and TR-251 bow label" }
+  ],
+  "loop": [0, 1, 2, 3, 4, 5, 6, 7],
+  "frameDurationMs": 100,
+  "motion": "horizontal left-to-right zodiac/RIB speedboat movement with padded frames to prevent sprite spillover",
+  "label": "TR-251"
+}

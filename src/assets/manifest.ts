@@ -27,6 +27,12 @@ export const CREATURES = {
     key: "crayfish",
     url: assetUrl("/assets/creatures/crayfish.svg"),
   },
+  spiderCrab: {
+    key: "spider-crab",
+    url: assetUrl("/assets/creatures/spider-crab-side-scuttle-sheet.png"),
+    frameWidth: 180,
+    frameHeight: 96,
+  },
   muuc: {
     key: "muuc",
     url: assetUrl("/assets/creatures/muuc.svg"),
@@ -132,6 +138,7 @@ export const CREATURES = {
 export const NPC_CREATURES = [
   CREATURES.blueDevil,
   CREATURES.crayfish,
+  CREATURES.spiderCrab,
   CREATURES.killerWhale,
   CREATURES.kingGeorgeWhiting,
   CREATURES.nudhhi,
@@ -146,7 +153,7 @@ export const NPC_CREATURES = [
   CREATURES.yellowBlueFish,
 ] as const;
 
-const SEAGRASS_MEADOW_ASSET_VERSION = "directional-sway-v3";
+const SEAGRASS_MEADOW_ASSET_VERSION = "directional-sway-v4-alpha";
 
 const seagrassFrame = (variant: number, frame: number, pose: string) => {
   const variantId = variant.toString().padStart(2, "0");

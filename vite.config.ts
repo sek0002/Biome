@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  base: process.env.GITHUB_ACTIONS ? "/MUUCgame/" : "/",
+  base: process.env.GITHUB_ACTIONS ? "/Biome/" : "/",
 });

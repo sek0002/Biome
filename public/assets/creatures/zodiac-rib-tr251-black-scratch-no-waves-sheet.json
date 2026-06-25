@@ -1,0 +1,22 @@
+{
+  "image": "zodiac-rib-tr251-black-scratch-no-waves-sheet.png",
+  "source": "zodiac-rib-tr251-black-scratch-sheet.png",
+  "reference": "Screen Recording 2026-06-25 at 11.29.26 am.mov",
+  "frameWidth": 320,
+  "frameHeight": 240,
+  "frames": [
+    { "index": 0, "pose": "blue RIB boat without wake, black TR-251 on front pontoon" },
+    { "index": 1, "pose": "blue RIB boat without wake, black TR-251 on front pontoon" },
+    { "index": 2, "pose": "blue RIB boat without wake, black TR-251 on front pontoon" },
+    { "index": 3, "pose": "blue RIB boat without wake, black TR-251 on front pontoon" },
+    { "index": 4, "pose": "blue RIB boat without wake, black TR-251 on front pontoon" },
+    { "index": 5, "pose": "blue RIB boat without wake, black TR-251 on front pontoon" },
+    { "index": 6, "pose": "blue RIB boat without wake, black TR-251 on front pontoon" },
+    { "index": 7, "pose": "blue RIB boat without wake, black TR-251 on front pontoon" }
+  ],
+  "loop": [0, 1, 2, 3, 4, 5, 6, 7],
+  "frameDurationMs": 100,
+  "label": "TR-251",
+  "labelColor": "black",
+  "notes": "Wave and wake pixels removed from the scratch generated sprite sheet."
+}

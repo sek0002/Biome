@@ -1,0 +1,18 @@
+{
+  "image": "zodiac-boat-horizontal-sheet.png",
+  "frameWidth": 272,
+  "frameHeight": 320,
+  "frames": [
+    { "index": 0, "pose": "forward glide with low bow wave" },
+    { "index": 1, "pose": "forward glide with sail and lantern bob" },
+    { "index": 2, "pose": "forward glide with rising stern wake" },
+    { "index": 3, "pose": "forward glide with cresting bow ripple" },
+    { "index": 4, "pose": "forward glide with level hull" },
+    { "index": 5, "pose": "forward glide with dipping bow" },
+    { "index": 6, "pose": "forward glide with broad wake" },
+    { "index": 7, "pose": "forward glide with settling ripple" }
+  ],
+  "loop": [0, 1, 2, 3, 4, 5, 6, 7],
+  "frameDurationMs": 120,
+  "motion": "horizontal left-to-right sailing loop with subtle bobbing and water ripple changes"
+}

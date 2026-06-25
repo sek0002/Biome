@@ -1,0 +1,13 @@
+{
+  "image": "zodiac-rib-stationary-no-waves-registered-frame.png",
+  "source": "zodiac-rib-stationary-no-waves.png",
+  "frameWidth": 320,
+  "frameHeight": 240,
+  "registration": {
+    "anchor": "alpha bbox center x and bottom edge",
+    "targetCenterX": 158,
+    "targetBottom": 158
+  },
+  "scale": "90% of the previous registered static frame width",
+  "notes": "Static no-waves boat normalized into the moving boat frame size for pause/drift texture swaps, then reduced by 10%."
+}
