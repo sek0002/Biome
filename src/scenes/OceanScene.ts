@@ -552,8 +552,11 @@ const flythroughBiomeFromZone = (id: FlythroughBiomeId, inset = 80): FlythroughB
   };
 };
 const FLYTHROUGH_BIOMES: FlythroughBiome[] = [
+  flythroughBiomeFromZone("surface"),
   flythroughBiomeFromZone("coral"),
   flythroughBiomeFromZone("kelp"),
+  flythroughBiomeFromZone("dropoff"),
+  flythroughBiomeFromZone("deep"),
 ];
 const FLYTHROUGH_SPEED = 14;
 const FLYTHROUGH_SURFACE_PADDING = 88;
@@ -597,7 +600,7 @@ export class OceanScene extends Phaser.Scene {
     knob: HTMLElement;
   };
   private rocks!: Phaser.Physics.Arcade.StaticGroup;
-  private zoneLabel?: HTMLElement | null;
+  private zoneSelect?: HTMLSelectElement | null;
   private depthLabel?: HTMLElement | null;
   private depthGaugeFill?: HTMLElement | null;
   private depthGaugeMax?: HTMLElement | null;
@@ -963,7 +966,9 @@ export class OceanScene extends Phaser.Scene {
           world = generateWorld(this.caveSeed);
           activeWorld = this.filterWorldToActiveBiome(world);
           this.caveTiles = activeWorld.caveTiles;
-          this.zoneLabel = document.getElementById("zone-label");
+          const zoneSelect = document.getElementById("zone-label");
+          this.zoneSelect = zoneSelect instanceof HTMLSelectElement ? zoneSelect : undefined;
+          this.setupBiomeSelect(this.zoneSelect);
           this.depthLabel = document.getElementById("depth-label");
           this.depthGaugeFill = document.getElementById("depth-gauge-fill");
           this.depthGaugeMax = document.getElementById("depth-gauge-max");
@@ -1243,6 +1248,38 @@ export class OceanScene extends Phaser.Scene {
 
   private randomFlythroughBiomeId() {
     return Phaser.Utils.Array.GetRandom(FLYTHROUGH_BIOMES).id;
+  }
+
+  private setupBiomeSelect(select?: HTMLSelectElement | null) {
+    if (!select) return;
+    const compact = select.id === "dev-biome";
+    select.replaceChildren(
+      ...FLYTHROUGH_BIOMES.map((biome) => {
+        const option = document.createElement("option");
+        option.value = biome.id;
+        option.textContent = compact ? this.compactBiomeName(biome) : biome.name;
+        return option;
+      }),
+    );
+    select.value = this.flythroughBiome.id;
+    select.onchange = () => {
+      const selected = select.value as FlythroughBiomeId;
+      if (selected !== this.flythroughBiome.id) {
+        this.restartWithFlythroughBiome(selected);
+      }
+    };
+  }
+
+  private compactBiomeName(biome: FlythroughBiome) {
+    if (biome.id === "surface") return "Shelf";
+    if (biome.id === "coral") return "Seagrass";
+    if (biome.id === "deep") return "Deep";
+    return biome.name;
+  }
+
+  private syncBiomeSelects() {
+    if (this.zoneSelect) this.zoneSelect.value = this.flythroughBiome.id;
+    if (this.devCameraTools) this.devCameraTools.biomeSelect.value = this.flythroughBiome.id;
   }
 
   private activeBiomeBounds(margin = 0) {
@@ -7628,7 +7665,7 @@ export class OceanScene extends Phaser.Scene {
     xRange.max = String(WORLD_WIDTH);
     yRange.max = String(WORLD_HEIGHT);
     profileSelect.value = this.performanceProfile;
-    biomeSelect.value = this.flythroughBiome.id;
+    this.setupBiomeSelect(biomeSelect);
     renderHeightInput.value = String(window.getGameRenderHeight?.() ?? 720);
     seedInput.value = String(this.caveSeed);
     this.devCameraTools = {
@@ -7685,10 +7722,6 @@ export class OceanScene extends Phaser.Scene {
     profileSelect.onchange = () => {
       this.setPerformanceProfile(profileSelect.value === "mobile" ? "mobile" : "desktop");
     };
-    const applySelectedBiome = () => {
-      this.restartWithFlythroughBiome(biomeSelect.value as FlythroughBiomeId);
-    };
-    biomeSelect.onchange = applySelectedBiome;
     biomeRandom.onclick = () => this.restartWithFlythroughBiome(this.randomFlythroughBiomeId());
     biomeReload.onclick = () => this.restartWithFlythroughBiome(this.flythroughBiome.id);
     renderApply.onclick = () => {
@@ -7796,9 +7829,7 @@ export class OceanScene extends Phaser.Scene {
     this.clearTouchInput();
     this.setBackgroundImageVisibility(true);
     this.enterFlythroughMode();
-    if (this.devCameraTools) {
-      this.devCameraTools.biomeSelect.value = this.flythroughBiome.id;
-    }
+    this.syncBiomeSelects();
     this.updateDeveloperToolState();
     this.updateDeveloperToolReadout();
   }
@@ -8430,7 +8461,7 @@ export class OceanScene extends Phaser.Scene {
     const zone = this.isHeroInCave() ? CAVE_ZONE : zoneAtPosition(this.hero.x, this.hero.y);
     if (zone.id !== this.currentZoneId) {
       this.currentZoneId = zone.id;
-      if (this.zoneLabel) this.zoneLabel.textContent = zone.name;
+      this.syncBiomeSelects();
     }
     if (this.depthLabel) {
       const depth = depthAtPosition(this.hero.x, this.hero.y);

@@ -47,6 +47,7 @@ canvas {
   color: #d8fff6;
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
   text-shadow: 0 1px 0 #021017;
+  pointer-events: auto;
 }
 
 #hud-logo {
@@ -57,9 +58,46 @@ canvas {
   filter: drop-shadow(0 3px 0 rgba(0, 0, 0, 0.35));
 }
 
-.hud-panel strong {
+#hud-brand {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+}
+
+#hud-version {
+  padding: 3px 5px;
+  border: 1px solid rgba(155, 228, 219, 0.28);
+  background: rgba(4, 20, 28, 0.58);
+  color: #97d8cd;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.28);
+  font-size: 9px;
+  line-height: 1;
+  text-shadow: 0 1px 0 #021017;
+}
+
+.hud-panel strong,
+.hud-panel select {
   font-size: 12px;
   line-height: 1;
+}
+
+.hud-panel select {
+  max-width: min(46vw, 210px);
+  padding: 0 22px 0 0;
+  border: 0;
+  background: transparent;
+  color: #d8fff6;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  text-shadow: 0 1px 0 #021017;
+  cursor: pointer;
+}
+
+.hud-panel select:focus-visible {
+  outline: 1px solid rgba(216, 255, 246, 0.72);
+  outline-offset: 3px;
 }
 
 .hud-panel span {
@@ -755,6 +793,10 @@ canvas {
   #hud-logo {
     width: 92px;
     height: 92px;
+  }
+
+  #hud-version {
+    font-size: 8px;
   }
 
   #depth-gauge {

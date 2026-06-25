@@ -20,9 +20,18 @@
         </div>
       </div>
       <div id="hud">
-        <img id="hud-logo" src="%BASE_URL%assets/creatures/muuc.svg" alt="" />
+        <div id="hud-brand">
+          <img id="hud-logo" src="%BASE_URL%assets/creatures/muuc.svg" alt="" />
+          <span id="hud-version">beta v0.1</span>
+        </div>
         <div class="hud-panel">
-          <strong id="zone-label">Water Surface</strong>
+          <select id="zone-label" aria-label="Biome">
+            <option value="surface">Continental Shelf</option>
+            <option value="coral">Seagrass Meadow</option>
+            <option value="kelp">Kelp Forest</option>
+            <option value="dropoff">Drop Off</option>
+            <option value="deep">Open Ocean</option>
+          </select>
         </div>
         <div id="depth-gauge" aria-label="Depth gauge">
           <div id="depth-gauge-track">
@@ -68,8 +77,11 @@
           <label class="dev-select" title="Flythrough biome">
             <span>Biome</span>
             <select id="dev-biome">
+              <option value="surface">Shelf</option>
               <option value="coral">Seagrass</option>
               <option value="kelp">Kelp</option>
+              <option value="dropoff">Drop Off</option>
+              <option value="deep">Deep</option>
             </select>
           </label>
           <button id="dev-biome-random" type="button" title="Load random biome">Random</button>
