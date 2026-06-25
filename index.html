@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Joey the Port Jackson Shark</title>
+    <title>Biomes</title>
   </head>
   <body>
     <div id="app" class="splash-mode">
@@ -20,17 +20,13 @@
         </div>
       </div>
       <div id="hud">
-        <div id="hud-brand">
+        <a id="hud-logo-link" href="https://muuc.org.au" target="_blank" rel="noopener noreferrer" aria-label="Visit MUUC website">
           <img id="hud-logo" src="%BASE_URL%assets/creatures/muuc.svg" alt="" />
-          <span id="hud-version">beta v0.1</span>
-        </div>
+        </a>
         <div class="hud-panel">
           <select id="zone-label" aria-label="Biome">
-            <option value="surface">Continental Shelf</option>
             <option value="coral">Seagrass Meadow</option>
             <option value="kelp">Kelp Forest</option>
-            <option value="dropoff">Drop Off</option>
-            <option value="deep">Open Ocean</option>
           </select>
         </div>
         <div id="depth-gauge" aria-label="Depth gauge">
@@ -55,6 +51,7 @@
       <button id="fullscreen-toggle" type="button" aria-pressed="false" aria-label="Enter fullscreen" title="Fullscreen">
         <span class="fullscreen-icon" aria-hidden="true"></span>
       </button>
+      <span id="hud-version">beta v0.1</span>
       <aside id="creature-info-popup" class="creature-info-popup" aria-live="polite" hidden>
         <div class="creature-info-preview">
           <canvas id="creature-info-preview-canvas" width="180" height="120" aria-hidden="true"></canvas>
@@ -77,11 +74,8 @@
           <label class="dev-select" title="Flythrough biome">
             <span>Biome</span>
             <select id="dev-biome">
-              <option value="surface">Shelf</option>
               <option value="coral">Seagrass</option>
               <option value="kelp">Kelp</option>
-              <option value="dropoff">Drop Off</option>
-              <option value="deep">Deep</option>
             </select>
           </label>
           <button id="dev-biome-random" type="button" title="Load random biome">Random</button>
