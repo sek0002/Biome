@@ -361,12 +361,12 @@ canvas {
   top: 0;
   z-index: 22;
   display: grid;
-  grid-template-columns: 172px minmax(220px, 1fr);
+  grid-template-columns: 258px minmax(330px, 1fr);
   align-items: stretch;
-  gap: 12px;
-  width: min(520px, calc(100vw - 24px));
-  min-height: 142px;
-  padding: 10px;
+  gap: 18px;
+  width: min(780px, calc(100vw - 24px));
+  min-height: 213px;
+  padding: 15px;
   border: 1px solid rgba(155, 228, 219, 0.46);
   background:
     linear-gradient(180deg, rgba(7, 34, 45, 0.92), rgba(3, 15, 23, 0.92)),
@@ -388,10 +388,10 @@ canvas {
   grid-template-rows: auto auto;
   align-content: stretch;
   justify-items: center;
-  gap: 6px;
+  gap: 9px;
   min-width: 0;
-  min-height: 120px;
-  padding: 5px;
+  min-height: 180px;
+  padding: 8px;
   border: 1px solid rgba(155, 228, 219, 0.28);
   background:
     radial-gradient(circle at 50% 45%, rgba(73, 212, 208, 0.18), rgba(2, 12, 18, 0.18) 64%),
@@ -409,12 +409,12 @@ canvas {
   min-width: 0;
   display: grid;
   align-content: start;
-  gap: 5px;
+  gap: 8px;
 }
 
 .creature-info-kicker {
   color: #49d4d0;
-  font-size: 9px;
+  font-size: 14px;
   line-height: 1;
   text-transform: uppercase;
 }
@@ -422,7 +422,7 @@ canvas {
 #creature-info-title {
   margin: 0;
   color: #f2fffb;
-  font-size: 14px;
+  font-size: 21px;
   line-height: 1.1;
   font-weight: 700;
 }
@@ -430,7 +430,7 @@ canvas {
 #creature-info-summary {
   margin: 0;
   color: #a9ddd5;
-  font-size: 11px;
+  font-size: 17px;
   line-height: 1.36;
   text-align: justify;
   text-justify: inter-word;
@@ -438,13 +438,13 @@ canvas {
 
 .creature-info-section {
   display: grid;
-  gap: 1px;
+  gap: 2px;
 }
 
 .creature-info-section h3 {
   margin: 0;
   color: #d7fff8;
-  font-size: 9px;
+  font-size: 14px;
   line-height: 1.15;
   text-transform: uppercase;
 }
@@ -456,7 +456,7 @@ canvas {
 
 .creature-info-images {
   display: grid;
-  gap: 5px;
+  gap: 8px;
   min-height: 0;
   width: 100%;
   height: auto;
@@ -466,7 +466,7 @@ canvas {
   display: block;
   width: 100%;
   height: auto;
-  min-height: 54px;
+  min-height: 81px;
   object-fit: contain;
   border: 1px solid rgba(155, 228, 219, 0.28);
   background: rgba(2, 12, 18, 0.54);
@@ -880,23 +880,23 @@ canvas {
   }
 
   .creature-info-popup {
-    grid-template-columns: 128px minmax(150px, 1fr);
-    gap: 8px;
-    width: min(420px, calc(100vw - 20px));
-    min-height: 116px;
-    padding: 8px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    width: min(630px, calc(100vw - 20px));
+    min-height: 174px;
+    padding: 12px;
   }
 
   .creature-info-preview {
-    min-height: 94px;
+    min-height: 141px;
   }
 
   #creature-info-title {
-    font-size: 12px;
+    font-size: 18px;
   }
 
   #creature-info-summary {
-    font-size: 10px;
+    font-size: 15px;
   }
 
   .dev-slider {

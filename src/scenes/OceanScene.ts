@@ -538,21 +538,6 @@ const SAND_PALETTE_DARK = 0x3a2316;
 const TERRAIN_GRADIENT_TEXTURE_KEY = "terrain-sand-gradient-scale";
 const TERRAIN_GRADIENT_TEXTURE_WIDTH = 1200;
 const TERRAIN_GRADIENT_TEXTURE_HEIGHT = 720;
-const UNDERGROUND_TILE_SIZE = 64;
-const UNDERGROUND_TILE_ALPHA = 0.74;
-const UNDERGROUND_TILE_SPACING_X = 118;
-const UNDERGROUND_TILE_SPACING_Y = 96;
-const UNDERGROUND_TILE_BAND_DEPTH = 620;
-const UNDERGROUND_TILE_DENSITY = 0.34;
-const UNDERGROUND_TILE_START_X = BEACH_SHELF_END_X + 420;
-const UNDERGROUND_TILE_VARIANTS = Array.from({ length: 10 }, (_, index) => {
-  const id = (index + 1).toString().padStart(2, "0");
-
-  return {
-    key: `underwater-underground-tile-${id}`,
-    url: `/assets/landscape/underground-tiles/underwater-underground-imagegen-variant-${id}-detail.png`,
-  };
-});
 const CAMERA_TELEPORT_SYNC_THRESHOLD = 220;
 const flythroughBiomeFromZone = (id: FlythroughBiomeId, inset = 80): FlythroughBiome => {
   const zone = ZONES.find((candidate) => candidate.id === id) ?? ZONES[0];
@@ -622,6 +607,7 @@ export class OceanScene extends Phaser.Scene {
   private creatureInfoSummary?: HTMLElement;
   private creatureInfoImages?: HTMLElement;
   private creatureInfoPreviewTarget?: Phaser.GameObjects.Image | Phaser.GameObjects.Sprite;
+  private creatureInfoPinnedByTouch = false;
   private lightingOverlay!: Phaser.GameObjects.Graphics;
   private caveTileLayer?: Phaser.GameObjects.Graphics;
   private caveBiomeCurtain?: Phaser.GameObjects.Rectangle;
@@ -900,9 +886,6 @@ export class OceanScene extends Phaser.Scene {
         frameHeight: variant.frameHeight,
       });
     }
-    for (const variant of UNDERGROUND_TILE_VARIANTS) {
-      this.load.image(variant.key, assetUrl(variant.url));
-    }
     this.load.image("shipwreck", assetUrl("/assets/landscape/shipwreck.png"));
     this.load.image("beach-house-only", assetUrl("/assets/landscape/beach-house-only.png"));
     this.load.image(this.finalBiomeBackgroundKey(), assetUrl(this.finalBiomeBackgroundUrl()));
@@ -929,6 +912,7 @@ export class OceanScene extends Phaser.Scene {
     document.getElementById("splash")?.classList.remove("is-ready");
     document.getElementById("splash")?.setAttribute("aria-hidden", "false");
     this.initializeCreatureInfoPopup();
+    this.initializeCreatureInfoTouchDismissal();
     void this.loadCreatureInfoEntries();
     this.runWorldPrepStages();
   }
@@ -959,6 +943,17 @@ export class OceanScene extends Phaser.Scene {
     this.creatureInfoSummary = summary;
     this.creatureInfoImages = images;
     this.hideCreatureInfoPopup();
+  }
+
+  private initializeCreatureInfoTouchDismissal() {
+    this.input.on(
+      "pointerdown",
+      (pointer: Phaser.Input.Pointer, currentlyOver: Phaser.GameObjects.GameObject[]) => {
+        if (!this.creatureInfoPinnedByTouch || !this.isTouchInfoPointer(pointer)) return;
+        if (this.creatureInfoPreviewTarget && currentlyOver.includes(this.creatureInfoPreviewTarget)) return;
+        this.hideCreatureInfoPopup();
+      },
+    );
   }
 
   private async loadCreatureInfoEntries() {
@@ -3143,7 +3138,6 @@ export class OceanScene extends Phaser.Scene {
       .setDepth(graphics.depth)
       .setMask(terrainMask);
 
-    this.createUndergroundTileOverlay(terrainMask, graphics.depth + 0.02, terrainTopByColumn);
     graphics.setMask(terrainMask);
 
     for (let y = WATERLINE_Y + 320; y < WORLD_HEIGHT; y += 720) {
@@ -3154,69 +3148,6 @@ export class OceanScene extends Phaser.Scene {
     }
 
     this.drawTerrainSandTexture(graphics, terrainTopByColumn);
-  }
-
-  private createUndergroundTileOverlay(
-    mask: Phaser.Display.Masks.GeometryMask,
-    depth: number,
-    terrainTopByColumn: Map<number, number>,
-  ) {
-    const bounds = this.activeBiomeBounds(ACTIVE_BIOME_TERRAIN_MARGIN);
-    const startX = Math.max(bounds.startX, UNDERGROUND_TILE_START_X);
-    const endX = Math.min(bounds.endX, WORLD_WIDTH);
-    const width = endX - startX;
-    if (width <= 0) return;
-
-    for (const variant of UNDERGROUND_TILE_VARIANTS) {
-      this.textures.get(variant.key).setFilter(Phaser.Textures.FilterMode.NEAREST);
-    }
-
-    const columns = Math.ceil(width / UNDERGROUND_TILE_SPACING_X);
-    const rows = Math.ceil(UNDERGROUND_TILE_BAND_DEPTH / UNDERGROUND_TILE_SPACING_Y);
-
-    for (let column = 0; column <= columns; column += 1) {
-      const baseX = startX + column * UNDERGROUND_TILE_SPACING_X;
-      for (let row = 0; row <= rows; row += 1) {
-        const occupancy = this.deterministicUnit(column * 41 + row * 13, this.caveSeed + 1409, 0x6ea7);
-        if (occupancy > UNDERGROUND_TILE_DENSITY) continue;
-
-        const jitterX = Phaser.Math.Linear(
-          -UNDERGROUND_TILE_SPACING_X * 0.38,
-          UNDERGROUND_TILE_SPACING_X * 0.38,
-          this.deterministicUnit(column * 59 + row * 23, this.caveSeed + 1511, 0x97ab),
-        );
-        const x = Phaser.Math.Clamp(baseX + jitterX, startX, endX);
-        const floorY = this.smoothedTerrainGuideYAt(x, terrainTopByColumn);
-        const jitterY = Phaser.Math.Linear(
-          -UNDERGROUND_TILE_SPACING_Y * 0.34,
-          UNDERGROUND_TILE_SPACING_Y * 0.34,
-          this.deterministicUnit(column * 29 + row * 67, this.caveSeed + 1697, 0xb11d),
-        );
-        const y = floorY + 28 + row * UNDERGROUND_TILE_SPACING_Y + jitterY;
-        if (y >= WORLD_HEIGHT - UNDERGROUND_TILE_SIZE * 0.5) continue;
-
-        const variantIndex = Math.floor(
-          this.deterministicUnit(column * 31 + row * 17, this.caveSeed + 911, 0x644c34) * UNDERGROUND_TILE_VARIANTS.length,
-        ) % UNDERGROUND_TILE_VARIANTS.length;
-        const variant = UNDERGROUND_TILE_VARIANTS[variantIndex];
-        const sizeNoise = this.deterministicUnit(column * 73 + row * 37, this.caveSeed + 1733, 0x2d51);
-        const displaySize = Phaser.Math.Linear(UNDERGROUND_TILE_SIZE * 0.82, UNDERGROUND_TILE_SIZE * 1.18, sizeNoise);
-        const depthFade = 1 - this.smooth01(row / Math.max(1, rows));
-        const sprite = this.add
-          .image(x, y, variant.key)
-          .setDepth(depth)
-          .setDisplaySize(displaySize, displaySize)
-          .setAlpha(UNDERGROUND_TILE_ALPHA * Phaser.Math.Linear(0.58, 1, depthFade))
-          .setMask(mask);
-
-        const orientation = Math.floor(
-          this.deterministicUnit(column * 97 + row * 43, this.caveSeed + 1811, 0xf00d) * 8,
-        );
-        sprite.setFlipX((orientation & 1) === 1);
-        sprite.setFlipY((orientation & 2) === 2);
-        sprite.setRotation((Math.floor(orientation / 2) % 4) * Phaser.Math.DegToRad(90));
-      }
-    }
   }
 
   private drawTerrainSandTexture(
@@ -4502,8 +4433,16 @@ export class OceanScene extends Phaser.Scene {
     sprite.on("pointermove", (pointer: Phaser.Input.Pointer) => {
       this.positionCreatureInfoPopup(pointer);
     });
+    sprite.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
+      if (!this.isTouchInfoPointer(pointer)) return;
+      this.creatureInfoPinnedByTouch = true;
+      this.creatureInfoPreviewTarget = sprite;
+      this.setCreatureInfoHoverState(assetKey, sprite, true, pointer);
+      this.showCreatureInfoPopup(assetKey, sprite, pointer);
+    });
     sprite.on("pointerout", () => {
       this.setCreatureInfoHoverState(assetKey, sprite, false);
+      if (this.creatureInfoPinnedByTouch) return;
       this.hideCreatureInfoPopup();
     });
   }
@@ -4536,9 +4475,15 @@ export class OceanScene extends Phaser.Scene {
 
   private hideCreatureInfoPopup() {
     this.creatureInfoPreviewTarget = undefined;
+    this.creatureInfoPinnedByTouch = false;
     if (this.creatureInfoPopup) {
       this.creatureInfoPopup.hidden = true;
     }
+  }
+
+  private isTouchInfoPointer(pointer: Phaser.Input.Pointer) {
+    const pointerEvent = pointer.event as PointerEvent | undefined;
+    return pointerEvent?.pointerType === "touch" || window.matchMedia("(hover: none), (pointer: coarse)").matches;
   }
 
   private setCreatureInfoHoverState(
