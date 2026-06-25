@@ -1,0 +1,13 @@
+{
+  "image": "sea-sweep-locked-v2-inout-sheet.png",
+  "frameWidth": 480,
+  "frameHeight": 304,
+  "frames": 6,
+  "direction": "left",
+  "animation": {
+    "name": "swim-tail-inout",
+    "fps": 9,
+    "loop": true
+  },
+  "notes": "Body/head region is locked across all frames; tail pixels after x=300 animate by horizontal foreshortening to imply movement in and out of the 2D plane."
+}

@@ -71,6 +71,15 @@
     "Global Distribution": "Native to Australia.",
     "imageUrls": ["https://portphillipmarinelife.net.au/images/species/speciesHeroThumb_487374.jpeg"]
   },
+  "garfish": {
+    "title": "Southern Garfish",
+    "kicker": "Surface Schooler",
+    "Description": "Long, slender schooling fish with a needle-like lower jaw. Garfish cruise close to the surface, often moving quickly in loose groups feeding on invertebrates and plant matter close to the shore. ",
+    "Habitat": "Inshore surface waters in bays and estuaries, and along the coast, usually around the seagrass Zostera.",
+    "Maximum Size": "Up to about 50 cm.",
+    "Global Distribution": "Native to Australia.",
+    "imageUrls": ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9oHCcemFhhtplLy2x4iVHBYVSIuMAAl8Dksa6-qHo1g&s=10"]
+  },
   "king-george-whiting": {
     "title": "King George Whiting",
     "kicker": "Field Notes",
@@ -160,5 +169,14 @@
     "Maximum Size": "75cm",
     "Global Distribution": "Native to Australia.",
     "imageUrls": ["https://media.australian.museum/media/dd/images/Arripis_trutta.width-800.509ba6a.jpg"]
+  },
+  "sea-sweep": {
+    "title": "Sea Sweep",
+    "kicker": "Field Notes",
+    "Description": "Sea sweep are omnivores, browsing on algae and zooplankton. They are an active schooling species, often seen feeding on plankton well above the bottom. They are also very curious, and will approach divers to investigate.",
+    "Habitat": "Inshore rocky reefs, in depths of 1-25 m.",
+    "Maximum Size": "60cm",
+    "Global Distribution": "Native to Australia.",
+    "imageUrls": ["https://portphillipmarinelife.net.au/images/species/speciesHeroThumb_419404.jpeg"]
   }
 }

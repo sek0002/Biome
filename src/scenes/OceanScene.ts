@@ -183,6 +183,8 @@ const CREATURE_FRONT_TRACK_DEFAULT_OFFSET_RATIO = 0.42;
 const CREATURE_FRONT_TRACK_RAY_OFFSET_RATIO = 0.34;
 const CREATURE_FRONT_TRACK_SEADRAGON_OFFSET_RATIO = 0.34;
 const CREATURE_INFO_PREVIEW_ZOOM_CROP = 1.42;
+const SKY_GRADIENT_TEXTURE_KEY = "sky-gradient-dithered";
+const SKY_GRADIENT_TEXTURE_WIDTH = 2048;
 const HERO_SWIM_FRAMES = [
   CREATURES.hero.frames.tailRight.key,
   CREATURES.hero.frames.center.key,
@@ -191,6 +193,16 @@ const HERO_SWIM_FRAMES = [
 ] as const;
 const YELLOW_BLUE_FISH_SWIM_KEY = "yellow-blue-fish-swim";
 const YELLOW_BLUE_FISH_BASE_WIDTH = 42;
+const GARFISH_SWIM_KEY = "garfish-tail-depth-swim";
+const GARFISH_BASE_WIDTH = 84;
+const GARFISH_SURFACE_DEPTH = 5.2;
+const GARFISH_MIN_SPEED = 76;
+const GARFISH_MAX_SPEED = 190;
+const GARFISH_ANIMATION_REFERENCE_SPEED = 132;
+const SEA_SWEEP_SWIM_KEY = "sea-sweep-swim-tail-inout";
+const SEA_SWEEP_BASE_WIDTH = YELLOW_BLUE_FISH_BASE_WIDTH;
+const SEA_SWEEP_RENDER_WIDTH_SCALE = 1.2;
+const SEA_SWEEP_ANIMATION_REFERENCE_SPEED = 32;
 const SEADRAGON_TURN_KEY = "seadragon-turn";
 const SEADRAGON_BASE_WIDTH = 96;
 const SEADRAGON_FRAME_COUNT = 3;
@@ -298,7 +310,7 @@ const RED_SNAPPER_IDLE_MAX_DURATION = 5600;
 const RED_SNAPPER_IDLE_DRIFT_X = 30;
 const RED_SNAPPER_IDLE_DRIFT_Y = 16;
 const BULL_RAY_SWIM_KEY = "bull-ray-side-swim";
-const BULL_RAY_BASE_WIDTH = HERO_RENDER_WIDTH * 2.53125;
+const BULL_RAY_BASE_WIDTH = HERO_RENDER_WIDTH * 2.025;
 const BULL_RAY_DEPTH = -3.56;
 const BULL_RAY_MIN_CRUISE_SPEED = 20;
 const BULL_RAY_MAX_CRUISE_SPEED = 34;
@@ -398,8 +410,8 @@ const ZODIAC_BOAT_STATIC_URL = "/assets/creatures/zodiac-rib-stationary-no-waves
 const ZODIAC_BOAT_FRAME_WIDTH = 320;
 const ZODIAC_BOAT_FRAME_HEIGHT = 240;
 const ZODIAC_BOAT_FRAME_COUNT = 8;
-const ZODIAC_BOAT_DISPLAY_WIDTH = 347;
-const ZODIAC_BOAT_DISPLAY_HEIGHT = 200;
+const ZODIAC_BOAT_DISPLAY_WIDTH = 521;
+const ZODIAC_BOAT_DISPLAY_HEIGHT = 300;
 const ZODIAC_BOAT_MARGIN = 360;
 const ZODIAC_BOAT_SPEED = 215;
 const ZODIAC_BOAT_DRIFT_MIN_CRUISE_MS = 10000;
@@ -552,11 +564,8 @@ const flythroughBiomeFromZone = (id: FlythroughBiomeId, inset = 80): FlythroughB
   };
 };
 const FLYTHROUGH_BIOMES: FlythroughBiome[] = [
-  flythroughBiomeFromZone("surface"),
   flythroughBiomeFromZone("coral"),
   flythroughBiomeFromZone("kelp"),
-  flythroughBiomeFromZone("dropoff"),
-  flythroughBiomeFromZone("deep"),
 ];
 const FLYTHROUGH_SPEED = 14;
 const FLYTHROUGH_SURFACE_PADDING = 88;
@@ -811,7 +820,9 @@ export class OceanScene extends Phaser.Scene {
       creature.key !== CREATURES.flathead.key &&
       creature.key !== CREATURES.spiderCrab.key &&
       creature.key !== CREATURES.kingGeorgeWhiting.key &&
-      creature.key !== CREATURES.yellowBlueFish.key
+      creature.key !== CREATURES.yellowBlueFish.key &&
+      creature.key !== CREATURES.garfish.key &&
+      creature.key !== CREATURES.seaSweep.key
     ))) {
       this.load.image(creature.key, creature.url);
     }
@@ -822,6 +833,14 @@ export class OceanScene extends Phaser.Scene {
     this.load.spritesheet(CREATURES.yellowBlueFish.key, CREATURES.yellowBlueFish.url, {
       frameWidth: CREATURES.yellowBlueFish.frameWidth,
       frameHeight: CREATURES.yellowBlueFish.frameHeight,
+    });
+    this.load.spritesheet(CREATURES.garfish.key, CREATURES.garfish.url, {
+      frameWidth: CREATURES.garfish.frameWidth,
+      frameHeight: CREATURES.garfish.frameHeight,
+    });
+    this.load.spritesheet(CREATURES.seaSweep.key, CREATURES.seaSweep.url, {
+      frameWidth: CREATURES.seaSweep.frameWidth,
+      frameHeight: CREATURES.seaSweep.frameHeight,
     });
     this.load.spritesheet(CREATURES.grassWhitingPeek.key, CREATURES.grassWhitingPeek.url, {
       frameWidth: CREATURES.grassWhitingPeek.frameWidth,
@@ -1599,18 +1618,12 @@ export class OceanScene extends Phaser.Scene {
   private createBackground(zones: OceanZone[]) {
     const bounds = this.activeBiomeBounds(ACTIVE_BIOME_RENDER_MARGIN);
     const width = bounds.endX - bounds.startX;
-    const skyBandHeight = 2;
-    for (let y = 0; y < WATERLINE_Y; y += skyBandHeight) {
-      const t = this.smooth01(y / WATERLINE_Y);
-      const color = t < 0.62
-        ? this.mixHexColor(0x45c4ef, 0xcdf7ef, t / 0.62)
-        : this.mixHexColor(0xcdf7ef, 0xfff5cf, (t - 0.62) / 0.38);
-      const height = Math.min(skyBandHeight, WATERLINE_Y - y);
-      this.add
-        .rectangle(bounds.startX, y, width, height, color)
-        .setOrigin(0)
-        .setDepth(-80);
-    }
+    this.prepareSkyGradientTexture();
+    this.add
+      .image(bounds.startX, 0, SKY_GRADIENT_TEXTURE_KEY)
+      .setOrigin(0)
+      .setDisplaySize(width, WATERLINE_Y)
+      .setDepth(-80);
 
     this.createSkyClouds();
     const bandHeight = 24;
@@ -1903,6 +1916,40 @@ export class OceanScene extends Phaser.Scene {
       const container = this.drawSmallPixelCloud(x, y, scale);
       this.skyClouds.push({ container, speed: 6.2 + (i % 7) * 0.85, width: 140 * scale });
     }
+  }
+
+  private prepareSkyGradientTexture() {
+    if (this.textures.exists(SKY_GRADIENT_TEXTURE_KEY)) return;
+
+    const canvas = document.createElement("canvas");
+    canvas.width = SKY_GRADIENT_TEXTURE_WIDTH;
+    canvas.height = WATERLINE_Y;
+    const context = canvas.getContext("2d");
+    if (!context) return;
+
+    const image = context.createImageData(canvas.width, canvas.height);
+    for (let y = 0; y < canvas.height; y += 1) {
+      const t = this.smooth01(y / Math.max(1, canvas.height - 1));
+      const baseColor = Phaser.Display.Color.ValueToColor(
+        t < 0.62
+          ? this.mixHexColor(0x45c4ef, 0xcdf7ef, t / 0.62)
+          : this.mixHexColor(0xcdf7ef, 0xfff5cf, (t - 0.62) / 0.38),
+      );
+
+      for (let x = 0; x < canvas.width; x += 1) {
+        const noise = this.deterministicUnit(x, y, 0x5a7);
+        const dither = noise < 0.5 ? -1 : noise > 0.78 ? 1 : 0;
+        const index = (y * canvas.width + x) * 4;
+        image.data[index] = Phaser.Math.Clamp(baseColor.red + dither, 0, 255);
+        image.data[index + 1] = Phaser.Math.Clamp(baseColor.green + dither, 0, 255);
+        image.data[index + 2] = Phaser.Math.Clamp(baseColor.blue + dither, 0, 255);
+        image.data[index + 3] = 255;
+      }
+    }
+
+    context.putImageData(image, 0, 0);
+    const texture = this.textures.addCanvas(SKY_GRADIENT_TEXTURE_KEY, canvas);
+    texture?.setFilter(Phaser.Textures.FilterMode.LINEAR);
   }
 
   private drawLargePixelCloud(x: number, y: number, scale: number) {
@@ -4160,16 +4207,34 @@ export class OceanScene extends Phaser.Scene {
     const yellowBlueFishSchools = new Map<number, {
       motion: { x: number; y: number };
       drift: number;
+      assetKey: "yellow-blue-fish" | "sea-sweep";
+      speedScale: number;
       members: Array<{
         sprite: Phaser.GameObjects.Sprite;
         offsetX: number;
         offsetY: number;
       }>;
     }>();
+    const garfishSchools = new Map<number, {
+      motion: { x: number; y: number };
+      drift: number;
+      speed: number;
+      members: Array<{
+        sprite: Phaser.GameObjects.Sprite;
+        offsetX: number;
+        offsetY: number;
+        phase: number;
+        animationBias: number;
+      }>;
+    }>();
 
     for (const spawn of creatures) {
       const asset =
-        spawn.assetKey === "grass-whiting-peek"
+        spawn.assetKey === "garfish"
+          ? CREATURES.garfish
+          : spawn.assetKey === "sea-sweep"
+          ? CREATURES.seaSweep
+          : spawn.assetKey === "grass-whiting-peek"
           ? CREATURES.grassWhitingPeek
           : spawn.assetKey === "grass-whiting-peck"
             ? CREATURES.grassWhitingPeck
@@ -4194,6 +4259,10 @@ export class OceanScene extends Phaser.Scene {
       const sprite =
         spawn.assetKey === "yellow-blue-fish"
           ? this.add.sprite(spawn.x, spawn.y, CREATURES.yellowBlueFish.key, 2)
+          : spawn.assetKey === "garfish"
+            ? this.add.sprite(spawn.x, spawn.y, CREATURES.garfish.key, Math.floor(Math.random() * 6))
+          : spawn.assetKey === "sea-sweep"
+            ? this.add.sprite(spawn.x, spawn.y, CREATURES.seaSweep.key, 0)
           : spawn.assetKey === "seadragon"
             ? this.add.sprite(spawn.x, spawn.y, CREATURES.seadragon.key, 1)
             : spawn.assetKey === "grass-whiting-peek"
@@ -4220,7 +4289,11 @@ export class OceanScene extends Phaser.Scene {
                                     ? this.add.sprite(spawn.x, spawn.y, CREATURES.spiderCrab.key, 0)
 	                              : this.add.image(spawn.x, spawn.y, asset.key);
       const depth =
-        spawn.assetKey === "grass-whiting-peek"
+        spawn.assetKey === "garfish"
+          ? GARFISH_SURFACE_DEPTH
+          : spawn.assetKey === "sea-sweep"
+          ? 4
+          : spawn.assetKey === "grass-whiting-peek"
           ? GRASS_WHITING_PEEK_DEPTH
           : spawn.assetKey === "grass-whiting-peck"
             ? GRASS_WHITING_PECK_DEPTH
@@ -4250,10 +4323,28 @@ export class OceanScene extends Phaser.Scene {
         .setDepth(depth)
         .setAlpha(0.94);
 
+      if (spawn.assetKey === "sea-sweep") {
+        sprite.setScale(sprite.scaleX * SEA_SWEEP_RENDER_WIDTH_SCALE, sprite.scaleY);
+      }
+
       if (spawn.assetKey === "yellow-blue-fish" && sprite instanceof Phaser.GameObjects.Sprite) {
         sprite.play({
           key: YELLOW_BLUE_FISH_SWIM_KEY,
           startFrame: Math.floor(Math.random() * 4),
+        });
+      }
+
+      if (spawn.assetKey === "garfish" && sprite instanceof Phaser.GameObjects.Sprite) {
+        sprite.play({
+          key: GARFISH_SWIM_KEY,
+          startFrame: Math.floor(Math.random() * 6),
+        });
+      }
+
+      if (spawn.assetKey === "sea-sweep" && sprite instanceof Phaser.GameObjects.Sprite) {
+        sprite.play({
+          key: SEA_SWEEP_SWIM_KEY,
+          startFrame: Math.floor(Math.random() * 6),
         });
       }
 
@@ -4289,6 +4380,33 @@ export class OceanScene extends Phaser.Scene {
         continue;
       }
 
+      if (spawn.assetKey === "sea-sweep" && sprite instanceof Phaser.GameObjects.Sprite) {
+        this.addSeaSweepRestrictedRoam(sprite, spawn);
+        continue;
+      }
+
+      if (spawn.assetKey === "garfish" && sprite instanceof Phaser.GameObjects.Sprite) {
+        const schoolId = spawn.schoolId ?? Math.floor(spawn.x);
+        const offsetX = spawn.schoolOffsetX ?? 0;
+        const offsetY = spawn.schoolOffsetY ?? 0;
+        const school = garfishSchools.get(schoolId) ?? {
+          motion: { x: spawn.x - offsetX, y: spawn.y - offsetY },
+          drift: spawn.drift,
+          speed: Phaser.Math.Between(GARFISH_MIN_SPEED, GARFISH_MAX_SPEED),
+          members: [],
+        };
+        school.drift = Math.max(school.drift, spawn.drift);
+        school.members.push({
+          sprite,
+          offsetX,
+          offsetY,
+          phase: Math.random() * Math.PI * 2,
+          animationBias: Phaser.Math.FloatBetween(0.9, 1.12),
+        });
+        garfishSchools.set(schoolId, school);
+        continue;
+      }
+
       if (spawn.assetKey === "yellow-blue-fish" && sprite instanceof Phaser.GameObjects.Sprite) {
         const schoolId = spawn.schoolId ?? Math.floor(spawn.x);
         const offsetX = spawn.schoolOffsetX ?? 0;
@@ -4296,6 +4414,8 @@ export class OceanScene extends Phaser.Scene {
         const school = yellowBlueFishSchools.get(schoolId) ?? {
           motion: { x: spawn.x - offsetX, y: spawn.y - offsetY },
           drift: spawn.drift,
+          assetKey: "yellow-blue-fish",
+          speedScale: 1,
           members: [],
         };
         school.drift = Math.max(school.drift, spawn.drift);
@@ -4362,6 +4482,9 @@ export class OceanScene extends Phaser.Scene {
 
     for (const school of yellowBlueFishSchools.values()) {
       this.addYellowBlueFishSchoolTween(school);
+    }
+    for (const school of garfishSchools.values()) {
+      this.addGarfishSchoolTween(school);
     }
     this.createCreatureTrackGuideLayer(creatures);
   }
@@ -4495,6 +4618,8 @@ export class OceanScene extends Phaser.Scene {
     if (assetKey === "smooth-sting-ray") return CREATURES.stingray.url;
     if (assetKey === "killer-whale") return CREATURES.killerWhale.url;
     if (assetKey === "yellow-blue-fish") return CREATURES.yellowBlueFish.url;
+    if (assetKey === "garfish") return CREATURES.garfish.url;
+    if (assetKey === "sea-sweep") return CREATURES.seaSweep.url;
     if (assetKey === "grass-whiting-peek") return CREATURES.grassWhitingPeek.url;
     if (assetKey === "grass-whiting-peck") return CREATURES.grassWhitingPeck.url;
     if (assetKey === "king-george-whiting") return CREATURES.kingGeorgeWhiting.url;
@@ -4660,6 +4785,8 @@ export class OceanScene extends Phaser.Scene {
   private createCreatureAnimations() {
     this.textures.get(CREATURES.seadragon.key).setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get(CREATURES.yellowBlueFish.key).setFilter(Phaser.Textures.FilterMode.NEAREST);
+    this.textures.get(CREATURES.garfish.key).setFilter(Phaser.Textures.FilterMode.NEAREST);
+    this.textures.get(CREATURES.seaSweep.key).setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get(CREATURES.grassWhitingPeek.key).setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get(CREATURES.grassWhitingPeck.key).setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.textures.get(CREATURES.kingGeorgeWhiting.key).setFilter(Phaser.Textures.FilterMode.NEAREST);
@@ -4682,6 +4809,28 @@ export class OceanScene extends Phaser.Scene {
           frames: [0, 1, 2, 3, 4, 3, 2, 1],
         }),
         frameRate: 8,
+        repeat: -1,
+      });
+    }
+
+    if (!this.anims.exists(GARFISH_SWIM_KEY)) {
+      this.anims.create({
+        key: GARFISH_SWIM_KEY,
+        frames: this.anims.generateFrameNumbers(CREATURES.garfish.key, {
+          frames: [0, 1, 2, 3, 4, 5],
+        }),
+        frameRate: 8,
+        repeat: -1,
+      });
+    }
+
+    if (!this.anims.exists(SEA_SWEEP_SWIM_KEY)) {
+      this.anims.create({
+        key: SEA_SWEEP_SWIM_KEY,
+        frames: this.anims.generateFrameNumbers(CREATURES.seaSweep.key, {
+          frames: [0, 1, 2, 3, 4, 5],
+        }),
+        frameRate: 9,
         repeat: -1,
       });
     }
@@ -4925,6 +5074,8 @@ export class OceanScene extends Phaser.Scene {
 
   private creatureTrackDebugColor(assetKey: CreatureKey) {
     if (assetKey === "yellow-blue-fish") return 0xff8df5;
+    if (assetKey === "garfish") return 0xb7fff4;
+    if (assetKey === "sea-sweep") return 0xbfd4ff;
     if (assetKey === "king-george-whiting" || assetKey === "grass-whiting-peek" || assetKey === "grass-whiting-peck") return 0x45ff9a;
     if (assetKey === "dusky-morwong" || assetKey === "banded-wrasse" || assetKey === "seadragon" || assetKey === "bull-ray") return 0x56d7ff;
     if (this.isTerrainFollowingCreature(assetKey) || assetKey === "crayfish") return 0xffe66d;
@@ -5250,6 +5401,8 @@ export class OceanScene extends Phaser.Scene {
   private addYellowBlueFishSchoolTween(school: {
     motion: { x: number; y: number };
     drift: number;
+    assetKey: "yellow-blue-fish" | "sea-sweep";
+    speedScale: number;
     members: Array<{
       sprite: Phaser.GameObjects.Sprite;
       offsetX: number;
@@ -5304,10 +5457,10 @@ export class OceanScene extends Phaser.Scene {
         );
         const memberTrackPoint = { ...trackPoint, x: memberX, y: memberY };
         if (this.isNearCreatureTerrainGuide(memberX, memberY)) {
-          this.placeCreatureFrontOnTrack(member.sprite, "yellow-blue-fish", memberTrackPoint, 0.22);
+          this.placeCreatureFrontOnTrack(member.sprite, school.assetKey, memberTrackPoint, 0.22);
         } else {
           member.sprite.setPosition(memberX, memberY);
-          this.alignCreatureToTrack(member.sprite, "yellow-blue-fish", trackPoint);
+          this.alignCreatureToTrack(member.sprite, school.assetKey, trackPoint);
         }
       }
     };
@@ -5321,14 +5474,14 @@ export class OceanScene extends Phaser.Scene {
       const directionX: -1 | 1 = target.x >= school.motion.x ? 1 : -1;
       const distance = Phaser.Math.Distance.Between(start.x, start.y, target.x, target.y);
       const speedFactor = 2 + Math.random() * 3;
-      const pixelsPerSecond = speedFactor * 38;
+      const pixelsPerSecond = speedFactor * 38 * school.speedScale;
       const progress = { value: 0 };
       updateMembers({ x: start.x, y: start.y, directionX, pitch: 0 });
 
       this.tweens.add({
         targets: progress,
         value: 1,
-        duration: Phaser.Math.Clamp((distance / pixelsPerSecond) * 1000, 4500, 28000),
+        duration: Phaser.Math.Clamp((distance / pixelsPerSecond) * 1000, 4500, 28000 / school.speedScale),
         ease: "Sine.inOut",
         onUpdate: () => {
           const point = this.creatureTrackPoint(
@@ -5350,6 +5503,271 @@ export class OceanScene extends Phaser.Scene {
 
     updateMembers({ x: school.motion.x, y: school.motion.y, directionX: 1, pitch: 0 });
     this.time.delayedCall(Math.random() * 900, swimNext);
+  }
+
+  private addGarfishSchoolTween(school: {
+    motion: { x: number; y: number };
+    drift: number;
+    speed: number;
+    members: Array<{
+      sprite: Phaser.GameObjects.Sprite;
+      offsetX: number;
+      offsetY: number;
+      phase: number;
+      animationBias: number;
+    }>;
+  }) {
+    const memberMotion = school.members.map((member) => ({
+      ...member,
+      x: member.offsetX,
+      y: member.offsetY,
+      targetX: member.offsetX,
+      targetY: member.offsetY,
+      response: 1 + Math.random() * 1.2,
+      nextRetarget: 0,
+    }));
+    const surfaceBand = this.garfishSurfaceBand();
+    let lastUpdateTime = this.time.now;
+
+    const setAnimationSpeed = (routeSpeed: number) => {
+      const baseTimeScale = Phaser.Math.Clamp(routeSpeed / GARFISH_ANIMATION_REFERENCE_SPEED, 0.58, 1.62);
+      for (const member of memberMotion) {
+        member.sprite.anims.timeScale = baseTimeScale * member.animationBias;
+      }
+    };
+
+    const updateMembers = (trackPoint: CreatureTrackPoint) => {
+      const now = this.time.now;
+      const seconds = Math.min((now - lastUpdateTime) / 1000, 0.08);
+      lastUpdateTime = now;
+
+      for (const member of memberMotion) {
+        if (now >= member.nextRetarget) {
+          member.targetX = Phaser.Math.Clamp(member.offsetX + Phaser.Math.Between(-18, 18), member.offsetX - 30, member.offsetX + 30);
+          member.targetY = Phaser.Math.Clamp(member.offsetY + Phaser.Math.Between(-5, 5), member.offsetY - 11, member.offsetY + 11);
+          member.response = 0.9 + Math.random() * 1.5;
+          member.nextRetarget = now + 1200 + Math.random() * 2400;
+        }
+
+        const response = 1 - Math.exp(-seconds * member.response);
+        const pulseX = Math.sin(now * 0.0014 + member.phase) * 7;
+        const pulseY = Math.cos(now * 0.0018 + member.phase * 1.3) * 2.4;
+        member.x = Phaser.Math.Linear(member.x, member.targetX + pulseX, response);
+        member.y = Phaser.Math.Linear(member.y, member.targetY + pulseY, response);
+
+        const memberX = Phaser.Math.Clamp(trackPoint.x + member.x, surfaceBand.minX, surfaceBand.maxX);
+        const yRange = this.garfishSurfaceYRangeAt(memberX);
+        const memberY = Phaser.Math.Clamp(trackPoint.y + member.y, yRange.minY, yRange.maxY);
+        member.sprite.setPosition(memberX, memberY);
+        member.sprite.setRotation(trackPoint.pitch * 0.55);
+        this.faceSprite(member.sprite, "garfish", trackPoint.directionX);
+      }
+    };
+
+    const swimNext = () => {
+      const start = this.garfishSafeSurfacePoint(school.motion.x, school.motion.y);
+      const target = this.garfishSurfaceTarget(start, school.drift);
+      const directionX: -1 | 1 = target.x >= start.x ? 1 : -1;
+      const distance = Phaser.Math.Distance.Between(start.x, start.y, target.x, target.y);
+      const routeSpeed = Phaser.Math.Clamp(
+        school.speed * Phaser.Math.FloatBetween(0.86, 1.18),
+        GARFISH_MIN_SPEED,
+        GARFISH_MAX_SPEED,
+      );
+      const progress = { value: 0 };
+      const lateralAmplitude = Phaser.Math.Clamp(distance * 0.006, 9, 28);
+      const cycles = 0.32 + Math.random() * 0.42;
+      const phase = Math.random() * Math.PI * 2;
+
+      school.motion.x = start.x;
+      school.motion.y = start.y;
+      setAnimationSpeed(routeSpeed);
+      updateMembers({ x: start.x, y: start.y, directionX, pitch: 0 });
+
+      this.tweens.add({
+        targets: progress,
+        value: 1,
+        duration: Phaser.Math.Clamp((distance / routeSpeed) * 1000, 9000, 90000),
+        ease: "Sine.inOut",
+        onUpdate: () => {
+          const point = this.creatureTrackPoint(start, target, progress.value, lateralAmplitude, cycles, phase);
+          const safePoint = this.garfishSafeSurfacePoint(point.x, point.y);
+          school.motion.x = safePoint.x;
+          school.motion.y = safePoint.y;
+          updateMembers({ ...point, x: safePoint.x, y: safePoint.y });
+        },
+        onComplete: swimNext,
+      });
+    };
+
+    setAnimationSpeed(school.speed);
+    updateMembers({ x: school.motion.x, y: school.motion.y, directionX: 1, pitch: 0 });
+    this.time.delayedCall(Math.random() * 1600, swimNext);
+  }
+
+  private garfishSurfaceBand() {
+    return {
+      minX: BEACH_END_X + 700,
+      maxX: WORLD_WIDTH - 620,
+      minY: WATERLINE_Y + 38,
+      maxY: WATERLINE_Y + 154,
+    };
+  }
+
+  private garfishSurfaceTarget(start: { x: number; y: number }, drift: number) {
+    const band = this.garfishSurfaceBand();
+    const distance = Phaser.Math.Between(1800, Math.max(2200, Math.floor(drift)));
+    let direction = Math.random() > 0.5 ? 1 : -1;
+    if (start.x < band.minX + distance * 0.45) direction = 1;
+    if (start.x > band.maxX - distance * 0.45) direction = -1;
+    const x = Phaser.Math.Clamp(start.x + direction * distance, band.minX, band.maxX);
+    const yRange = this.garfishSurfaceYRangeAt(x);
+    const y = Phaser.Math.Clamp(
+      start.y + Phaser.Math.Between(-42, 42),
+      yRange.minY,
+      yRange.maxY,
+    );
+    return { x, y };
+  }
+
+  private garfishSafeSurfacePoint(x: number, y: number) {
+    const band = this.garfishSurfaceBand();
+    const safeX = Phaser.Math.Clamp(x, band.minX, band.maxX);
+    const yRange = this.garfishSurfaceYRangeAt(safeX);
+    return {
+      x: safeX,
+      y: Phaser.Math.Clamp(y, yRange.minY, yRange.maxY),
+    };
+  }
+
+  private garfishSurfaceYRangeAt(x: number) {
+    const band = this.garfishSurfaceBand();
+    const terrainCeiling = this.creatureContinuousTerrainYAt(x) - 88;
+    return {
+      minY: band.minY,
+      maxY: Math.max(band.minY + 8, Math.min(band.maxY, terrainCeiling)),
+    };
+  }
+
+  private addSeaSweepRestrictedRoam(
+    sprite: Phaser.GameObjects.Sprite,
+    spawn: { x: number; y: number; assetKey: CreatureKey; drift: number; directionX?: -1 | 1 },
+  ) {
+    const radiusX = Phaser.Math.Clamp(spawn.drift * 5, 310, 800);
+    const corridor = {
+      minX: Phaser.Math.Clamp(spawn.x - radiusX, BEACH_END_X + 320, KELP_END_X - 220),
+      maxX: Phaser.Math.Clamp(spawn.x + radiusX, BEACH_END_X + 420, KELP_END_X - 120),
+    };
+    let current = this.seaSweepRestrictedPoint(spawn.x, spawn.y, corridor, spawn.directionX ?? 1);
+    sprite.setPosition(current.x, current.y);
+    this.placeCreatureFrontOnTrack(sprite, "sea-sweep", current, 0.18);
+
+    const scheduleNext = () => {
+      if (!sprite.active) return;
+      const target = this.seaSweepRestrictedTarget(current, corridor);
+      const distance = Phaser.Math.Distance.Between(current.x, current.y, target.x, target.y);
+      const speed = Phaser.Math.Between(18, 46);
+      const duration = Phaser.Math.Clamp((distance / speed) * 1000, 1400, 7600);
+      const routeSpeed = distance / Math.max(0.001, duration / 1000);
+      const lateralAmplitude = Phaser.Math.Between(3, 11);
+      const cycles = Phaser.Math.FloatBetween(0.35, 1.15);
+      const phase = Math.random() * Math.PI * 2;
+      const progress = { value: 0 };
+
+      sprite.anims.timeScale = Phaser.Math.Clamp(routeSpeed / SEA_SWEEP_ANIMATION_REFERENCE_SPEED, 0.55, 1.45);
+
+      this.tweens.add({
+        targets: progress,
+        value: 1,
+        duration,
+        ease: "Sine.inOut",
+        onUpdate: () => {
+          const point = this.creatureTrackPoint(current, target, progress.value, lateralAmplitude, cycles, phase);
+          const safePoint = this.seaSweepRestrictedPoint(point.x, point.y, corridor, point.directionX, point.pitch);
+          this.placeCreatureFrontOnTrack(sprite, "sea-sweep", safePoint, 0.2);
+        },
+        onComplete: () => {
+          current = target;
+          this.addSeaSweepMomentumDrift(sprite, current, corridor, scheduleNext);
+        },
+      });
+    };
+
+    this.time.delayedCall(Phaser.Math.Between(200, 1800), scheduleNext);
+  }
+
+  private addSeaSweepMomentumDrift(
+    sprite: Phaser.GameObjects.Sprite,
+    current: CreatureTrackPoint,
+    corridor: { minX: number; maxX: number },
+    onComplete: () => void,
+  ) {
+    const driftDirection = current.directionX;
+    const driftDistance = Phaser.Math.Between(18, 54) * driftDirection;
+    const driftTarget = this.seaSweepRestrictedPoint(
+      current.x + driftDistance,
+      current.y + Phaser.Math.Between(-10, 10),
+      corridor,
+      driftDirection,
+    );
+    const distance = Phaser.Math.Distance.Between(current.x, current.y, driftTarget.x, driftTarget.y);
+    const duration = Phaser.Math.Clamp((distance / Phaser.Math.Between(10, 22)) * 1000, 900, 2600);
+    const progress = { value: 0 };
+
+    sprite.anims.timeScale = Phaser.Math.FloatBetween(0.05, 0.16);
+
+    this.tweens.add({
+      targets: progress,
+      value: 1,
+      duration,
+      ease: "Sine.out",
+      onUpdate: () => {
+        const point = this.creatureTrackPoint(current, driftTarget, progress.value, 2, 0.25, 0);
+        const safePoint = this.seaSweepRestrictedPoint(point.x, point.y, corridor, driftDirection, point.pitch);
+        this.placeCreatureFrontOnTrack(sprite, "sea-sweep", safePoint, 0.12);
+      },
+      onComplete: () => {
+        current.x = driftTarget.x;
+        current.y = driftTarget.y;
+        current.directionX = driftTarget.directionX;
+        current.pitch = driftTarget.pitch;
+        this.time.delayedCall(Phaser.Math.Between(120, 700), onComplete);
+      },
+    });
+  }
+
+  private seaSweepRestrictedTarget(
+    current: CreatureTrackPoint,
+    corridor: { minX: number; maxX: number },
+  ): CreatureTrackPoint {
+    const directionX: -1 | 1 = Math.random() > 0.5 ? 1 : -1;
+    const distance = Phaser.Math.Between(110, 360) * directionX;
+    const x = Phaser.Math.Clamp(current.x + distance, corridor.minX, corridor.maxX);
+    const floorY = this.creatureTerrainGuideYAt(x);
+    const y = Phaser.Math.Clamp(
+      floorY - Phaser.Math.Between(96, 310),
+      WATERLINE_Y + 150,
+      floorY - 58,
+    );
+    return this.seaSweepRestrictedPoint(x, y, corridor, x >= current.x ? 1 : -1);
+  }
+
+  private seaSweepRestrictedPoint(
+    x: number,
+    y: number,
+    corridor: { minX: number; maxX: number },
+    directionX: -1 | 1,
+    pitch = 0,
+  ): CreatureTrackPoint {
+    const safeX = Phaser.Math.Clamp(x, corridor.minX, corridor.maxX);
+    const floorY = this.creatureTerrainGuideYAt(safeX);
+    const safeY = Phaser.Math.Clamp(y, WATERLINE_Y + 140, floorY - 56);
+    return {
+      x: safeX,
+      y: Phaser.Math.Clamp(safeY, Math.max(WATERLINE_Y + 150, floorY - 330), floorY - 58),
+      directionX,
+      pitch: Phaser.Math.Clamp(pitch, Phaser.Math.DegToRad(-10), Phaser.Math.DegToRad(10)),
+    };
   }
 
   private addSeadragonDrift(
@@ -6952,6 +7370,8 @@ export class OceanScene extends Phaser.Scene {
     relativeScale: number,
   ) {
     if (assetKey === "yellow-blue-fish") return (YELLOW_BLUE_FISH_BASE_WIDTH / sprite.width) * relativeScale;
+    if (assetKey === "garfish") return (GARFISH_BASE_WIDTH / sprite.width) * relativeScale;
+    if (assetKey === "sea-sweep") return (SEA_SWEEP_BASE_WIDTH / sprite.width) * relativeScale;
     if (assetKey === "seadragon") return (SEADRAGON_BASE_WIDTH / sprite.width) * relativeScale;
     if (assetKey === "grass-whiting-peek") return (GRASS_WHITING_PEEK_BASE_WIDTH / sprite.width) * relativeScale;
     if (assetKey === "grass-whiting-peck") return (GRASS_WHITING_PECK_BASE_WIDTH / sprite.width) * relativeScale;

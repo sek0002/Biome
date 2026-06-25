@@ -61,6 +61,18 @@ export const CREATURES = {
     frameWidth: 500,
     frameHeight: 724,
   },
+  garfish: {
+    key: "garfish",
+    url: assetUrl("/assets/creatures/garfish/garfish-tail-depth-spritesheet-6frame.png"),
+    frameWidth: 297,
+    frameHeight: 112,
+  },
+  seaSweep: {
+    key: "sea-sweep",
+    url: assetUrl("/assets/creatures/sea-sweep-locked-v2-inout-sheet.png"),
+    frameWidth: 480,
+    frameHeight: 304,
+  },
   grassWhitingPeek: {
     key: "grass-whiting-peek",
     url: assetUrl("/assets/creatures/fish-blue-green/blue-green-fish-peek-duck-whole-body-clean.png"),
@@ -151,6 +163,8 @@ export const NPC_CREATURES = [
   CREATURES.flathead,
   CREATURES.stingray,
   CREATURES.yellowBlueFish,
+  CREATURES.garfish,
+  CREATURES.seaSweep,
 ] as const;
 
 const SEAGRASS_MEADOW_ASSET_VERSION = "directional-sway-v4-alpha";
