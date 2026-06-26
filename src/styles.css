@@ -124,16 +124,22 @@ canvas {
 
 .hud-panel select {
   max-width: min(46vw, 210px);
-  padding: 0 22px 0 0;
+  padding: 2px 22px 2px 4px;
   border: 0;
-  background: transparent;
+  background: rgba(2, 12, 18, 0.72);
   color: #d8fff6;
+  color-scheme: dark;
   font: inherit;
   font-size: 12px;
   font-weight: 700;
   line-height: 1;
   text-shadow: 0 1px 0 #021017;
   cursor: pointer;
+}
+
+.hud-panel select option {
+  background: #04141c;
+  color: #d8fff6;
 }
 
 .hud-panel select:focus-visible {
@@ -680,52 +686,29 @@ canvas {
 }
 
 .speaker-icon {
-  position: relative;
   display: block;
   width: 22px;
-  height: 18px;
-  background:
-    linear-gradient(currentColor 0 0) 1px 6px / 6px 2px no-repeat,
-    linear-gradient(currentColor 0 0) 1px 10px / 6px 2px no-repeat,
-    linear-gradient(currentColor 0 0) 1px 6px / 2px 6px no-repeat,
-    linear-gradient(currentColor 0 0) 7px 6px / 2px 6px no-repeat,
-    radial-gradient(ellipse at left center, transparent 54%, currentColor 56% 63%, transparent 65%) 12px 2px / 9px 14px no-repeat,
-    radial-gradient(ellipse at left center, transparent 59%, currentColor 61% 67%, transparent 69%) 10px -2px / 14px 22px no-repeat;
+  height: 22px;
+  background-image: var(--speaker-icon-url);
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 44px 22px;
 }
 
 .speaker-icon::before {
-  content: "";
-  position: absolute;
-  left: 7px;
-  top: 3px;
-  width: 10px;
-  height: 12px;
-  background: currentColor;
-  clip-path: polygon(0 35%, 100% 0, 100% 100%, 0 65%);
+  content: none;
 }
 
 .speaker-icon::after {
-  content: "";
-  position: absolute;
-  display: none;
+  content: none;
 }
 
 #music-mute[aria-pressed="true"] .speaker-icon {
-  background:
-    linear-gradient(currentColor 0 0) 1px 6px / 6px 2px no-repeat,
-    linear-gradient(currentColor 0 0) 1px 10px / 6px 2px no-repeat,
-    linear-gradient(currentColor 0 0) 1px 6px / 2px 6px no-repeat,
-    linear-gradient(currentColor 0 0) 7px 6px / 2px 6px no-repeat;
+  background-position: left center;
 }
 
-#music-mute[aria-pressed="true"] .speaker-icon::after {
-  display: block;
-  right: 1px;
-  top: 8px;
-  width: 14px;
-  height: 2px;
-  background: currentColor;
-  transform: rotate(-42deg);
+#music-mute[aria-pressed="false"] .speaker-icon {
+  background-position: right center;
 }
 
 .music-volume-popover {
