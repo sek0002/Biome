@@ -64,6 +64,8 @@ canvas {
   border-radius: 50%;
   pointer-events: auto;
   cursor: pointer;
+  animation: loading-logo 1200ms ease-in-out infinite alternate;
+  transform-style: preserve-3d;
   transition:
     filter 140ms ease,
     transform 140ms ease;
@@ -363,6 +365,7 @@ canvas {
 }
 
 .creature-info-popup {
+  --creature-info-popup-scale: 1;
   position: fixed;
   left: 0;
   top: 0;
@@ -383,6 +386,7 @@ canvas {
     0 4px 0 rgba(0, 0, 0, 0.34),
     0 14px 28px rgba(0, 0, 0, 0.28);
   pointer-events: none;
+  transform-origin: left top;
   transform: translate3d(0, 0, 0);
 }
 
@@ -728,9 +732,11 @@ canvas {
   position: absolute;
   top: calc(100% + 6px);
   right: 0;
-  width: 142px;
-  height: auto;
-  padding: 6px 8px;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 144px;
+  padding: 8px 5px;
   border: 1px solid rgba(155, 228, 219, 0.34);
   background: rgba(4, 20, 28, 0.78);
   box-shadow: 0 3px 0 rgba(0, 0, 0, 0.34);
@@ -749,16 +755,15 @@ canvas {
 }
 
 #music-volume {
-  appearance: none;
-  width: 120px;
-  height: 8px;
-  margin: 0 auto;
+  width: 22px;
+  height: 126px;
+  margin: 0;
   display: block;
   -webkit-appearance: auto;
   -moz-appearance: auto;
   appearance: auto;
-  writing-mode: horizontal-tb;
-  direction: ltr;
+  writing-mode: vertical-lr;
+  direction: rtl;
   background: transparent;
   accent-color: #49d4d0;
 }
@@ -1015,6 +1020,7 @@ canvas {
   }
 
   .creature-info-popup {
+    --creature-info-popup-scale: 0.88;
     grid-template-columns: minmax(0, 1fr);
     gap: 8px;
     width: min(441px, calc(100vw - 20px));
@@ -1032,6 +1038,10 @@ canvas {
 
   #creature-info-summary {
     font-size: 11px;
+  }
+
+  .creature-info-section h3 {
+    font-size: 9px;
   }
 
   .dev-slider {
@@ -1066,6 +1076,13 @@ canvas {
     width: var(--dev-readout-width);
   }
 
+}
+
+@media (max-width: 420px) {
+  .creature-info-popup {
+    --creature-info-popup-scale: 0.78;
+    width: min(392px, calc(100vw - 18px));
+  }
 }
 
 @media (hover: none), (pointer: coarse), (max-width: 900px) {

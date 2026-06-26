@@ -3088,7 +3088,19 @@ export class OceanScene extends Phaser.Scene {
   }
 
   private smoothedTerrainGuideYAt(x: number, topByColumn: Map<number, number>) {
-    const tx = Math.round(x / TILE);
+    const column = Phaser.Math.Clamp(x / TILE, 0, WORLD_WIDTH / TILE);
+    const leftColumn = Math.floor(column);
+    const rightColumn = Math.min(Math.ceil(column), Math.floor(WORLD_WIDTH / TILE));
+    if (leftColumn === rightColumn) return this.smoothedTerrainGuideColumnYAt(leftColumn, topByColumn);
+
+    return Phaser.Math.Linear(
+      this.smoothedTerrainGuideColumnYAt(leftColumn, topByColumn),
+      this.smoothedTerrainGuideColumnYAt(rightColumn, topByColumn),
+      this.smooth01(column - leftColumn),
+    );
+  }
+
+  private smoothedTerrainGuideColumnYAt(tx: number, topByColumn: Map<number, number>) {
     let weighted = 0;
     let weightTotal = 0;
 
@@ -3100,7 +3112,7 @@ export class OceanScene extends Phaser.Scene {
       weightTotal += weight;
     }
 
-    return weightTotal > 0 ? weighted / weightTotal : this.terrainSurfaceYAt(x, topByColumn);
+    return weightTotal > 0 ? weighted / weightTotal : this.terrainSurfaceYAt(tx * TILE, topByColumn);
   }
 
   private terrainGuideRotationAt(x: number, topByColumn: Map<number, number>) {
@@ -5008,7 +5020,7 @@ export class OceanScene extends Phaser.Scene {
 
     left = Phaser.Math.Clamp(left, margin, Math.max(margin, window.innerWidth - popupRect.width - margin));
     top = Phaser.Math.Clamp(top, margin, Math.max(margin, window.innerHeight - popupRect.height - margin));
-    popup.style.transform = `translate3d(${Math.round(left)}px, ${Math.round(top)}px, 0)`;
+    popup.style.transform = `translate3d(${Math.round(left)}px, ${Math.round(top)}px, 0) scale(var(--creature-info-popup-scale, 1))`;
   }
 
   private createCreatureAnimations() {
