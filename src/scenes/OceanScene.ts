@@ -207,6 +207,8 @@ const GARFISH_SURFACE_DEPTH = 5.2;
 const GARFISH_MIN_SPEED = 76;
 const GARFISH_MAX_SPEED = 190;
 const GARFISH_ANIMATION_REFERENCE_SPEED = 132;
+const GARFISH_MEMBER_ROUTE_OFFSET_X = 150;
+const GARFISH_MEMBER_ROUTE_OFFSET_Y = 18;
 const SEA_SWEEP_SWIM_KEY = "sea-sweep-swim-tail-inout";
 const SEA_SWEEP_BASE_WIDTH = YELLOW_BLUE_FISH_BASE_WIDTH;
 const SEA_SWEEP_RENDER_WIDTH_SCALE = 1.2;
@@ -556,7 +558,7 @@ const SEABED_ELEMENT_CLUSTER_SPACING_X = 520;
 const SEABED_ELEMENT_CLUSTER_SPACING_Y = 150;
 const SEABED_ELEMENT_SCATTER_BAND_TOP = 14;
 const SEABED_ELEMENT_SCATTER_BAND_DEPTH = 320;
-const SEABED_ELEMENT_CLUSTER_DENSITY = 0.16;
+const SEABED_ELEMENT_CLUSTER_DENSITY = 0.8;
 const SEABED_ELEMENT_CLUSTER_MIN_SIZE = 4;
 const SEABED_ELEMENT_CLUSTER_MAX_SIZE = 10;
 const SEABED_ELEMENT_CLUSTER_RADIUS_X = 42;
@@ -5758,15 +5760,23 @@ export class OceanScene extends Phaser.Scene {
       animationBias: number;
     }>;
   }) {
-    const memberMotion = school.members.map((member) => ({
-      ...member,
-      x: member.offsetX,
-      y: member.offsetY,
-      targetX: member.offsetX,
-      targetY: member.offsetY,
-      response: 1 + Math.random() * 1.2,
-      nextRetarget: 0,
-    }));
+    const memberMotion = school.members.map((member) => {
+      const routeOffsetX = Phaser.Math.Between(-GARFISH_MEMBER_ROUTE_OFFSET_X, GARFISH_MEMBER_ROUTE_OFFSET_X);
+      const routeOffsetY = Phaser.Math.Between(-GARFISH_MEMBER_ROUTE_OFFSET_Y, GARFISH_MEMBER_ROUTE_OFFSET_Y);
+      return {
+        ...member,
+        x: member.offsetX,
+        y: member.offsetY,
+        targetX: member.offsetX,
+        targetY: member.offsetY,
+        response: 1 + Math.random() * 1.2,
+        nextRetarget: 0,
+        routeStartX: routeOffsetX,
+        routeStartY: routeOffsetY,
+        routeEndX: routeOffsetX,
+        routeEndY: routeOffsetY,
+      };
+    });
     const surfaceBand = this.garfishSurfaceBand();
     let lastUpdateTime = this.time.now;
 
@@ -5777,10 +5787,11 @@ export class OceanScene extends Phaser.Scene {
       }
     };
 
-    const updateMembers = (trackPoint: CreatureTrackPoint) => {
+    const updateMembers = (trackPoint: CreatureTrackPoint, routeProgress = 0) => {
       const now = this.time.now;
       const seconds = Math.min((now - lastUpdateTime) / 1000, 0.08);
       lastUpdateTime = now;
+      const routeT = this.smooth01(Phaser.Math.Clamp(routeProgress, 0, 1));
 
       for (const member of memberMotion) {
         if (now >= member.nextRetarget) {
@@ -5796,9 +5807,11 @@ export class OceanScene extends Phaser.Scene {
         member.x = Phaser.Math.Linear(member.x, member.targetX + pulseX, response);
         member.y = Phaser.Math.Linear(member.y, member.targetY + pulseY, response);
 
-        const memberX = Phaser.Math.Clamp(trackPoint.x + member.x, surfaceBand.minX, surfaceBand.maxX);
+        const routeOffsetX = Phaser.Math.Linear(member.routeStartX, member.routeEndX, routeT);
+        const routeOffsetY = Phaser.Math.Linear(member.routeStartY, member.routeEndY, routeT);
+        const memberX = Phaser.Math.Clamp(trackPoint.x + member.x + routeOffsetX, surfaceBand.minX, surfaceBand.maxX);
         const yRange = this.garfishSurfaceYRangeAt(memberX);
-        const memberY = Phaser.Math.Clamp(trackPoint.y + member.y, yRange.minY, yRange.maxY);
+        const memberY = Phaser.Math.Clamp(trackPoint.y + member.y + routeOffsetY, yRange.minY, yRange.maxY);
         member.sprite.setPosition(memberX, memberY);
         member.sprite.setRotation(trackPoint.pitch * 0.55);
         this.faceSprite(member.sprite, "garfish", trackPoint.directionX);
@@ -5820,10 +5833,17 @@ export class OceanScene extends Phaser.Scene {
       const cycles = 0.32 + Math.random() * 0.42;
       const phase = Math.random() * Math.PI * 2;
 
+      for (const member of memberMotion) {
+        member.routeStartX = member.routeEndX;
+        member.routeStartY = member.routeEndY;
+        member.routeEndX = Phaser.Math.Between(-GARFISH_MEMBER_ROUTE_OFFSET_X, GARFISH_MEMBER_ROUTE_OFFSET_X);
+        member.routeEndY = Phaser.Math.Between(-GARFISH_MEMBER_ROUTE_OFFSET_Y, GARFISH_MEMBER_ROUTE_OFFSET_Y);
+      }
+
       school.motion.x = start.x;
       school.motion.y = start.y;
       setAnimationSpeed(routeSpeed);
-      updateMembers({ x: start.x, y: start.y, directionX, pitch: 0 });
+      updateMembers({ x: start.x, y: start.y, directionX, pitch: 0 }, 0);
 
       this.tweens.add({
         targets: progress,
@@ -5835,7 +5855,7 @@ export class OceanScene extends Phaser.Scene {
           const safePoint = this.garfishSafeSurfacePoint(point.x, point.y);
           school.motion.x = safePoint.x;
           school.motion.y = safePoint.y;
-          updateMembers({ ...point, x: safePoint.x, y: safePoint.y });
+          updateMembers({ ...point, x: safePoint.x, y: safePoint.y }, progress.value);
         },
         onComplete: swimNext,
       });
