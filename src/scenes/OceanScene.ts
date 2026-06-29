@@ -209,6 +209,7 @@ const GARFISH_MAX_SPEED = 190;
 const GARFISH_ANIMATION_REFERENCE_SPEED = 132;
 const GARFISH_MEMBER_ROUTE_OFFSET_X = 150;
 const GARFISH_MEMBER_ROUTE_OFFSET_Y = 18;
+const FISH_SCHOOL_BIOME_EDGE_MARGIN = 280;
 const SEA_SWEEP_SWIM_KEY = "sea-sweep-swim-tail-inout";
 const SEA_SWEEP_BASE_WIDTH = YELLOW_BLUE_FISH_BASE_WIDTH;
 const SEA_SWEEP_RENDER_WIDTH_SCALE = 1.2;
@@ -5867,9 +5868,18 @@ export class OceanScene extends Phaser.Scene {
   }
 
   private garfishSurfaceBand() {
+    const bounds = this.activeBiomeBounds(FISH_SCHOOL_BIOME_EDGE_MARGIN);
+    const minX = Math.max(BEACH_END_X + 700, bounds.startX + 180);
+    const maxX = Math.min(WORLD_WIDTH - 620, bounds.endX - 180);
+    const fallbackCenterX = Phaser.Math.Clamp(
+      (bounds.startX + bounds.endX) / 2,
+      BEACH_END_X + 700,
+      WORLD_WIDTH - 620,
+    );
+
     return {
-      minX: BEACH_END_X + 700,
-      maxX: WORLD_WIDTH - 620,
+      minX: maxX > minX ? minX : fallbackCenterX - 1,
+      maxX: maxX > minX ? maxX : fallbackCenterX + 1,
       minY: WATERLINE_Y + 38,
       maxY: WATERLINE_Y + 154,
     };
@@ -7290,15 +7300,28 @@ export class OceanScene extends Phaser.Scene {
   }
 
   private yellowBlueFishSafeCorridor(schoolMarginX: number, schoolMarginY: number) {
+    const bounds = this.activeBiomeBounds(FISH_SCHOOL_BIOME_EDGE_MARGIN);
     const marginX = Math.max(920, schoolMarginX + 320);
     const marginTop = Math.max(230, schoolMarginY + 185);
     const marginBottom = Math.max(260, schoolMarginY + 210);
-    const minX = BEACH_END_X + marginX;
-    const maxX = KELP_END_X - marginX;
+    const minX = Math.max(BEACH_END_X + marginX, bounds.startX + marginX);
+    const maxX = Math.min(KELP_END_X - marginX, bounds.endX - marginX);
+    const fallbackCenterX = Phaser.Math.Clamp(
+      (bounds.startX + bounds.endX) / 2,
+      BEACH_END_X + marginX,
+      KELP_END_X - marginX,
+    );
     const minY = WATERLINE_Y + marginTop;
     const maxY = WATERLINE_Y + 820;
 
-    return { minX, maxX, minY, maxY, marginX, marginBottom };
+    return {
+      minX: maxX > minX ? minX : fallbackCenterX - 1,
+      maxX: maxX > minX ? maxX : fallbackCenterX + 1,
+      minY,
+      maxY,
+      marginX,
+      marginBottom,
+    };
   }
 
   private yellowBlueFishSchoolPath(
